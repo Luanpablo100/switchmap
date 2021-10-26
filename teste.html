@@ -1,0 +1,28 @@
+<html>
+<head>
+<title> Track Mouse </title>
+
+<link rel="stylesheet" href="track.css">
+</head>
+<body>
+    
+    <div class="track-line">
+
+    </div>
+
+<script defer>
+    var pointerX = -1;
+    var pointerY = -1;
+    let trackLine = document.querySelector('.track-line')
+
+    document.onmousemove = function(event) {
+        pointerX = event.pageX;
+        pointerY = event.pageY;
+        trackLine.style.position = 'absolute';
+        trackLine.style.left = pointerX + 'px';
+        trackLine.style.top = pointerY + 'px';
+    }
+
+</script>
+</body>
+</html>

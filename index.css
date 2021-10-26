@@ -1,0 +1,39 @@
+body {
+    background-color: rgb(22, 1, 26);
+}
+
+.switch {
+    width: 70vw;
+    height: 80px;
+    background-color: gray;
+    margin-bottom: 30px;
+    padding: 5px;
+    display: flex;
+}
+
+.port {
+    background-color: rgb(151, 151, 151);
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+.ppanel {
+    background-color: black;
+    width: 70vw;
+    height: 80px;
+    margin-bottom: 30px;
+    padding: 5px;
+    display: flex;
+}
+
+.pport {
+    background-color: whitesmoke;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+}
+
+.input-port {
+    width: 100%;
+}
