@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Rack {
+  id Int @id @default(autoincrement())
+  code String @unique
+  Switchs Switch[]
+}
+
+model Switch {
+  id Int @id @default(autoincrement())
+  code String @unique
+  rackCode String
+  rack Rack @relation(fields: [rackCode], references: [code])
+  Ports Port[]
+}
+
+model Port {
+  id Int @id @default(autoincrement())
+  code String @unique
+  switchCode String
+  switch Switch @relation(fields: [switchCode], references: [code])
+}
