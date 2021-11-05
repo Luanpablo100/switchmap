@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Switch from "./components/Switch";
 import './App.css'
-import readFunctions from './prisma/read'
 
 const App = () => {
 
@@ -29,15 +28,6 @@ const App = () => {
       ]
     }
   ])
-
-  useEffect(() => {
-    const fetchData = async() => {
-      const dataFromDb = await readFunctions.querySwitch.queryAll()
-      console.log(dataFromDb)
-    }
-
-    fetchData()
-  }, [])
 
   return (
     <div>
