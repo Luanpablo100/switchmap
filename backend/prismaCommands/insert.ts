@@ -18,11 +18,12 @@ const insertFunctions = {
             }
         })
     },
-    newPort: async (portId: string, switchId: string)=> {
+    newPort: async (portId: string, switchId: string, portDesc:string)=> {
         await prisma.port.create({
             data: {
                 code: portId,
-                switchCode: switchId
+                switchCode: switchId,
+                desc: portDesc
             }
         })
     },

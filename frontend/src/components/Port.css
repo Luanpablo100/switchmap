@@ -4,3 +4,19 @@
     background-color: dimgray;
     margin: 3px;
 }
+
+.port-input {
+    width: 100%;
+    border: none;
+    height: 100%;
+    background-color: dimgray;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition-duration: .1s;
+}
+
+.port-input:hover {
+    background-color: rgb(189, 189, 189);
+    color: black;
+}

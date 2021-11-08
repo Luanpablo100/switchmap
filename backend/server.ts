@@ -1,24 +1,68 @@
-import { rejects } from 'assert/strict'
-import express from 'express'
-import { resolve } from 'path/posix'
-import { getEnvironmentData } from 'worker_threads'
+import express, { response } from 'express'
+
+
 
 const app = express()
+
+import cors from 'cors'
+app.use(cors())
+
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
 
 import insertFunctions from './prismaCommands/insert'
 import readFunctions from './prismaCommands/read'
 
-app.get('/', async function(req, res) {
 
-        async function getData () {
-            return new Promise((resolve, reject) => {
-              setTimeout(resolve)
-            });
-          }
-          
+app.get('/', async (req, res) => {
+  try {
+    const querySwitchs = await readFunctions.querySwitch.queryAll()
 
-    await getData()
-    res.send('hello world')
+    return res.json(querySwitchs)
+  } catch (err) {
+    return res.status(400).json(err)
+  }
+})
+
+
+app.post('/switchs', async (request, response) => {
+  try {
+    const {code, rackCode} = request.body
+
+    insertFunctions.newSwitch(code,rackCode)
+
+    return response.json("Switch inserido!")
+    
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.post('/ports', async (request, response) => {
+  try {
+    const {code, switchCode, portDesc} = request.body
+
+    insertFunctions.newPort(code, switchCode, portDesc)
+
+    return response.json("Porta cadastrada!")
+    
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.post('/port/delete/', async (request, response) => {
+  try {
+    const {code, switchCode, portDesc} = request.body
+
+    insertFunctions.newPort(code, switchCode, portDesc)
+
+    return response.json("Porta cadastrada!")
+    
+  } catch (err) {
+    return response.status(400).json(err)
+  }
 })
 
 app.listen('3001', () => {

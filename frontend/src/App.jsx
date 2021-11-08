@@ -1,38 +1,61 @@
 import React, { useEffect, useState } from "react";
 import Switch from "./components/Switch";
+import PortInfo from "./components/PortInfo";
 import './App.css'
+import { Routes, Route, BrowserRouter} from 'react-router-dom'
 
 const App = () => {
 
   const [hackData, setHackData] = useState([
     {
       id: 1,
-      ports: [
+      Ports: [
         {
-          port: 1
+          code: 1,
+          desc: 'lorenipsun'
         },
         {
-          port: 2
+          code: 2,
+          desc: 'loreion'
         }
       ]
     },
     {
       id: 2,
-      ports: [
+      Ports: [
         {
-          port: 1
+          code: 1,
+          desc: "loren"
         },
         {
-          port: 2
+          code: 2,
+          desc: "loren2"
         }
       ]
     }
   ])
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const { data } = await axios.get('http://localhost:3001')
+  //     setHackData(data)
+  //   }
+
+  //   fetchData()
+  // }, [])
+
   return (
-    <div>
-      {hackData.map(sw => <Switch sw={sw}/>)}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" exact render={() => (
+          <div className={"hack"}>
+            {hackData.map(sw => <Switch sw={sw}/>)}
+          </div>
+        )}
+        />
+        <Route path="/:portId" exact component={PortInfo}/>
+      </Routes>
+    </BrowserRouter>
   )
 }
 

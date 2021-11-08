@@ -5,13 +5,19 @@ import './Switch.css'
 const Switch = ({sw}) => {
     let even
     let odd
-    {odd = sw.ports.filter(port => port.port % 2 !== 0)}
-    {even = sw.ports.filter(port => port.port % 2 === 0)}
+    {odd = sw.Ports.filter(port => port.code % 2 !== 0)}
+    // sw.Ports.filter(port => {console.log(port)})
+    {even = sw.Ports.filter(port => port.code % 2 === 0)}
     return (
         <div className="switch">
+            <div>
             {<Ports ports={odd}/>}
             {<Ports ports={even}/>}
-            {sw.id}
+            </div>
+            <div className={"control"}>
+            <h1>{sw.id}</h1>
+            {/* <button>Update</button> */}
+            </div>
         </div>
     )
 }
