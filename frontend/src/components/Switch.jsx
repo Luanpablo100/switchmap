@@ -2,11 +2,10 @@ import React from "react";
 import Ports from "./Ports";
 import './Switch.css'
 
-const Switch = ({sw}) => {
+const SwitchElement = ({sw}) => {
     let even
     let odd
     {odd = sw.Ports.filter(port => port.code % 2 !== 0)}
-    // sw.Ports.filter(port => {console.log(port)})
     {even = sw.Ports.filter(port => port.code % 2 === 0)}
     return (
         <div className="switch">
@@ -22,4 +21,4 @@ const Switch = ({sw}) => {
     )
 }
 
-export default Switch;
+export default SwitchElement;

@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true}))
 
 import insertFunctions from './prismaCommands/insert'
 import readFunctions from './prismaCommands/read'
+import { request } from 'http'
 
 
 app.get('/', async (req, res) => {
@@ -52,7 +53,7 @@ app.post('/ports', async (request, response) => {
   }
 })
 
-app.post('/port/delete/', async (request, response) => {
+app.post('/port/delete/:portId', async (request, response) => {
   try {
     const {code, switchCode, portDesc} = request.body
 
@@ -63,6 +64,10 @@ app.post('/port/delete/', async (request, response) => {
   } catch (err) {
     return response.status(400).json(err)
   }
+})
+
+app.get('/port/:portId', async (request, response) => {
+  try 
 })
 
 app.listen('3001', () => {

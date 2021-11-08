@@ -1,0 +1,19 @@
+.info-container {
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+
+}
+
+.description {
+    text-decoration: none;
+}

@@ -6,12 +6,9 @@ import { useNavigate } from "react-router-dom";
 const Port = ({port}) => {
     const navigate = useNavigate()
 
-    function portMessage() {
-        alert(`Descrição da porta ${port.code}: ${port.desc}`)
-    }
-
     function handlePortClick() {
-        navigate(`/${port.id}`)
+        navigate(`/port/${port.id}`)
+        // console.log(port)
     }
 
     return (
