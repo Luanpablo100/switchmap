@@ -38,13 +38,13 @@ app.post('/switchs', async (request, response) => {
   }
 })
 
-app.post('/ports', async (request, response) => {
+app.post('/port/add', async (request, response) => {
   try {
     const {code, switchCode, portDesc} = request.body
 
     insertFunctions.newPort(code, switchCode, portDesc)
 
-    return response.json("Porta cadastrada!")
+    return response.status(400).json()
     
   } catch (err) {
     return response.status(400).json(err)

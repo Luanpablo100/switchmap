@@ -1,6 +1,7 @@
 import React from "react";
 import Ports from "./Ports";
 import './Switch.css'
+import { Link } from "react-router-dom";
 
 const SwitchElement = ({sw}) => {
     let even
@@ -15,7 +16,7 @@ const SwitchElement = ({sw}) => {
             </div>
             <div className={"control"}>
             <h1>{sw.id}</h1>
-            {/* <button>Update</button> */}
+            <Link to="/port/add">Cadastrar</Link>
             </div>
         </div>
     )

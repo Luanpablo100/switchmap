@@ -1,10 +1,10 @@
-import React, { useEffect, useState, Suspense, lazy } from "react";
+import React, { useEffect, useState } from "react";
 import PortInfo from "./components/PortInfo";
 import axios from "axios";
 import SwitchsElements from "./components/Switchs";
-import Button from "./components/Button";
 import './App.css'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Routes} from 'react-router-dom';
+import CreatePort from "./components/CreatePort";
 
 const App = () => {
 
@@ -51,7 +51,8 @@ const App = () => {
       <div className="hack">
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData}/>}/>
-          <Route path="port/:portId" element={<PortInfo/>}/>
+          <Route path="port/:portId" element={<PortInfo/>} data={hackData}/>
+          <Route path="port/add/" element={<CreatePort/>} data={hackData}/>
         </Routes>
       </div>
     </Router>

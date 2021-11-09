@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import './PortInfo.css'
 import axios from 'axios';
 
-const PortInfo = () => {
+const PortInfo = ({data}) => {
     const params = useParams()
 
     const navigate = useNavigate()
