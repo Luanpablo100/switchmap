@@ -1,7 +1,5 @@
 import express, { response } from 'express'
 
-
-
 const app = express()
 
 import cors from 'cors'
@@ -13,7 +11,7 @@ app.use(express.urlencoded({ extended: true}))
 
 import insertFunctions from './prismaCommands/insert'
 import readFunctions from './prismaCommands/read'
-import { request } from 'http'
+import deleteFunctions from './prismaCommands/delete'
 
 
 app.get('/', async (req, res) => {
@@ -53,21 +51,24 @@ app.post('/ports', async (request, response) => {
   }
 })
 
-app.post('/port/delete/:portId', async (request, response) => {
+app.delete('/port/:portId', async (request, response) => {
   try {
-    const {code, switchCode, portDesc} = request.body
-
-    insertFunctions.newPort(code, switchCode, portDesc)
-
-    return response.json("Porta cadastrada!")
-    
-  } catch (err) {
-    return response.status(400).json(err)
+    await deleteFunctions.deletePort(parseInt(request.params.portId))
+    return response.status(200).json()
+  } 
+  catch (err) {
+    return response.json(400).json(err)
   }
 })
 
 app.get('/port/:portId', async (request, response) => {
-  try 
+  try {
+    const portData = await readFunctions.queryPort.queryFind(parseInt(request.params.portId))
+    return response.json(portData)
+  } 
+  catch (err) {
+    return response.status(400).json(err)
+  }
 })
 
 app.listen('3001', () => {

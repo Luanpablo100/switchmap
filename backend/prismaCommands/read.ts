@@ -19,6 +19,14 @@ const readFunctions = {
         queryAll: async () => {
             const allPorts = await prisma.port.findMany()
             return allPorts
+        },
+        queryFind: async (portId: number) => {
+            const queryFindPorts = await prisma.port.findUnique({
+                where: {
+                    id: portId
+                }
+            })
+            return queryFindPorts
         }
     },
 }
