@@ -3,17 +3,17 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './CreatePort.css'
 
-const CreatePort = ({data}) => {
+const CreatePort = ({handleCreatePort}) => {
     const navigate = useNavigate()
 
-    async function handleAddPort() {
+    const handleCreatePortButtonClick = async () => {
         const inputPortSwCode = (document.getElementById("inputPortSwCode").value)
         const inputPortCode = (document.getElementById("inputPortCode").value)
         const inputPortDesc = (document.getElementById("inputPortDesc").value)
         const postData = { code: inputPortCode, switchCode: inputPortSwCode, portDesc: inputPortDesc }
-        await axios.post('http://localhost:3001/port/add', postData).then(navigate('/'))
+        await axios.post('http://localhost:3001/port/add', postData)
+        handleCreatePort().then(navigate("/"))
     }
-
 
     return ( 
 
@@ -30,7 +30,7 @@ const CreatePort = ({data}) => {
                 <input type="text" id="inputPortCode" name="inputPortCode" required/>
                 <label htmlFor="inputPortDesc">Descrição</label>
                 <input type="text" id="inputPortDesc" name="inputPortDesc" required/>
-                <button onClick={handleAddPort}>Cadastrar</button>
+                <button onClick={handleCreatePortButtonClick}>Cadastrar</button>
             </div>
         </div>
     );

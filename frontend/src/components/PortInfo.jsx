@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import './PortInfo.css'
 import axios from 'axios';
 
-const PortInfo = ({data}) => {
+const PortInfo = ({handleDeletePort}) => {
+
     const params = useParams()
 
     const navigate = useNavigate()
@@ -23,11 +24,12 @@ const PortInfo = ({data}) => {
         }
     
         getData()
-      }, [])
+      })
 
-      async function deletePort() {
-        await axios.delete(`http://localhost:3001/port/${params.portId}`)
-        return navigate('/')
+        const handleDeleteButtonClick = async() => {
+            await axios.delete(`http://localhost:3001/port/${params.portId}`)
+
+            handleDeletePort().then(navigate("/"))
       }
     
     return ( 
@@ -41,7 +43,7 @@ const PortInfo = ({data}) => {
                 {portData.desc}
             </div>
             <div className="port-control">
-                <button className="delete-button" onClick={deletePort}>Apagar</button>
+                <button className="delete-button" onClick={handleDeleteButtonClick}>Apagar</button>
             </div>
         </div>
      );
