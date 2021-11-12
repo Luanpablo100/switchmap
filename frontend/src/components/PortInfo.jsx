@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import './PortInfo.css'
 import axios from 'axios';
 
-const PortInfo = ({handleDeletePort}) => {
+const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
 
     const params = useParams()
 
@@ -30,19 +30,32 @@ const PortInfo = ({handleDeletePort}) => {
             await axios.delete(`http://localhost:3001/port/${params.portId}`)
 
             handleDeletePort().then(navigate("/"))
-      }
+        }
+
+        const handleUpdateButtonClick = async() => {
+            const inputPortCode = document.getElementById('input-port-code').value
+            const inputPortDesc = document.getElementById('input-port-desc').value
+            const putData = {code: inputPortCode, portDesc: inputPortDesc}
+            await axios.put(`http://localhost:3001/port/${params.portId}`, putData)
+            handleUpdatePort().then(navigate('/'))
+        }
+
+        const handleInputAwait = async() => {
+            setTimeout(handleUpdateButtonClick, 5000)
+        }
     
     return ( 
         <div className="info-container">
             <div className="title-container">
                 <Link to="/">Voltar</Link>
-                <h1 className={"title"}>Porta {portData.code} - Switch {portData.switchCode}</h1>
+                PORTA <input type="text" name="input-port-code" id="input-port-code" value={portData.code} onChange={handleInputAwait}/> <h1>Switch - {portData.switchCode}</h1>
             </div>
             <div className="description">
                 <h3>Descrição</h3>
-                {portData.desc}
+                <input type="text" name="input-port-desc" id="input-port-desc" value={portData.desc} onChange={handleInputAwait}/>
             </div>
             <div className="port-control">
+                <button className="update-button" onClick={handleUpdateButtonClick}>Atualizar</button>
                 <button className="delete-button" onClick={handleDeleteButtonClick}>Apagar</button>
             </div>
         </div>

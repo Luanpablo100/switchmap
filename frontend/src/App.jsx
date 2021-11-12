@@ -3,7 +3,7 @@ import PortInfo from "./components/PortInfo";
 import axios from "axios";
 import SwitchsElements from "./components/Switchs";
 import './App.css'
-import { BrowserRouter as Router, Link, Route, Routes, useParams} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import CreatePort from "./components/CreatePort";
 
 const App = () => {
@@ -37,8 +37,6 @@ const App = () => {
     }
   ])
 
-  const params = useParams()
-
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get('http://localhost:3001')
@@ -61,12 +59,18 @@ const App = () => {
     return ("Created")
 }
 
+  const handleUpdatePort = async () => {
+    const newData = await (await axios.get('http://localhost:3001/')).data
+    setHackData(newData)
+    return("Updated")
+  }
+
   return (
     <Router>
       <div className="hack">
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData}/>}/>
-          <Route path="port/:portId" element={<PortInfo handleDeletePort={handleDeletePort}/>} />
+          <Route path="port/:portId" element={<PortInfo handleDeletePort={handleDeletePort} handleUpdatePort={handleUpdatePort}/>} />
           <Route path="port/add/" element={<CreatePort handleCreatePort={handleCreatePort}/>}/>
         </Routes>
       </div>

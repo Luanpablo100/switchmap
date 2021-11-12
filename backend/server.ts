@@ -12,6 +12,7 @@ app.use(express.urlencoded({ extended: true}))
 import insertFunctions from './prismaCommands/insert'
 import readFunctions from './prismaCommands/read'
 import deleteFunctions from './prismaCommands/delete'
+import editFunctions from './prismaCommands/edit'
 
 
 app.get('/', async (req, res) => {
@@ -31,7 +32,7 @@ app.post('/switchs', async (request, response) => {
 
     insertFunctions.newSwitch(code,rackCode)
 
-    return response.json("Switch inserido!")
+    return response.status(200).json()
     
   } catch (err) {
     return response.status(400).json(err)
@@ -44,7 +45,7 @@ app.post('/port/add', async (request, response) => {
 
     insertFunctions.newPort(code, switchCode, portDesc)
 
-    return response.status(400).json()
+    return response.status(200).json()
     
   } catch (err) {
     return response.status(400).json(err)
@@ -67,6 +68,20 @@ app.get('/port/:portId', async (request, response) => {
     return response.json(portData)
   } 
   catch (err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.put('/port/:portId', async (request, response) => {
+  try {
+    const portId = parseInt(request.params.portId)
+    const {code, portDesc} = request.body
+
+    editFunctions.editPort(portId, code, portDesc)
+
+    return response.status(200).json()
+    
+  } catch (err) {
     return response.status(400).json(err)
   }
 })
