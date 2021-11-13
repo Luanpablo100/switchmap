@@ -1,9 +1,0 @@
-.switch {
-    width: 860px;
-    background-color: darkgray;
-    height: 90px;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}

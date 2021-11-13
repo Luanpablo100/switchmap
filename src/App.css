@@ -1,9 +1,0 @@
-.hack {
-  max-width: 80vw;
-  margin: 0 auto;
-  border: 2px solid blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
