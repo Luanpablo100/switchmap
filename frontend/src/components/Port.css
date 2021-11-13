@@ -17,6 +17,6 @@
 }
 
 .port-input:hover {
-    background-color: rgb(189, 189, 189);
-    color: black;
+    background-color: chartreuse;
+    color: white;
 }

@@ -39,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get('http://localhost:3001').then(console.log("busquei"))
+      const { data } = await axios.get('http://localhost:3001')
       setHackData(data)
     }
 
