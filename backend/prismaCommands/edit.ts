@@ -13,6 +13,12 @@ const editFunctions = {
                 desc: portDesc,
             }
         })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
     }
 }
 

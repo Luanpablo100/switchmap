@@ -19,12 +19,12 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
 
     useEffect(() => {
         const getData = async () => {
-          const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`)
+          const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`).then(console.log("Busquei"))
           setPortData(data)
         }
     
         getData()
-      })
+      }, [])
 
         const handleDeleteButtonClick = async() => {
             await axios.delete(`http://localhost:3001/port/${params.portId}`)
@@ -32,30 +32,31 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
             handleDeletePort().then(navigate("/"))
         }
 
-        const handleUpdateButtonClick = async() => {
+        const handleChangeInputValue = () => {
             const inputPortCode = document.getElementById('input-port-code').value
             const inputPortDesc = document.getElementById('input-port-desc').value
-            const putData = {code: inputPortCode, portDesc: inputPortDesc}
-            await axios.put(`http://localhost:3001/port/${params.portId}`, putData)
-            handleUpdatePort().then(navigate('/'))
+            const newData = {...portData, code: inputPortCode, desc: inputPortDesc}
+            setPortData(newData)
         }
 
-        const handleInputAwait = async() => {
-            setTimeout(handleUpdateButtonClick, 5000)
+        const handleUpdateData = async() => {
+            await axios.put(`http://localhost:3001/port/${params.portId}`, portData)
+            handleUpdatePort().then(navigate('/'))
         }
+            
     
     return ( 
         <div className="info-container">
             <div className="title-container">
                 <Link to="/">Voltar</Link>
-                PORTA <input type="text" name="input-port-code" id="input-port-code" value={portData.code} onChange={handleInputAwait}/> <h1>Switch - {portData.switchCode}</h1>
+                PORTA <input type="text" name="input-port-code" id="input-port-code" value={portData.code} onChange={handleChangeInputValue}/> <h1>Switch - {portData.switchCode}</h1>
             </div>
             <div className="description">
                 <h3>Descrição</h3>
-                <input type="text" name="input-port-desc" id="input-port-desc" value={portData.desc} onChange={handleInputAwait}/>
+                <input type="text" name="input-port-desc" id="input-port-desc" value={portData.desc} onChange={handleChangeInputValue}/>
             </div>
             <div className="port-control">
-                <button className="update-button" onClick={handleUpdateButtonClick}>Atualizar</button>
+                <button className="update-button" onClick={handleUpdateData}>Atualizar</button>
                 <button className="delete-button" onClick={handleDeleteButtonClick}>Apagar</button>
             </div>
         </div>

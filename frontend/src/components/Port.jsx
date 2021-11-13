@@ -8,7 +8,6 @@ const Port = ({port}) => {
 
     function handlePortClick() {
         navigate(`/port/${port.id}`)
-        // console.log(port)
     }
 
     return (

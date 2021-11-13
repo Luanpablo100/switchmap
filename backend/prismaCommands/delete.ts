@@ -9,6 +9,12 @@ const deleteFunctions = {
                 id: portId
             }
         })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
     }
 }
 

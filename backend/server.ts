@@ -74,10 +74,8 @@ app.get('/port/:portId', async (request, response) => {
 
 app.put('/port/:portId', async (request, response) => {
   try {
-    const portId = parseInt(request.params.portId)
-    const {code, portDesc} = request.body
-
-    editFunctions.editPort(portId, code, portDesc)
+    const {id, code, desc} = request.body
+    editFunctions.editPort(id, code, desc)
 
     return response.status(200).json()
     

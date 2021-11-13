@@ -4,8 +4,7 @@ import SwitchElement from './Switch';
 const SwitchsElements = ({data}) => {
     return (
         <> 
-        {console.log(data)}
-        {data.map(sw => <SwitchElement sw={sw}/>)}
+        {data.map(sw => <SwitchElement sw={sw} key={sw.id}/>)}
         </>
     );
 }
