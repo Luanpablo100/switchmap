@@ -30,4 +30,12 @@ model Port {
   switchCode String
   switch Switch @relation(fields: [switchCode], references: [code])
   desc String @default("")
+  department Department @relation(fields: [departId], references:[id])
+  departId Int @default(0)
+}
+
+model Department {
+  id Int @id @default(autoincrement())
+  departName String
+  Ports Port []
 }

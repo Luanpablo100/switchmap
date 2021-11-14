@@ -1,4 +1,5 @@
 import { PrismaClient } from ".prisma/client";
+import { query } from "express";
 
 const prisma = new PrismaClient()
 
@@ -45,6 +46,9 @@ const readFunctions = {
             const queryFindPorts = await prisma.port.findUnique({
                 where: {
                     id: portId
+                },
+                include: {
+                    department: true
                 }
             })
 
@@ -58,6 +62,22 @@ const readFunctions = {
             return queryFindPorts
         }
     },
+    queryDepartment: {
+        queryAll: async () => {
+            const allDepatments = await prisma.department.findMany()
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+
+            return allDepatments
+        },
+        queryFind: async () => {
+            return "Apenas um departamento"
+        }
+    }
 }
 
 export default readFunctions

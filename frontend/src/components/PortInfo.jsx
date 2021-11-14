@@ -33,22 +33,22 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
             departName: "Comercial"
         }
     ])
-
+    
 
     useEffect(() => {
         const getData = async () => {
-          const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`)
-          setPortData(data)
+            const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`)
+            setPortData(data)
 
-          const getDepartments = async () => {
-            const { data } = await axios.get('http://localhost:3001/department')
-            setDepartments(data)
-          }
-      
-          getDepartments()
+            const getDepartments = async () => {
+                const { data } = await axios.get('http://localhost:3001/department')
+                setDepartments(data)
+            } 
+            getDepartments()
         }
     
         getData()
+        // eslint-disable-next-line
       }, [])
 
         const handleDeleteButtonClick = async() => {
@@ -88,9 +88,9 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
 
                 <select name="department-select" id="department-select" onChange={handleChangeInputValue} className="select-port-department">
                     <option value={portData.departId}>{portData.department.departName}</option>
-                    {departments.map((department)=> { 
-                        if (department.id === portData.departId) {return}
-                        return <option value={department.id}>{department.departName}</option>
+                    {departments.map((department) => { 
+                        if (department.id === portData.departId) {return null}
+                        return (<option value={department.id}>{department.departName}</option>)
                     })}
                 </select>
 
