@@ -2,11 +2,8 @@ import express  from 'express'
 
 const app = express()
 
-import serverless from 'serverless-http'
-
 import cors from 'cors'
 app.use(cors())
-
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}))
@@ -107,8 +104,6 @@ app.post('/department/add', async(request, response) => {
   }
 })
 
-// app.listen('3001', () => {
-//     console.log('Servidor está rodando!')
-// })
-
-module.exports.handler = serverless(app);
+app.listen('3001', () => {
+    console.log('Servidor está rodando!')
+})
