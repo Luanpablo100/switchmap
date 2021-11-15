@@ -9,7 +9,7 @@
     "insert": "ts-node ./prismaCommands/insert.ts",
     "client": "cd frontend && npm i && npm run build",
     "server": "npm i && npx prisma generate && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "CI='' concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
