@@ -92,7 +92,15 @@ app.get('/department', async (request, response) => {
   }
 })
 
-
+app.get('/department/:departId', async(request, response) => {
+  try {
+    const departmentId = parseInt(request.params.departId) 
+    const findDepartment = await readFunctions.queryDepartment.queryFind(departmentId)
+    return response.status(200).json(findDepartment)
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
 
 app.post('/department/add', async(request, response) => {
   try {

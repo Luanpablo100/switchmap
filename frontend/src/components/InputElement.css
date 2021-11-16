@@ -20,7 +20,7 @@ h2 small {
 }
 
 
-input 				{
+.input-text-input-element				{
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
@@ -31,27 +31,27 @@ input 				{
   width: fit-content;
 }
 
-input[type=text] {
+.input-text-input-element[type=text] {
   border-bottom:1px solid #757575;
 }
 
-input[type=number] {
+.input-text-input-element[type=number] {
   width:60px;
   text-align: center;
   font-size: 1.7rem;
   font-weight: bold;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+.input-text-input-element[type=number]::-webkit-inner-spin-button,
+.input-text-input-element[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-input:focus 		{ outline:none; }
+.input-text-input-element:focus 		{ outline:none; }
 
 /* LABEL ======================================= */
-label 				 {
+.label-input-element 				 {
   color:#999; 
   font-size:18px;
   font-weight:normal;
@@ -65,7 +65,7 @@ label 				 {
 }
 
 /* active state */
-input:focus ~ label, input:valid ~ label 		{
+.input-text-input-element:focus ~ .label-input-element, .input-text-input-element:valid ~ .label-input-element 		{
   top:-20px;
   font-size:14px;
   color:#5264AE;

@@ -65,11 +65,18 @@ const App = () => {
     return("Updated")
   }
 
+  let departmentId = 1
+
+  const handleFilterPorts = async () => {
+    const filteredData = await axios.get(`http://localhost:3001/department/${departmentId}`)
+    console.log(filteredData.data)
+  }
+
   return (
     <Router>
       <div className="hack">
         <Routes>
-          <Route exact path="/" element={<SwitchsElements data={hackData}/>}/>
+          <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
           <Route path="port/:portId" element={<PortInfo handleDeletePort={handleDeletePort} handleUpdatePort={handleUpdatePort}/>} />
           <Route path="port/add/" element={<CreatePort handleCreatePort={handleCreatePort}/>}/>
         </Routes>

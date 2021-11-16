@@ -11,3 +11,14 @@
   align-items: center;
   flex-direction: column;
 }
+
+.react-link {
+  text-decoration: none;
+  color: chartreuse;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.react-link:hover {
+  color: white;
+
+}

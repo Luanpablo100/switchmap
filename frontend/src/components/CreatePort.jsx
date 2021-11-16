@@ -19,6 +19,7 @@ const CreatePort = ({handleCreatePort}) => {
     useEffect(() => {
         const getDepartments = async () => {
             const { data } = await axios.get('http://localhost:3001/department')
+            console.log(data)
             setDepartments(data)
           }
       
@@ -42,7 +43,7 @@ const CreatePort = ({handleCreatePort}) => {
         <div className="add-container">
 
             <div>
-                <Link to="/">Voltar</Link>
+                <Link to="/" className="react-link">Voltar</Link>
                 <h1>Adicionar porta</h1>
             </div>
             <div className="input-container">

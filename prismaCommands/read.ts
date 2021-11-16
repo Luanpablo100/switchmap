@@ -74,8 +74,24 @@ const readFunctions = {
 
             return allDepatments
         },
-        queryFind: async () => {
-            return "Apenas um departamento"
+        queryFind: async (departId: number) => {
+            const queryFindDepartments = await prisma.department.findUnique({
+                where: {
+                    id: departId
+                },
+                include: {
+                    Ports: true
+                }
+            })
+
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+
+            return queryFindDepartments
         }
     }
 }

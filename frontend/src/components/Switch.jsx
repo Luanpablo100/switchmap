@@ -16,7 +16,7 @@ const SwitchElement = ({sw}) => {
             </div>
             <div className={"control"}>
             <h1>{sw.id}</h1>
-            <Link to="/port/add">Cadastrar</Link>
+            <Link to="/port/add" className="react-link">Cadastrar</Link>
             </div>
         </div>
     )

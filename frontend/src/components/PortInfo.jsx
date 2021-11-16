@@ -3,6 +3,9 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import './PortInfo.css'
 import axios from 'axios';
 
+import { CgTrash } from "react-icons/cg"
+import { BiSave } from 'react-icons/bi'
+
 import InputElement from './InputElement';
 
 const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
@@ -74,7 +77,7 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
         <div className="info-container">
             <div className="title-container">
                 <div>
-                    <Link to="/">Voltar</Link>
+                    <Link to="/" className="react-link">Voltar</Link>
                 </div>
                 <div className="headers-info">
                 <h1>Porta - </h1>
@@ -96,8 +99,8 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
 
             </div>
             <div className="port-control">
-                <button className="update-button" onClick={handleUpdateData}>Atualizar</button>
-                <button className="delete-button" onClick={handleDeleteButtonClick}>Apagar</button>
+                <BiSave style={{width: "35px", height:"35px", cursor: "pointer"}} onClick={handleUpdateData}/>
+                <CgTrash style={{width: "35px", height:"35px", cursor: "pointer"}} onClick={handleDeleteButtonClick}/>
             </div>
         </div>
      );
