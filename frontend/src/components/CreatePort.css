@@ -1,0 +1,8 @@
+.add-container {
+    color: white;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,24 @@
+.hack {
+  max-width: 80vw;
+  margin: 30px auto;
+  overflow: auto;
+  min-height: 300px;
+  border: 2px solid chartreuse;
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.react-link {
+  text-decoration: none;
+  color: chartreuse;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.react-link:hover {
+  color: white;
+
+}

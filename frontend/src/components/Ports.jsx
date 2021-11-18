@@ -5,7 +5,7 @@ import Port from './Port'
 const Ports = ({ports}) => {
     return (
         <div className="ports">
-            {ports.map(port => <Port port={port}/>) }
+            {ports.map(port => <Port port={port} key={port.id}/>) }
         </div>
     )
 }
