@@ -1,5 +1,5 @@
 .hack {
-  max-width: 80vw;
+  width: 80vw;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
@@ -21,4 +21,14 @@
 .react-link:hover {
   color: white;
 
+}
+
+@media(max-width: 785px) {
+  .hack {
+    width: 100vw;
+    align-items:baseline;
+    border-radius: 0;
+    min-height: auto;
+    margin: 0;
+  }
 }

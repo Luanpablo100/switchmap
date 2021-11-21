@@ -5,10 +5,10 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "ts-node server.ts",
+    "back": "ts-node server.ts",
     "client": "cd frontend && npm i && npm start",
-    "server": "npm i && npx prisma generate && npm start",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "server": "npm i && npx prisma generate && npm run back",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "Luan Oliveira",

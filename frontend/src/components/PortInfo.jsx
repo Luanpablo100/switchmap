@@ -74,35 +74,43 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
         }
             
     return ( 
+        <>
+       
         <div className="info-container">
+        <div>
+            <Link to="/" className="react-link">Voltar</Link>
+        </div>
             <div className="title-container">
-                <div>
-                    <Link to="/" className="react-link">Voltar</Link>
-                </div>
+                
                 <div className="headers-info">
                 <h1>Porta - </h1>
-                    <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-port-code"} type={"number"}>{portData.code}</InputElement>
+                    <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-port-code"} type={"number"} key={portData.code}>{portData.code}</InputElement>
                     <h1>Switch - {portData.switchCode}</h1>
                 </div>
             </div>
             <div className="description">
                 <h3>Descrição</h3>
-                <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-port-desc"} type={"text"}>{portData.desc}</InputElement>
+                <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-port-desc"} type={"text"} key={portData.desc}>{portData.desc}</InputElement>
 
-                <select name="department-select" id="department-select" onChange={handleChangeInputValue} className="select-port-department">
+
+            <div className="select" style={{margin: "15px 0px"}}>
+                <select id="department-select" onChange={handleChangeInputValue} className="select-port-department" className="select-element">
                     <option value={portData.departId}>{portData.department.departName}</option>
                     {departments.map((department) => { 
                         if (department.id === portData.departId) {return null}
                         return (<option value={department.id}>{department.departName}</option>)
                     })}
                 </select>
+            </div>
+                
 
             </div>
             <div className="port-control">
-                <BiSave style={{width: "35px", height:"35px", cursor: "pointer"}} onClick={handleUpdateData}/>
-                <CgTrash style={{width: "35px", height:"35px", cursor: "pointer"}} onClick={handleDeleteButtonClick}/>
+                <BiSave  className="save-icon" onClick={handleUpdateData}/>
+                <CgTrash className="delete-icon" onClick={handleDeleteButtonClick}/>
             </div>
         </div>
+        </>
      );
 }
  

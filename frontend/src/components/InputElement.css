@@ -15,7 +15,6 @@ h2 small {
 .group 			  { 
   position:relative; 
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -24,11 +23,10 @@ h2 small {
   font-size:18px;
   padding:10px 10px 10px 5px;
   display:block;
-  width:300px;
+  width: 15em;
   border:none;
   background-color: transparent;
   color: white;
-  width: fit-content;
 }
 
 .input-text-input-element[type=text] {

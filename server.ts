@@ -12,6 +12,7 @@ import insertFunctions from './prismaCommands/insert'
 import readFunctions from './prismaCommands/read'
 import deleteFunctions from './prismaCommands/delete'
 import editFunctions from './prismaCommands/edit'
+import { env } from 'process'
 
 
 app.get('/', async (req, res) => {
@@ -112,6 +113,8 @@ app.post('/department/add', async(request, response) => {
   }
 })
 
-app.listen('3001', () => {
+const PORT = process.env.port
+
+app.listen(PORT, () => {
     console.log('Servidor está rodando!')
 })

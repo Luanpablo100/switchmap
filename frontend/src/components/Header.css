@@ -1,0 +1,15 @@
+.header-container {
+    background-color: rgb(36, 38, 39);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-link {
+    color: white;
+}
+
+.icon-link:hover {
+    color: chartreuse;
+    transition: .3s;
+}

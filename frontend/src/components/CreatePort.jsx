@@ -1,7 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import ButtonElement from './Button';
 import './CreatePort.css'
+import InputElement from './InputElement';
 
 const CreatePort = ({handleCreatePort}) => {
 
@@ -38,6 +40,10 @@ const CreatePort = ({handleCreatePort}) => {
         handleCreatePort().then(navigate("/"))
     }
 
+    const handleChangeInputValue = () => {
+        return
+    }
+
     return ( 
 
         <div className="add-container">
@@ -48,26 +54,28 @@ const CreatePort = ({handleCreatePort}) => {
             </div>
             <div className="input-container">
                 <label htmlFor="inputPortSwCode" >Número do Switch</label>
-                <input type="text" id="inputPortSwCode" name="inputPortSwCode" required/>
+                <InputElement configuration={"inputPortSwCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+
                 <label htmlFor="inputPortCode">Número da porta</label>
-                <input type="text" id="inputPortCode" name="department-select" required/>
+                <InputElement configuration={"inputPortCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+
                 <label htmlFor="department-select">Departamento</label>
 
+                <div className="select">
+                    <select name="department-select" id="department-select" className="select-element">
 
+                        {departments.map((department)=> {
+                            return <option value={department.id}>{department.departName}</option>
+                        })}
 
-                <select name="department-select" id="department-select">
+                    </select>
 
-                {departments.map((department)=> {
-                    return <option value={department.id}>{department.departName}</option>
-                })}
-
-                </select>
-
-
+                </div>  
 
                 <label htmlFor="inputPortDesc">Descrição</label>
-                <input type="text" id="inputPortDesc" name="inputPortDesc" required/>
-                <button onClick={handleCreatePortButtonClick}>Cadastrar</button>
+                <InputElement configuration={"inputPortDesc"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                
+                <ButtonElement onClick={handleCreatePortButtonClick}> Cadastrar</ButtonElement>
             </div>
         </div>
     );
