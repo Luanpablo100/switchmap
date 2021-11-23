@@ -15,11 +15,13 @@ const App = () => {
       Ports: [
         {
           code: "1",
-          desc: 'lorenipsun'
+          desc: 'lorenipsun',
+          departId: 1
         },
         {
           code: "2",
-          desc: 'loreion'
+          desc: 'loreion',
+          departId: 1
         }
       ]
     },
@@ -28,22 +30,40 @@ const App = () => {
       Ports: [
         {
           code: "1",
-          desc: "loren"
+          desc: "loren",
+          departId: 1
         },
         {
           code: "2",
-          desc: "loren2"
+          desc: "loren2",
+          departId: 1
         }
       ]
     }
   ])
 
+  const [departments, setDepartments] = useState([
+    {
+        id: 1,
+        departName: "Admin",
+    },
+    {
+        id: 2,
+        departName: "Comercial"
+    }
+])
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(`http://localhost:3001`)
-      console.log(process.env.port)
       setHackData(data)
     }
+
+    const getDepartments = async () => {
+      const { data } = await axios.get('http://localhost:3001/department')
+      setDepartments(data)
+    } 
+    getDepartments()
 
     fetchData()
   }, [])
@@ -67,16 +87,23 @@ const App = () => {
     return("Updated")
   }
 
-  let departmentId = 1
 
-  const handleFilterPorts = async () => {
-    const filteredData = await axios.get(`http://localhost:3001/department/${departmentId}`)
-    console.log(filteredData.data)
+  const handleFilterPorts = async (filterId) => {
+    const updateData = await axios.get(`http://localhost:3001`)
+    setHackData(updateData)
+
+    const newData = hackData.map(sw => {
+      const newPorts = sw.Ports.filter(port => port.departId === parseInt(filterId))
+      sw.Ports = newPorts
+      return sw
+    })
+
+    setHackData(newData)
   }
 
   return (
     <Router>
-      <HeaderElement/>
+      <HeaderElement handleFilterPorts={handleFilterPorts} departments={departments}/>
       <div className="hack">
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
