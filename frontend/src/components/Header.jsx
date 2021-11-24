@@ -2,28 +2,48 @@ import React from 'react';
 import './Header.css'
 import {BsFillPlusSquareFill} from 'react-icons/bs'
 import {HiFilter} from 'react-icons/hi'
+import {ImCross} from 'react-icons/im'
 import {Link} from "react-router-dom"
+import {useEffect, useState } from "react";
+import axios from "axios";
 
-const HeaderElement = ({handleFilterPorts, departments}) => {
+const HeaderElement = ({handleFilterPorts, handleCancelFilter}) => {
 
-    const handleClickFilterButton = () => {
-        const filterDepartId = document.getElementById('department-select').value
-        handleFilterPorts(filterDepartId)
+    const [departments, setDepartments] = useState([
+        {
+            id: 1,
+            departName: "Carregando...",
+        }
+    ])
+
+    useEffect(() => {
+        const getDepartments = async () => {
+            const { data } = await axios.get('http://localhost:3001/department')
+            setDepartments(data)
+        } 
+        getDepartments()
+    }, [])
+    
+    const handleChangeSelectValue = () => {
+        return
     }
 
-    const handleChangeInputValue = () => {
-        return ""
+
+    const handleClickFilterButton = () => {
+
+        const filterDepartId = document.getElementById('header-select-department').value
+        handleFilterPorts(filterDepartId)
     }
 
     return ( 
         <div className="header-container">
-            <h1 style={{marginLeft: "10px"}}>Switchmap</h1>
+            <Link to="/" style={{textDecoration: 'none', color: 'white'}}><h1 style={{marginLeft: "10px"}}>Switchmap</h1></Link>
             <div style={{display: 'flex', alignItems: 'center'}}>
-                <HiFilter style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleClickFilterButton}/>
-                <div className="select" style={{margin: "15px 0px"}}>
-                    <select id="department-select" onChange={handleChangeInputValue} className="select-port-department" className="select-element">
+                <HiFilter style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleClickFilterButton}/> <ImCross style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleCancelFilter}/>
+                <div className="select">
+                    <select id='header-select-department' onChange={handleChangeSelectValue} className="select-port-department" className="select-element">
                         {departments.map((department) => { 
-                            return (<option value={department.id}>{department.departName}</option>)
+                             return (<option value={department.id}>{department.departName}</option>)
                         })}
                     </select>
                 </div>

@@ -42,32 +42,14 @@ const App = () => {
     }
   ])
 
-  const [departments, setDepartments] = useState([
-    {
-        id: 1,
-        departName: "Admin",
-    },
-    {
-        id: 2,
-        departName: "Comercial"
-    }
-])
-
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(`http://localhost:3001`)
       setHackData(data)
     }
 
-    const getDepartments = async () => {
-      const { data } = await axios.get('http://localhost:3001/department')
-      setDepartments(data)
-    } 
-    getDepartments()
-
     fetchData()
   }, [])
-
 
   const handleDeletePort = async () => {
     const newData = await (await axios.get(`http://localhost:3001`)).data
@@ -87,11 +69,12 @@ const App = () => {
     return("Updated")
   }
 
+  const handleGetData = async () => {
+    const oldData = (await axios.get(`http://localhost:3001`)).data
+    return oldData
+  }
 
   const handleFilterPorts = async (filterId) => {
-    const updateData = await axios.get(`http://localhost:3001`)
-    setHackData(updateData)
-
     const newData = hackData.map(sw => {
       const newPorts = sw.Ports.filter(port => port.departId === parseInt(filterId))
       sw.Ports = newPorts
@@ -101,9 +84,14 @@ const App = () => {
     setHackData(newData)
   }
 
+  const handleCancelFilter = async() => {
+    const oldData = await handleGetData()
+    setHackData(oldData)
+  }
+
   return (
     <Router>
-      <HeaderElement handleFilterPorts={handleFilterPorts} departments={departments}/>
+      <HeaderElement handleFilterPorts={handleFilterPorts} handleCancelFilter={handleCancelFilter}/>
       <div className="hack">
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>

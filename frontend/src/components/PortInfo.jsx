@@ -7,6 +7,7 @@ import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 
 import InputElement from './InputElement';
+import DepartmentSelect from './DepartmentSelect';
 
 const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
 
@@ -29,12 +30,8 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
     const [departments, setDepartments] = useState([
         {
             id: 1,
-            departName: "Admin",
+            departName: "Carregando...",
         },
-        {
-            id: 2,
-            departName: "Comercial"
-        }
     ])
     
 
@@ -72,6 +69,10 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
             await axios.put(`http://localhost:3001/port/${params.portId}`, portData)
             handleUpdatePort().then(navigate('/'))
         }
+
+        const handleChangeSelectValue = () => {
+            return ""
+        }
             
     return ( 
         <>
@@ -94,7 +95,7 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
 
 
             <div className="select" style={{margin: "15px 0px"}}>
-                <select id="department-select" onChange={handleChangeInputValue} className="select-port-department" className="select-element">
+                <select id="department-select" onChange={handleChangeSelectValue} className="select-port-department" className="select-element">
                     <option value={portData.departId}>{portData.department.departName}</option>
                     {departments.map((department) => { 
                         if (department.id === portData.departId) {return null}
@@ -103,7 +104,6 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
                 </select>
             </div>
                 
-
             </div>
             <div className="port-control">
                 <BiSave  className="save-icon" onClick={handleUpdateData}/>
