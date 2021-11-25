@@ -5,10 +5,14 @@ const Create = () => {
     return ( 
         <div>
             <div>
-                <Link to="/port/add"></Link>
+                <Link to="/port/add">Criar porta</Link>
             </div>
-            <div></div>
-            <div></div>
+            <div>
+                <Link to="/switch/add">Criar switch</Link>
+            </div>
+            <div>
+                <Link to="/department/add">Criar departamento</Link>
+            </div>
         </div>
      );
 }

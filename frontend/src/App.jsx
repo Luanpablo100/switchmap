@@ -6,6 +6,9 @@ import './App.css'
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import CreatePort from "./components/CreatePort";
 import HeaderElement from "./components/Header";
+import Create from "./components/Create";
+import CreateSwitch from './components/CreateSwitch'
+import CreateDepartment from "./components/CreateDepartment";
 
 const App = () => {
 
@@ -62,6 +65,17 @@ const App = () => {
     setHackData(newData)
     return ("Created")
 }
+  const handleCreateSwitch = async() => {
+    const newData = await (await axios.get(`http://localhost:3001`)).data
+    setHackData(newData)
+    return('Created')
+  }
+  
+  const handleCreateDepartment = async() => {
+    const newData = await (await axios.get(`http://localhost:3001`)).data
+    setHackData(newData)
+    return('Created')
+  }
 
   const handleUpdatePort = async () => {
     const newData = await (await axios.get(`http://localhost:3001`)).data
@@ -96,7 +110,10 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
           <Route path="port/:portId" element={<PortInfo handleDeletePort={handleDeletePort} handleUpdatePort={handleUpdatePort}/>} />
+          <Route path="create/" element={<Create handleCreatePort={handleCreatePort} handleCreateSwitch={handleCreateSwitch}/>}/>
           <Route path="port/add/" element={<CreatePort handleCreatePort={handleCreatePort}/>}/>
+          <Route path="switch/add/" element={<CreateSwitch handleCreateSwitch={handleCreateSwitch}/>}/>
+          <Route path="department/add/" element={<CreateDepartment handleCreateDepartment={handleCreateDepartment}/>}/>
         </Routes>
       </div>
     </Router>

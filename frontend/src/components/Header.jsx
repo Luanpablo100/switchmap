@@ -49,7 +49,7 @@ const HeaderElement = ({handleFilterPorts, handleCancelFilter}) => {
                 </div>
             </div>
             
-            <Link to="/port/add" className="icon-link">
+            <Link to="/create" className="icon-link">
                 <BsFillPlusSquareFill style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}}/>
             </Link>
         </div>

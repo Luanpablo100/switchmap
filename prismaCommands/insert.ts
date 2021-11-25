@@ -53,6 +53,8 @@ const insertFunctions = {
                 departName: name
             }
         })
+    },
+    newPatchPanel: async () => {
     }
 }
 

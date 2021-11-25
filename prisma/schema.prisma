@@ -14,6 +14,7 @@ model Rack {
   id Int @id @default(autoincrement())
   code String @unique
   Switchs Switch[]
+  PatchPanels Patchpanel[]
 }
 
 model Switch {
@@ -22,6 +23,21 @@ model Switch {
   rackCode String
   rack Rack @relation(fields: [rackCode], references: [code])
   Ports Port[]
+}
+
+model Patchpanel {
+  id Int @id @default(autoincrement())
+  ppanelcode String @unique
+  rackCode String
+  rack Rack @relation(fields: [rackCode], references: [code])
+  panelports Patchport[] 
+}
+
+model Patchport {
+  id Int @id @default(autoincrement())
+  pportcode String
+  panelCode String
+  patchpanel Patchpanel @relation(fields: [panelCode], references: [ppanelcode])
 }
 
 model Port {
