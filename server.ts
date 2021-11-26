@@ -1,4 +1,4 @@
-import express  from 'express'
+import express, { response }  from 'express'
 
 const app = express()
 
@@ -13,6 +13,7 @@ import readFunctions from './prismaCommands/read'
 import deleteFunctions from './prismaCommands/delete'
 import editFunctions from './prismaCommands/edit'
 import { env } from 'process'
+import { request } from 'http'
 
 
 app.get('/', async (req, res) => {
@@ -25,6 +26,18 @@ app.get('/', async (req, res) => {
   }
 })
 
+app.post('/hack/add', async (request, response) => {
+  try {
+    const {rackId} = request.body
+
+    insertFunctions.newRack(rackId)
+
+    return response.status(200).json()
+    
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
 
 app.post('/switch/add', async (request, response) => {
   try {
@@ -41,9 +54,9 @@ app.post('/switch/add', async (request, response) => {
 
 app.post('/port/add', async (request, response) => {
   try {
-    const {code, switchCode, portDesc, departId} = request.body
+    const {code, switchCode, portDesc, departId, patchport} = request.body
 
-    insertFunctions.newPort(code, switchCode, portDesc, parseInt(departId))
+    insertFunctions.newPort(code, switchCode, portDesc, parseInt(departId), patchport)
 
     return response.status(200).json()
     
@@ -108,6 +121,36 @@ app.post('/department/add', async(request, response) => {
     const {departName} = request.body
     insertFunctions.newDepartment(departName)
     return response.status(200).json()
+  } catch(err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.get('/patchpanel', async(request, response) => {
+  try {
+    const allPatchPanels = await readFunctions.queryPatchPanel.queryAll()
+    return response.status(200).json(allPatchPanels)
+  } catch (error) {
+    return response.status(400).json(error)
+  }
+})
+
+app.post('/patchpanel/add', async (request, response) => {
+  try {
+    const {patchCode, rackId} = request.body
+
+    insertFunctions.newPatchPanel(patchCode, rackId)
+
+    return response.status(200).json()
+    
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.post("patchport/add", async(request, response) => {
+  try {
+    const { patchCode, portCode } = request.body
   } catch(err) {
     return response.status(400).json(err)
   }

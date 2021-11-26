@@ -93,6 +93,20 @@ const readFunctions = {
 
             return queryFindDepartments
         }
+    },
+    queryPatchPanel: {
+        queryAll: async() => {
+            const allPatchPanels = await prisma.patchpanel.findMany()
+
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+
+            return allPatchPanels
+        }
     }
 }
 

@@ -38,6 +38,7 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`)
+            console.log(data)
             setPortData(data)
 
             const getDepartments = async () => {

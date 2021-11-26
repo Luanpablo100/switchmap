@@ -9,6 +9,7 @@ import HeaderElement from "./components/Header";
 import Create from "./components/Create";
 import CreateSwitch from './components/CreateSwitch'
 import CreateDepartment from "./components/CreateDepartment";
+import CreateHack from "./components/CreateHack";
 
 const App = () => {
 
@@ -65,6 +66,13 @@ const App = () => {
     setHackData(newData)
     return ("Created")
 }
+
+const handleCreateHack = async () => {
+  const newData = await (await axios.get(`http://localhost:3001`)).data
+  setHackData(newData)
+  return ("Created")
+}
+
   const handleCreateSwitch = async() => {
     const newData = await (await axios.get(`http://localhost:3001`)).data
     setHackData(newData)
@@ -114,6 +122,7 @@ const App = () => {
           <Route path="port/add/" element={<CreatePort handleCreatePort={handleCreatePort}/>}/>
           <Route path="switch/add/" element={<CreateSwitch handleCreateSwitch={handleCreateSwitch}/>}/>
           <Route path="department/add/" element={<CreateDepartment handleCreateDepartment={handleCreateDepartment}/>}/>
+          <Route path="/hack/add" element={<CreateHack handleCreateHack={handleCreateHack}/>}/>
         </Routes>
       </div>
     </Router>

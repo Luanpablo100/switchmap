@@ -27,17 +27,18 @@ model Switch {
 
 model Patchpanel {
   id Int @id @default(autoincrement())
-  ppanelcode String @unique
+  code String @unique
   rackCode String
   rack Rack @relation(fields: [rackCode], references: [code])
-  panelports Patchport[] 
+  patchports Patchport[]
 }
 
 model Patchport {
   id Int @id @default(autoincrement())
-  pportcode String
-  panelCode String
-  patchpanel Patchpanel @relation(fields: [panelCode], references: [ppanelcode])
+  patchcode String
+  patchpanel Patchpanel @relation(fields: [patchcode], references: [code])
+  switchportId Int
+  switchport Port @relation(fields: [switchportId], references: [id])
 }
 
 model Port {
@@ -48,10 +49,11 @@ model Port {
   desc String @default("")
   department Department @relation(fields: [departId], references:[id])
   departId Int @default(0)
+  patchport Patchport?
 }
 
 model Department {
   id Int @id @default(autoincrement())
   departName String
-  Ports Port []
+  Ports Port[]
 }

@@ -34,8 +34,9 @@ const CreatePort = ({handleCreatePort}) => {
         const inputPortSwCode = (document.getElementById("inputPortSwCode").value)
         const inputPortCode = (document.getElementById("inputPortCode").value)
         const inputPortDesc = (document.getElementById("inputPortDesc").value)
+        const inputPortPatchPort = (document.getElementById("inputPortPatchPort").value)
         const inputPortDepartment = (document.getElementById("department-select").value)
-        const postData = { code: inputPortCode, switchCode: inputPortSwCode, portDesc: inputPortDesc, departId: inputPortDepartment}
+        const postData = { code: inputPortCode, switchCode: inputPortSwCode, portDesc: inputPortDesc, departId: inputPortDepartment, patchport: inputPortPatchPort}
         await axios.post('http://localhost:3001/port/add', postData)
         handleCreatePort().then(navigate("/"))
     }
@@ -44,7 +45,7 @@ const CreatePort = ({handleCreatePort}) => {
         return
     }
 
-    return ( 
+    return (
 
         <div className="add-container">
 
@@ -58,6 +59,9 @@ const CreatePort = ({handleCreatePort}) => {
 
                 <label htmlFor="inputPortCode">Número da porta</label>
                 <InputElement configuration={"inputPortCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+
+                <label htmlFor="inputPortPatchPort">Número da da porta do patch panel</label>
+                <InputElement configuration={"inputPortPatchPort"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
 
                 <label htmlFor="department-select">Departamento</label>
 

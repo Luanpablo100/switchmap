@@ -1,4 +1,4 @@
-import { PrismaClient } from ".prisma/client";
+import { Patchport, PrismaClient } from ".prisma/client";
 
 const prisma = new PrismaClient()
 
@@ -31,13 +31,14 @@ const insertFunctions = {
             await prisma.$disconnect();
             });
     },
-    newPort: async (portId: string, switchId: string, portDesc:string, departmentId: number)=> {
+    newPort: async (portId: string, switchId: string, portDesc:string, departmentId: number, patchport: undefined)=> {
         await prisma.port.create({
             data: {
                 code: portId,
                 switchCode: switchId,
                 desc: portDesc,
-                departId: departmentId
+                departId: departmentId,
+                patchport: patchport
             }
         })
             .catch((e) => {
@@ -54,7 +55,30 @@ const insertFunctions = {
             }
         })
     },
-    newPatchPanel: async () => {
+    newPatchPanel: async (patchCode: string, rackId: string) => {
+        await prisma.patchpanel.create({
+            data: {
+                code: patchCode,
+                rackCode: rackId
+            }
+        })
+    },
+    newPatchPort: async(portCode: string, switchPort: number, patchCode: string) => {
+        await prisma.patchport.create({
+            data: {
+                pportcode: portCode,
+                switchportId: switchPort,
+                patchcode: patchCode
+            }
+        })
+
+        .catch((e) => {
+            throw e;
+            })
+        .finally(async () => {
+        await prisma.$disconnect();
+        });
+
     }
 }
 
