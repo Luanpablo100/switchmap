@@ -5,17 +5,13 @@ import ButtonElement from './Button';
 import './CreatePort.css'
 import InputElement from './InputElement';
 
-const CreatePort = ({handleCreatePort}) => {
+const CreatePort = ({handleSetNewHackData}) => {
 
     const [departments, setDepartments] = useState([
         {
             id: 1,
-            departName: "Admin"
+            departName: "Carregando..."
         },
-        {
-            id: 2,
-            departName: "Comercial"
-        }
     ])
 
     useEffect(() => {
@@ -34,11 +30,11 @@ const CreatePort = ({handleCreatePort}) => {
         const inputPortSwCode = (document.getElementById("inputPortSwCode").value)
         const inputPortCode = (document.getElementById("inputPortCode").value)
         const inputPortDesc = (document.getElementById("inputPortDesc").value)
-        const inputPortPatchPort = (document.getElementById("inputPortPatchPort").value)
+        const inputPortPatchPortDesc = (document.getElementById("inputPortPatchPortDesc").value)
         const inputPortDepartment = (document.getElementById("department-select").value)
-        const postData = { code: inputPortCode, switchCode: inputPortSwCode, portDesc: inputPortDesc, departId: inputPortDepartment, patchport: inputPortPatchPort}
+        const postData = { code: inputPortCode, switchCode: inputPortSwCode, portDesc: inputPortDesc, departId: inputPortDepartment, patchportdesc: inputPortPatchPortDesc}
         await axios.post('http://localhost:3001/port/add', postData)
-        handleCreatePort().then(navigate("/"))
+        handleSetNewHackData().then(navigate("/"))
     }
 
     const handleChangeInputValue = () => {
@@ -55,13 +51,13 @@ const CreatePort = ({handleCreatePort}) => {
             </div>
             <div className="input-container">
                 <label htmlFor="inputPortSwCode" >Número do Switch</label>
-                <InputElement configuration={"inputPortSwCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputPortSwCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
                 <label htmlFor="inputPortCode">Número da porta</label>
-                <InputElement configuration={"inputPortCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputPortCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
-                <label htmlFor="inputPortPatchPort">Número da da porta do patch panel</label>
-                <InputElement configuration={"inputPortPatchPort"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <label htmlFor="inputPortPatchPortDesc">Patch panel</label>
+                <InputElement configuration={"inputPortPatchPortDesc"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
                 <label htmlFor="department-select">Departamento</label>
 
@@ -77,7 +73,7 @@ const CreatePort = ({handleCreatePort}) => {
                 </div>  
 
                 <label htmlFor="inputPortDesc">Descrição</label>
-                <InputElement configuration={"inputPortDesc"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputPortDesc"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
                 
                 <ButtonElement onClick={handleCreatePortButtonClick}> Cadastrar</ButtonElement>
             </div>

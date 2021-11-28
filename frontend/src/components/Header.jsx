@@ -3,6 +3,7 @@ import './Header.css'
 import {BsFillPlusSquareFill} from 'react-icons/bs'
 import {HiFilter} from 'react-icons/hi'
 import {ImCross} from 'react-icons/im'
+import {BsGearFill} from 'react-icons/bs'
 import {Link} from "react-router-dom"
 import {useEffect, useState } from "react";
 import axios from "axios";
@@ -48,10 +49,15 @@ const HeaderElement = ({handleFilterPorts, handleCancelFilter}) => {
                     </select>
                 </div>
             </div>
+            <div>
+                <Link to="/create" className="icon-link">
+                    <BsFillPlusSquareFill style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}}/>
+                </Link>
+                <Link to="/manage" className="icon-link">
+                    <BsGearFill style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}}/>
+                </Link>
+            </div>
             
-            <Link to="/create" className="icon-link">
-                <BsFillPlusSquareFill style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}}/>
-            </Link>
         </div>
      );
 }

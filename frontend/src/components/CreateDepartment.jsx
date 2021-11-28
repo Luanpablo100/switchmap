@@ -5,28 +5,7 @@ import ButtonElement from './Button';
 import './CreatePort.css'
 import InputElement from './InputElement';
 
-const CreateDepartment = ({handleCreateDepartment}) => {
-
-    const [departments, setDepartments] = useState([
-        {
-            id: 1,
-            departName: "Admin"
-        },
-        {
-            id: 2,
-            departName: "Comercial"
-        }
-    ])
-
-    useEffect(() => {
-        const getDepartments = async () => {
-            const { data } = await axios.get('http://localhost:3001/department')
-            console.log(data)
-            setDepartments(data)
-          }
-      
-          getDepartments()
-    }, [])
+const CreateDepartment = ({handleSetNewHackData}) => {
 
     const navigate = useNavigate()
 
@@ -34,7 +13,7 @@ const CreateDepartment = ({handleCreateDepartment}) => {
         const inputDepartmentName = (document.getElementById("inputDepartmentName").value)
         const postData = { departName: inputDepartmentName}
         await axios.post('http://localhost:3001/department/add', postData)
-        handleCreateDepartment().then(navigate("/"))
+        handleSetNewHackData().then(navigate("/"))
     }
 
     const handleChangeInputValue = () => {
@@ -51,7 +30,7 @@ const CreateDepartment = ({handleCreateDepartment}) => {
             </div>
             <div className="input-container">
                 <label htmlFor="inputDepartmentName" >Nome do departamento</label>
-                <InputElement configuration={"inputDepartmentName"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputDepartmentName"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
                 <ButtonElement onClick={handleCreateDepartmentButtonClick}> Cadastrar</ButtonElement>
             </div>

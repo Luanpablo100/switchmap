@@ -5,7 +5,7 @@ import ButtonElement from './Button';
 import './CreatePort.css'
 import InputElement from './InputElement';
 
-const CreateSwitch = ({handleCreateSwitch}) => {
+const CreateSwitch = ({handleSetNewHackData}) => {
 
     const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ const CreateSwitch = ({handleCreateSwitch}) => {
         const inputRackCode = (document.getElementById("inputRackCode").value)
         const postData = { code: inputSwitchCode, rackCode: inputRackCode}
         await axios.post('http://localhost:3001/switch/add', postData)
-        handleCreateSwitch().then(navigate("/"))
+        handleSetNewHackData().then(navigate("/"))
     }
 
     const handleChangeInputValue = () => {
@@ -31,10 +31,10 @@ const CreateSwitch = ({handleCreateSwitch}) => {
             </div>
             <div className="input-container">
                 <label htmlFor="inputSwitchCode" >Número do Switch</label>
-                <InputElement configuration={"inputSwitchCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputSwitchCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
                 <label htmlFor="inputRackCode" >Número do Rack</label>
-                <InputElement configuration={"inputRackCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputRackCode"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
                 <ButtonElement onClick={handleCreateSwitchButtonClick}> Cadastrar</ButtonElement>
             </div>

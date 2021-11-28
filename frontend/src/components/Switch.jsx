@@ -14,7 +14,7 @@ const SwitchElement = ({sw}) => {
                 {<Ports ports={even} orientation={"down"}/>}
             </div>
             <div className={"control"}>
-                <h1>{sw.id}</h1>
+                <h1>{sw.code}</h1>
             </div>
         </div>
     )

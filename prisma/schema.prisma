@@ -14,31 +14,14 @@ model Rack {
   id Int @id @default(autoincrement())
   code String @unique
   Switchs Switch[]
-  PatchPanels Patchpanel[]
 }
 
 model Switch {
   id Int @id @default(autoincrement())
   code String @unique
-  rackCode String
+  rackCode String @default("1")
   rack Rack @relation(fields: [rackCode], references: [code])
   Ports Port[]
-}
-
-model Patchpanel {
-  id Int @id @default(autoincrement())
-  code String @unique
-  rackCode String
-  rack Rack @relation(fields: [rackCode], references: [code])
-  patchports Patchport[]
-}
-
-model Patchport {
-  id Int @id @default(autoincrement())
-  patchcode String
-  patchpanel Patchpanel @relation(fields: [patchcode], references: [code])
-  switchportId Int
-  switchport Port @relation(fields: [switchportId], references: [id])
 }
 
 model Port {
@@ -49,7 +32,7 @@ model Port {
   desc String @default("")
   department Department @relation(fields: [departId], references:[id])
   departId Int @default(0)
-  patchport Patchport?
+  patchportdesc String @default("")
 }
 
 model Department {

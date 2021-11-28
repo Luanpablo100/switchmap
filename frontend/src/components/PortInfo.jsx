@@ -7,9 +7,8 @@ import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 
 import InputElement from './InputElement';
-import DepartmentSelect from './DepartmentSelect';
 
-const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
+const PortInfo = ({handleSetNewHackData}) => {
 
     const params = useParams()
 
@@ -24,7 +23,8 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
         department: {
             departName: "Indefinido",
             id: 1
-        }
+        },
+        patchportdesc: "Indefinido"
     })
 
     const [departments, setDepartments] = useState([
@@ -38,7 +38,6 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
     useEffect(() => {
         const getData = async () => {
             const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`)
-            console.log(data)
             setPortData(data)
 
             const getDepartments = async () => {
@@ -55,20 +54,22 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
         const handleDeleteButtonClick = async() => {
             await axios.delete(`http://localhost:3001/port/${params.portId}`)
 
-            handleDeletePort().then(navigate("/"))
+            handleSetNewHackData().then(navigate("/"))
         }
 
         const handleChangeInputValue = () => {
-            const inputPortCode = document.getElementById('input-port-code').value
-            const inputPortDesc = document.getElementById('input-port-desc').value
-            const inputPortDepartment = document.getElementById('department-select').value
-            const newData = {...portData, code: inputPortCode, desc: inputPortDesc, departId: inputPortDepartment}
-            setPortData(newData)
+            return
         }
 
         const handleUpdateData = async() => {
-            await axios.put(`http://localhost:3001/port/${params.portId}`, portData)
-            handleUpdatePort().then(navigate('/'))
+            const inputPortCode = document.getElementById('input-port-code').value
+            const inputPortDesc = document.getElementById('input-port-desc').value
+            const inputPatchPortDesc = document.getElementById('input-patch-port-desc').value
+            const inputPortDepartment = document.getElementById('department-select').value
+            const newData = {...portData, code: inputPortCode, desc: inputPortDesc, departId: inputPortDepartment, patchportdesc: inputPatchPortDesc}
+
+            await axios.put(`http://localhost:3001/port/${params.portId}`, newData)
+            handleSetNewHackData().then(navigate('/'))
         }
 
         const handleChangeSelectValue = () => {
@@ -94,6 +95,9 @@ const PortInfo = ({handleDeletePort, handleUpdatePort}) => {
                 <h3>Descrição</h3>
                 <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-port-desc"} type={"text"} key={portData.desc}>{portData.desc}</InputElement>
 
+                <h3>Patchpanel</h3>
+            
+                <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-patch-port-desc"} type={"text"} key={portData.patchportdesc}>{portData.patchportdesc}</InputElement>
 
             <div className="select" style={{margin: "15px 0px"}}>
                 <select id="department-select" onChange={handleChangeSelectValue} className="select-port-department" className="select-element">

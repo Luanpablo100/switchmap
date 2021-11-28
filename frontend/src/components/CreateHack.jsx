@@ -5,7 +5,7 @@ import ButtonElement from './Button';
 import './CreatePort.css'
 import InputElement from './InputElement';
 
-const CreateHack = ({handleCreateHack}) => {
+const CreateHack = ({handleSetNewHackData}) => {
 
     const navigate = useNavigate()
 
@@ -13,7 +13,7 @@ const CreateHack = ({handleCreateHack}) => {
         const inputHackNumber = (document.getElementById("inputHackNumber").value)
         const postData = { rackId: inputHackNumber}
         await axios.post('http://localhost:3001/hack/add', postData)
-        handleCreateHack().then(navigate("/"))
+        handleSetNewHackData().then(navigate("/"))
     }
 
     const handleChangeInputValue = () => {
@@ -30,7 +30,7 @@ const CreateHack = ({handleCreateHack}) => {
             </div>
             <div className="input-container">
                 <label htmlFor="inputHackNumber" >Número do rack</label>
-                <InputElement configuration={"inputHackNumber"} type={"text"} handleChangeInputValue={handleChangeInputValue}></InputElement>
+                <InputElement configuration={"inputHackNumber"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
                 <ButtonElement onClick={handleCreateHackButtonClick}> Cadastrar</ButtonElement>
             </div>

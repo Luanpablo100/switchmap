@@ -1,4 +1,4 @@
-import express, { response }  from 'express'
+import express, { request, response }  from 'express'
 
 const app = express()
 
@@ -12,8 +12,6 @@ import insertFunctions from './prismaCommands/insert'
 import readFunctions from './prismaCommands/read'
 import deleteFunctions from './prismaCommands/delete'
 import editFunctions from './prismaCommands/edit'
-import { env } from 'process'
-import { request } from 'http'
 
 
 app.get('/', async (req, res) => {
@@ -39,6 +37,16 @@ app.post('/hack/add', async (request, response) => {
   }
 })
 
+app.get('/switch/:switchId', async(request, response) => {
+  try {
+    const switchId = request.params.switchId
+    const queryFindSwitch = await readFunctions.querySwitch.queryFind(parseInt(switchId))
+    return response.status(200).json(queryFindSwitch)
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
+
 app.post('/switch/add', async (request, response) => {
   try {
     const {code, rackCode} = request.body
@@ -52,11 +60,20 @@ app.post('/switch/add', async (request, response) => {
   }
 })
 
+app.delete('/switch/:switchId', async (request, response) => {
+  try {
+    await deleteFunctions.deleteSwitch(parseInt(request.params.switchId))
+    return response.status(200).json()
+  }catch(err) {
+    response.status(400).json()
+  }
+})
+
 app.post('/port/add', async (request, response) => {
   try {
-    const {code, switchCode, portDesc, departId, patchport} = request.body
+    const {code, switchCode, portDesc, departId, patchportdesc} = request.body
 
-    insertFunctions.newPort(code, switchCode, portDesc, parseInt(departId), patchport)
+    insertFunctions.newPort(code, switchCode, portDesc, parseInt(departId), patchportdesc)
 
     return response.status(200).json()
     
@@ -87,8 +104,8 @@ app.get('/port/:portId', async (request, response) => {
 
 app.put('/port/:portId', async (request, response) => {
   try {
-    const {id, code, desc, departId} = request.body
-    editFunctions.editPort(id, code, desc, parseInt(departId))
+    const {id, code, desc, departId, patchportdesc} = request.body
+    editFunctions.editPort(id, code, desc, parseInt(departId), patchportdesc)
 
     return response.status(200).json()
     
@@ -126,33 +143,12 @@ app.post('/department/add', async(request, response) => {
   }
 })
 
-app.get('/patchpanel', async(request, response) => {
+app.delete('/department/:departId', async (request, response) => {
   try {
-    const allPatchPanels = await readFunctions.queryPatchPanel.queryAll()
-    return response.status(200).json(allPatchPanels)
-  } catch (error) {
-    return response.status(400).json(error)
-  }
-})
-
-app.post('/patchpanel/add', async (request, response) => {
-  try {
-    const {patchCode, rackId} = request.body
-
-    insertFunctions.newPatchPanel(patchCode, rackId)
-
+    await deleteFunctions.deleteDepartment(parseInt(request.params.departId))
     return response.status(200).json()
-    
-  } catch (err) {
-    return response.status(400).json(err)
-  }
-})
-
-app.post("patchport/add", async(request, response) => {
-  try {
-    const { patchCode, portCode } = request.body
   } catch(err) {
-    return response.status(400).json(err)
+    response.status(400).json(err)
   }
 })
 
