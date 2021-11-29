@@ -1,7 +1,7 @@
 {
   "name": "switchmap",
   "version": "1.0.0",
-  "description": "",
+  "description": "A software to document network infrastructure",
   "private": true,
   "main": "index.js",
   "scripts": {

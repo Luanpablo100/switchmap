@@ -33,7 +33,7 @@ const deleteFunctions = {
     deleteDepartment: async (departId:number) => {
         await prisma.department.delete({
             where: {
-                departId: departId
+                id: departId
             }
         })
 
