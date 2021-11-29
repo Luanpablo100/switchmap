@@ -62,14 +62,21 @@ const App = () => {
     },
 ])
 
+  // const HOST = "localhost"
+  const host = {
+    name: 'localhost',
+    port: '3001'
+  }
+  // const PORT = "3001"
+
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get(`http://localhost:3001`)
+      const { data } = await axios.get(`http://${host.name}:${host.port}`)
       setHackData(data)
     }
 
     const getDepartments = async () => {
-      const { data } = await axios.get('http://localhost:3001/department')
+      const { data } = await axios.get(`http://${host.name}:${host.port}/department`)
       setDepartments(data)
     }
 
@@ -79,18 +86,18 @@ const App = () => {
   }, [])
 
   const handleSetNewHackData = async () => {
-    const newData = await (await axios.get(`http://localhost:3001`)).data
+    const newData = await (await axios.get(`http://${host.name}:${host.port}`)).data
     return setHackData(newData)
     
   }
 
   const handleSetNewDepartmentData = async() => {
-    const newData = await (await (await axios.get(`http://localhost:3001/department`)).data)
+    const newData = await (await (await axios.get(`http://${host.name}:${host.port}/department`)).data)
     return setDepartments(newData)
   }
 
   const handleGetData = async () => {
-    const oldData = (await axios.get(`http://localhost:3001`)).data
+    const oldData = (await axios.get(`http://${host.name}:${host.port}`)).data
     return oldData
   }
 
@@ -115,17 +122,17 @@ const App = () => {
       <div className="hack">
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
-          <Route path="port/:portId" element={<PortInfo handleSetNewHackData={handleSetNewHackData}/>} />
+          <Route path="port/:portId" element={<PortInfo handleSetNewHackData={handleSetNewHackData} server={host}/>} />
           <Route path="create/" element={<Create handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="port/add/" element={<CreatePort handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="switch/add/" element={<CreateSwitch handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="department/add/" element={<CreateDepartment handleSetNewDepartmentData={handleSetNewDepartmentData}/>}/>
-          <Route path="/hack/add" element={<CreateHack handleSetNewHackData={handleSetNewHackData}/>}/>
+          <Route path="port/add/" element={<CreatePort handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
+          <Route path="switch/add/" element={<CreateSwitch handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
+          <Route path="department/add/" element={<CreateDepartment handleSetNewDepartmentData={handleSetNewDepartmentData} server={host}/>}/>
+          <Route path="/hack/add" element={<CreateHack handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
           <Route path="/manage" element={<Manage handleSetNewHackData={handleSetNewHackData}/>}/>
           <Route path="/manage/switch" element={<SwitchList switchdata={hackData}/>}/>
-          <Route path="/switch/:switchId" element={<ManageSwitch handleSetNewHackData={handleSetNewHackData}/>}/>
+          <Route path="/switch/:switchId" element={<ManageSwitch handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
           <Route path="/manage/department" element={<DepartList departmentData={departments}/>}/>
-          <Route path="/department/:departId" element={<ManageDepartment handleSetNewDepartmentData={handleSetNewDepartmentData}/>}/>
+          <Route path="/department/:departId" element={<ManageDepartment handleSetNewDepartmentData={handleSetNewDepartmentData} server={host}/>}/>
         </Routes>
       </div>
     </Router>

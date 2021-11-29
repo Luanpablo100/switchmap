@@ -6,7 +6,7 @@ const DepartList = ({departmentData}) => {
 
     return ( 
         <div className="container">
-            <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/manage" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Gerenciar departamentos</h1>
             </div>

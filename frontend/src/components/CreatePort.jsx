@@ -5,7 +5,7 @@ import ButtonElement from './Button';
 import './CreatePort.css'
 import InputElement from './InputElement';
 
-const CreatePort = ({handleSetNewHackData}) => {
+const CreatePort = ({handleSetNewHackData, server}) => {
 
     const [departments, setDepartments] = useState([
         {
@@ -16,7 +16,7 @@ const CreatePort = ({handleSetNewHackData}) => {
 
     useEffect(() => {
         const getDepartments = async () => {
-            const { data } = await axios.get('http://localhost:3001/department')
+            const { data } = await axios.get(`http://${server.name}:${server.port}/department`)
             setDepartments(data)
           }
       
@@ -32,7 +32,7 @@ const CreatePort = ({handleSetNewHackData}) => {
         const inputPortPatchPortDesc = (document.getElementById("inputPortPatchPortDesc").value)
         const inputPortDepartment = (document.getElementById("department-select").value)
         const postData = { code: inputPortCode, switchCode: inputPortSwCode, portDesc: inputPortDesc, departId: inputPortDepartment, patchportdesc: inputPortPatchPortDesc}
-        await axios.post('http://localhost:3001/port/add', postData)
+        await axios.post(`http://${server.name}:${server.port}/port/add`, postData)
         handleSetNewHackData().then(navigate("/"))
     }
 
@@ -44,7 +44,7 @@ const CreatePort = ({handleSetNewHackData}) => {
 
         <div className="add-container">
 
-            <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/create" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Adicionar porta</h1>
             </div>

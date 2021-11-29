@@ -1,14 +1,12 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './SwitchList.css'
 
 const SwitchList = ({switchdata}) => {
 
-    const navigate = useNavigate()
-
     return ( 
         <div className="container">
-            <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/manage" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Gerenciar switchs</h1>
             </div>

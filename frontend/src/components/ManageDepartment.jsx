@@ -8,7 +8,7 @@ import { BiSave } from 'react-icons/bi'
 
 import InputElement from './InputElement';
 
-const ManageDepartment = ({handleSetNewDepartmentData}) => {
+const ManageDepartment = ({handleSetNewDepartmentData, server}) => {
 
     const params = useParams()
 
@@ -22,8 +22,7 @@ const ManageDepartment = ({handleSetNewDepartmentData}) => {
     
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios.get(`http://localhost:3001/department/${params.departId}`)
-            console.log(data)
+            const { data } = await axios.get(`http://${server.name}:${server.port}/department/${params.departId}`)
             setDepartmentData(data)
         }
     
@@ -32,7 +31,7 @@ const ManageDepartment = ({handleSetNewDepartmentData}) => {
       }, [])
 
         const handleDeleteButtonClick = async() => {
-            await axios.delete(`http://localhost:3001/department/${params.departId}`)
+            await axios.delete(`http://${server.name}:${server.port}/department/${params.departId}`)
 
             handleSetNewDepartmentData().then(navigate("/manage/department"))
         }
@@ -45,7 +44,7 @@ const ManageDepartment = ({handleSetNewDepartmentData}) => {
             const inputDepartName = document.getElementById('input-depart-name').value
             const newData = {...departmentData, departName: inputDepartName}
 
-            await axios.put(`http://localhost:3001/department/${params.departId}`, newData)
+            await axios.put(`http://${server.name}:${server.port}/department/${params.departId}`, newData)
             handleSetNewDepartmentData().then(navigate('/manage/department'))
         }
             

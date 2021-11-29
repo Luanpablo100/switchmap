@@ -8,7 +8,7 @@ import { BiSave } from 'react-icons/bi'
 
 import InputElement from './InputElement';
 
-const ManageSwitch = ({handleSetNewHackData}) => {
+const ManageSwitch = ({handleSetNewHackData, server}) => {
 
     const params = useParams()
 
@@ -22,7 +22,7 @@ const ManageSwitch = ({handleSetNewHackData}) => {
     
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios.get(`http://localhost:3001/switch/${params.switchId}`)
+            const { data } = await axios.get(`http://${server.name}:${server.port}/switch/${params.switchId}`)
             setSwitchData(data)
         }
     
@@ -31,7 +31,7 @@ const ManageSwitch = ({handleSetNewHackData}) => {
       }, [])
 
         const handleDeleteButtonClick = async() => {
-            await axios.delete(`http://localhost:3001/switch/${params.switchId}`)
+            await axios.delete(`http://${server.name}:${server.port}/switch/${params.switchId}`)
 
             handleSetNewHackData().then(navigate("/"))
         }
@@ -44,7 +44,7 @@ const ManageSwitch = ({handleSetNewHackData}) => {
             const inputPortCode = document.getElementById('input-switch-code').value
             const newData = {...switchData, switchcode: inputPortCode}
 
-            await axios.put(`http://localhost:3001/switch/${params.switchId}`, newData)
+            await axios.put(`http://${server.name}:${server.port}/switch/${params.switchId}`, newData)
             handleSetNewHackData().then(navigate('/'))
         }
             

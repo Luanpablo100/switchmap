@@ -10,8 +10,8 @@ const SwitchElement = ({sw}) => {
     return (
         <div className="switch">
             <div className="ports-container">
-                {<Ports ports={odd} orientation={"up"}/>}
-                {<Ports ports={even} orientation={"down"}/>}
+                {<Ports ports={odd} orientation={"up"} key={`${sw.id}-up`}/>}
+                {<Ports ports={even} orientation={"down"} key={`${sw.id}-down`}/>}
             </div>
             <div className={"control"}>
                 <h1>{sw.code}</h1>

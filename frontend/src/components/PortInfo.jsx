@@ -8,7 +8,7 @@ import { BiSave } from 'react-icons/bi'
 
 import InputElement from './InputElement';
 
-const PortInfo = ({handleSetNewHackData}) => {
+const PortInfo = ({handleSetNewHackData, server}) => {
 
     const params = useParams()
 
@@ -37,22 +37,21 @@ const PortInfo = ({handleSetNewHackData}) => {
 
     useEffect(() => {
         const getData = async () => {
-            const { data } = await axios.get(`http://localhost:3001/port/${params.portId}`)
+            const { data } = await axios.get(`http://${server.name}:${server.port}/port/${params.portId}`)
             setPortData(data)
 
             const getDepartments = async () => {
-                const { data } = await axios.get('http://localhost:3001/department')
+                const { data } = await axios.get(`http://${server.name}:${server.port}/department`)
                 setDepartments(data)
             } 
             getDepartments()
         }
     
         getData()
-        // eslint-disable-next-line
       }, [])
 
         const handleDeleteButtonClick = async() => {
-            await axios.delete(`http://localhost:3001/port/${params.portId}`)
+            await axios.delete(`http://${server.name}:${server.port}/port/${params.portId}`)
 
             handleSetNewHackData().then(navigate("/"))
         }
@@ -68,7 +67,7 @@ const PortInfo = ({handleSetNewHackData}) => {
             const inputPortDepartment = document.getElementById('department-select').value
             const newData = {...portData, code: inputPortCode, desc: inputPortDesc, departId: inputPortDepartment, patchportdesc: inputPatchPortDesc}
 
-            await axios.put(`http://localhost:3001/port/${params.portId}`, newData)
+            await axios.put(`http://${server.name}:${server.port}/port/${params.portId}`, newData)
             handleSetNewHackData().then(navigate('/'))
         }
 

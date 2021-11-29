@@ -5,8 +5,6 @@ import {HiFilter} from 'react-icons/hi'
 import {ImCross} from 'react-icons/im'
 import {BsGearFill} from 'react-icons/bs'
 import {Link} from "react-router-dom"
-import {useEffect, useState } from "react";
-import axios from "axios";
 
 const HeaderElement = ({handleFilterPorts, handleCancelFilter, departmentData}) => {
 

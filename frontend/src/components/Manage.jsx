@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './Manage.css'
 
-const Manage = ({handleSetNewHackData}) => {
+const Manage = () => {
     return ( 
         <div className="container">
 
