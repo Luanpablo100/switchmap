@@ -1,0 +1,33 @@
+.switch-div {
+    background-color: rgba(36, 36, 36, 0.76);
+    margin: 20px;
+    display: flex;
+    justify-content:space-between;
+    padding: 15px 20px;
+    border: rgb(158, 158, 158) 2px solid;
+    text-decoration: none;
+max-width: 200px;
+}
+
+.switch-div:hover {
+    transition: .2s;
+    box-shadow: rgba(255, 255, 255, 0.39) 0px 0px 10px;
+}
+
+.switch-list {
+    display: flex;
+}
+
+.switch-code {
+    color: chartreuse;
+    font-weight: bold;
+}
+
+.switch-name {
+    color: white;
+    margin-right: 10px;
+}
+
+.title-container {
+    text-align: center;
+}

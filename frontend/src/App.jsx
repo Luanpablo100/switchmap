@@ -13,6 +13,8 @@ import CreateHack from "./components/CreateHack";
 import Manage from "./components/Manage";
 import SwitchList from "./components/SwitchList";
 import ManageSwitch from "./components/ManageSwitch";
+import ManageDepartment from "./components/ManageDepartment";
+import DepartList from "./components/DepartList";
 
 const App = () => {
 
@@ -53,11 +55,25 @@ const App = () => {
     }
   ])
 
+  const [departments, setDepartments] = useState([
+    {
+        id: 1,
+        departName: "Carregando..."
+    },
+])
+
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get(`http://localhost:3001`)
       setHackData(data)
     }
+
+    const getDepartments = async () => {
+      const { data } = await axios.get('http://localhost:3001/department')
+      setDepartments(data)
+    }
+
+    getDepartments()
 
     fetchData()
   }, [])
@@ -66,6 +82,11 @@ const App = () => {
     const newData = await (await axios.get(`http://localhost:3001`)).data
     return setHackData(newData)
     
+  }
+
+  const handleSetNewDepartmentData = async() => {
+    const newData = await (await (await axios.get(`http://localhost:3001/department`)).data)
+    return setDepartments(newData)
   }
 
   const handleGetData = async () => {
@@ -90,7 +111,7 @@ const App = () => {
 
   return (
     <Router>
-      <HeaderElement handleFilterPorts={handleFilterPorts} handleCancelFilter={handleCancelFilter}/>
+      <HeaderElement handleFilterPorts={handleFilterPorts} handleCancelFilter={handleCancelFilter} departmentData={departments}/>
       <div className="hack">
         <Routes>
           <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
@@ -98,12 +119,13 @@ const App = () => {
           <Route path="create/" element={<Create handleSetNewHackData={handleSetNewHackData}/>}/>
           <Route path="port/add/" element={<CreatePort handleSetNewHackData={handleSetNewHackData}/>}/>
           <Route path="switch/add/" element={<CreateSwitch handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="department/add/" element={<CreateDepartment handleSetNewHackData={handleSetNewHackData}/>}/>
+          <Route path="department/add/" element={<CreateDepartment handleSetNewDepartmentData={handleSetNewDepartmentData}/>}/>
           <Route path="/hack/add" element={<CreateHack handleSetNewHackData={handleSetNewHackData}/>}/>
           <Route path="/manage" element={<Manage handleSetNewHackData={handleSetNewHackData}/>}/>
           <Route path="/manage/switch" element={<SwitchList switchdata={hackData}/>}/>
           <Route path="/switch/:switchId" element={<ManageSwitch handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="/manage/department" element={<Manage handleSetNewHackData={handleSetNewHackData}/>}/>
+          <Route path="/manage/department" element={<DepartList departmentData={departments}/>}/>
+          <Route path="/department/:departId" element={<ManageDepartment handleSetNewDepartmentData={handleSetNewDepartmentData}/>}/>
         </Routes>
       </div>
     </Router>

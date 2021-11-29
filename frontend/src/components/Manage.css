@@ -1,0 +1,14 @@
+.link-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.react-link-2 {
+    color: white;
+    text-decoration: none;
+}
+
+.react-link-2:hover {
+    color: chartreuse;
+}

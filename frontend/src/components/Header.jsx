@@ -8,23 +8,8 @@ import {Link} from "react-router-dom"
 import {useEffect, useState } from "react";
 import axios from "axios";
 
-const HeaderElement = ({handleFilterPorts, handleCancelFilter}) => {
+const HeaderElement = ({handleFilterPorts, handleCancelFilter, departmentData}) => {
 
-    const [departments, setDepartments] = useState([
-        {
-            id: 1,
-            departName: "Carregando...",
-        }
-    ])
-
-    useEffect(() => {
-        const getDepartments = async () => {
-            const { data } = await axios.get('http://localhost:3001/department')
-            setDepartments(data)
-        } 
-        getDepartments()
-    }, [])
-    
     const handleChangeSelectValue = () => {
         return
     }
@@ -43,7 +28,7 @@ const HeaderElement = ({handleFilterPorts, handleCancelFilter}) => {
                 <HiFilter style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleClickFilterButton}/> <ImCross style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleCancelFilter}/>
                 <div className="select">
                     <select id='header-select-department' onChange={handleChangeSelectValue} className="select-port-department" className="select-element">
-                        {departments.map((department) => { 
+                        {departmentData.map((department) => { 
                              return (<option value={department.id}>{department.departName}</option>)
                         })}
                     </select>

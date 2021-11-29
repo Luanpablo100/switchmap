@@ -17,7 +17,6 @@ const CreatePort = ({handleSetNewHackData}) => {
     useEffect(() => {
         const getDepartments = async () => {
             const { data } = await axios.get('http://localhost:3001/department')
-            console.log(data)
             setDepartments(data)
           }
       
@@ -45,8 +44,8 @@ const CreatePort = ({handleSetNewHackData}) => {
 
         <div className="add-container">
 
-            <div>
-                <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/" className="react-link">Voltar</Link>
+            <div className="title-container">
                 <h1>Adicionar porta</h1>
             </div>
             <div className="input-container">

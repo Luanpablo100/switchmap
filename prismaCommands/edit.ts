@@ -21,6 +21,39 @@ const editFunctions = {
             .finally(async () => {
             await prisma.$disconnect();
             });
+    },
+    editSwitch: async (switchid: number, switchcode:string) => {
+        await prisma.switch.update({
+            where: {
+                id:switchid,
+            },
+            data: {
+                code: switchcode
+            }
+        })
+
+        .catch((e) => {
+            throw e;
+            })
+        .finally(async () => {
+        await prisma.$disconnect();
+        });
+    },
+    editDepartment: async (departId:number, departName: string) => {
+        await prisma.department.update({
+            where: {
+                id: departId
+            },
+            data: {
+                departName: departName
+            }
+        })
+        .catch((e) => {
+            throw e;
+            })
+        .finally(async () => {
+        await prisma.$disconnect();
+        });
     }
 }
 

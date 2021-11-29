@@ -16,7 +16,7 @@ const ManageSwitch = ({handleSetNewHackData}) => {
 
     const [switchData, setSwitchData] = useState([{
         id: 1,
-        code: "oi",
+        code: "1",
         rackCode: '1'
     }])
     
@@ -42,7 +42,7 @@ const ManageSwitch = ({handleSetNewHackData}) => {
 
         const handleUpdateData = async() => {
             const inputPortCode = document.getElementById('input-switch-code').value
-            const newData = {...switchData, code: inputPortCode}
+            const newData = {...switchData, switchcode: inputPortCode}
 
             await axios.put(`http://localhost:3001/switch/${params.switchId}`, newData)
             handleSetNewHackData().then(navigate('/'))
@@ -51,10 +51,10 @@ const ManageSwitch = ({handleSetNewHackData}) => {
     return ( 
         <>
        
-        <div className="info-container">
-        <div>
-            <Link to="/manage/switch" className="react-link">Voltar</Link>
-        </div>
+        <div className="container">
+            <div>
+                <Link to="/manage/switch" className="react-link">Voltar</Link>
+            </div>
             <div className="title-container">
                 <h1>Gerenciar switch</h1>
             </div>

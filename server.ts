@@ -60,6 +60,17 @@ app.post('/switch/add', async (request, response) => {
   }
 })
 
+app.put('/switch/:switchId', async(request, response) => {
+  try {
+    const switchid = request.params.switchId
+    const {switchcode} = request.body
+    editFunctions.editSwitch(parseInt(switchid), switchcode)
+    return response.status(200).json()
+  } catch(err) {
+    return response.status(400).json(err)
+  }
+})
+
 app.delete('/switch/:switchId', async (request, response) => {
   try {
     await deleteFunctions.deleteSwitch(parseInt(request.params.switchId))
@@ -137,6 +148,17 @@ app.post('/department/add', async(request, response) => {
   try {
     const {departName} = request.body
     insertFunctions.newDepartment(departName)
+    return response.status(200).json()
+  } catch(err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.put('/department/:departId', async (request, response) => {
+  try {
+    const departId = request.params.departId
+    const {departName} = request.body
+    editFunctions.editDepartment(parseInt(departId), departName)
     return response.status(200).json()
   } catch(err) {
     return response.status(400).json(err)

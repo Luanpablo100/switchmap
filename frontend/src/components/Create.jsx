@@ -3,15 +3,21 @@ import { Link } from 'react-router-dom';
 
 const Create = () => {
     return ( 
-        <div>
-            <div>
-                <Link to="/port/add">Criar porta</Link>
+
+
+
+        <div className="container">
+
+            <Link to="/" className="react-link">Voltar</Link>
+            <div className="title-container">
+                <h1>Novo</h1>
             </div>
-            <div>
-                <Link to="/switch/add">Criar switch</Link>
-            </div>
-            <div>
-                <Link to="/department/add">Criar departamento</Link>
+            <div className="link-container">
+            <Link to="/port/add" className="react-link-2">Switchport</Link>
+
+            <Link to="/switch/add" className="react-link-2">Switch</Link>
+            <Link to="/department/add" className="react-link-2">Departamento</Link>
+
             </div>
         </div>
      );

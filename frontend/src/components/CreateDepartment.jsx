@@ -5,7 +5,7 @@ import ButtonElement from './Button';
 import './CreatePort.css'
 import InputElement from './InputElement';
 
-const CreateDepartment = ({handleSetNewHackData}) => {
+const CreateDepartment = ({handleSetNewDepartmentData}) => {
 
     const navigate = useNavigate()
 
@@ -13,7 +13,7 @@ const CreateDepartment = ({handleSetNewHackData}) => {
         const inputDepartmentName = (document.getElementById("inputDepartmentName").value)
         const postData = { departName: inputDepartmentName}
         await axios.post('http://localhost:3001/department/add', postData)
-        handleSetNewHackData().then(navigate("/"))
+        handleSetNewDepartmentData().then(navigate("/"))
     }
 
     const handleChangeInputValue = () => {
