@@ -42,7 +42,7 @@ const editFunctions = {
     editDepartment: async (departId:number, departName: string) => {
         await prisma.department.update({
             where: {
-                id: departId
+                departId: departId
             },
             data: {
                 departName: departName

@@ -166,16 +166,17 @@ app.put('/department/:departId', async (request, response) => {
 })
 
 app.delete('/department/:departId', async (request, response) => {
+  const departId = parseFloat(request.params.departId)
   try {
-    await deleteFunctions.deleteDepartment(parseInt(request.params.departId))
+    await deleteFunctions.deleteDepartment(departId)
     return response.status(200).json()
   } catch(err) {
     response.status(400).json(err)
   }
 })
 
-const PORT = process.env.port
+const PORT = 3001
 
 app.listen(PORT, () => {
-    console.log('Servidor está rodando!')
+    console.log(`Servidor está rodando na porta ${PORT}`)
 })

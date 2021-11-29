@@ -108,7 +108,7 @@ const readFunctions = {
         queryFind: async (departId: number) => {
             const queryFindDepartments = await prisma.department.findUnique({
                 where: {
-                    id: departId
+                    departId: departId
                 },
                 include: {
                     Ports: true
