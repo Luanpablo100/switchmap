@@ -4,12 +4,3 @@
     display: flex;
     justify-content: space-between;
 }
-
-.icon-link {
-    color: white;
-}
-
-.icon-link:hover {
-    color: chartreuse;
-    transition: .3s;
-}

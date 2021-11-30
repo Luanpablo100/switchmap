@@ -24,6 +24,24 @@
 
 }
 
+.react-link-2 {
+  color: white;
+  text-decoration: none;
+}
+
+.react-link-2:hover {
+  color: chartreuse;
+}
+
+.icon-link {
+  color: white;
+}
+
+.icon-link:hover {
+  color: chartreuse;
+  transition: .3s;
+}
+
 @media(max-width: 785px) {
   .hack {
     width: 100vw;
