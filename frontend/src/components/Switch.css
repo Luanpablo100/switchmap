@@ -1,11 +1,11 @@
 .switch {
-    width: 860px;
-    background-color: darkgray;
-    height: 90px;
+    min-width: 600px;
+    background-color: rgba(36, 36, 36, 0.76);
     margin: 20px;
     display: flex;
     justify-content:space-between;
-    padding: 20px;
+    padding: 8px 20px;
+    border: rgb(158, 158, 158) 2px solid;
 }
 
 .control {

@@ -1,4 +1,4 @@
-import express  from 'express'
+import express, { request, response }  from 'express'
 
 const app = express()
 
@@ -24,6 +24,28 @@ app.get('/', async (req, res) => {
   }
 })
 
+app.post('/hack/add', async (request, response) => {
+  try {
+    const {rackId} = request.body
+
+    insertFunctions.newRack(rackId)
+
+    return response.status(200).json()
+    
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.get('/switch/:switchId', async(request, response) => {
+  try {
+    const switchId = request.params.switchId
+    const queryFindSwitch = await readFunctions.querySwitch.queryFind(parseInt(switchId))
+    return response.status(200).json(queryFindSwitch)
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
 
 app.post('/switch/add', async (request, response) => {
   try {
@@ -38,11 +60,31 @@ app.post('/switch/add', async (request, response) => {
   }
 })
 
+app.put('/switch/:switchId', async(request, response) => {
+  try {
+    const switchid = request.params.switchId
+    const {switchcode} = request.body
+    editFunctions.editSwitch(parseInt(switchid), switchcode)
+    return response.status(200).json()
+  } catch(err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.delete('/switch/:switchId', async (request, response) => {
+  try {
+    await deleteFunctions.deleteSwitch(parseInt(request.params.switchId))
+    return response.status(200).json()
+  }catch(err) {
+    response.status(400).json()
+  }
+})
+
 app.post('/port/add', async (request, response) => {
   try {
-    const {code, switchCode, portDesc, departId} = request.body
+    const {code, switchCode, portDesc, departId, patchportdesc} = request.body
 
-    insertFunctions.newPort(code, switchCode, portDesc, parseInt(departId))
+    insertFunctions.newPort(code, switchCode, portDesc, parseInt(departId), patchportdesc)
 
     return response.status(200).json()
     
@@ -73,8 +115,8 @@ app.get('/port/:portId', async (request, response) => {
 
 app.put('/port/:portId', async (request, response) => {
   try {
-    const {id, code, desc, departId} = request.body
-    editFunctions.editPort(id, code, desc, parseInt(departId))
+    const {id, code, desc, departId, patchportdesc} = request.body
+    editFunctions.editPort(id, code, desc, parseInt(departId), patchportdesc)
 
     return response.status(200).json()
     
@@ -92,7 +134,15 @@ app.get('/department', async (request, response) => {
   }
 })
 
-
+app.get('/department/:departId', async(request, response) => {
+  try {
+    const departmentId = parseInt(request.params.departId) 
+    const findDepartment = await readFunctions.queryDepartment.queryFind(departmentId)
+    return response.status(200).json(findDepartment)
+  } catch (err) {
+    return response.status(400).json(err)
+  }
+})
 
 app.post('/department/add', async(request, response) => {
   try {
@@ -104,6 +154,29 @@ app.post('/department/add', async(request, response) => {
   }
 })
 
-app.listen('3001', () => {
-    console.log('Servidor está rodando!')
+app.put('/department/:departId', async (request, response) => {
+  try {
+    const departId = request.params.departId
+    const {departName} = request.body
+    editFunctions.editDepartment(parseInt(departId), departName)
+    return response.status(200).json()
+  } catch(err) {
+    return response.status(400).json(err)
+  }
+})
+
+app.delete('/department/:departId', async (request, response) => {
+  const departId = parseFloat(request.params.departId)
+  try {
+    await deleteFunctions.deleteDepartment(departId)
+    return response.status(200).json()
+  } catch(err) {
+    response.status(400).json(err)
+  }
+})
+
+const PORT = 3001
+
+app.listen(PORT, () => {
+    console.log(`Servidor está rodando na porta ${PORT}`)
 })

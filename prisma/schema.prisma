@@ -19,7 +19,7 @@ model Rack {
 model Switch {
   id Int @id @default(autoincrement())
   code String @unique
-  rackCode String
+  rackCode String @default("1")
   rack Rack @relation(fields: [rackCode], references: [code])
   Ports Port[]
 }
@@ -30,12 +30,13 @@ model Port {
   switchCode String
   switch Switch @relation(fields: [switchCode], references: [code])
   desc String @default("")
+  departId Int
   department Department @relation(fields: [departId], references:[id])
-  departId Int @default(0)
+  patchportdesc String @default("")
 }
 
 model Department {
   id Int @id @default(autoincrement())
   departName String
-  Ports Port []
+  Ports Port[]
 }

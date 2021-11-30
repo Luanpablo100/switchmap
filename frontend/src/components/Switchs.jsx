@@ -3,9 +3,11 @@ import SwitchElement from './Switch';
 
 const SwitchsElements = ({data}) => {
     return (
-        <> 
-        {data.map(sw => <SwitchElement sw={sw} key={sw.id}/>)}
-        </>
+        <div style={{display: "flex"}}>
+            <div>
+                {data.map(sw => <SwitchElement sw={sw} key={sw.id}/>)}  
+            </div>
+        </div>
     );
 }
  

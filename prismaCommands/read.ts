@@ -6,7 +6,9 @@ const prisma = new PrismaClient()
 const readFunctions = {
     queryRack: {
         queryAll: async () => {
-            const allRacks = await prisma.rack.findMany()
+            const allRacks = await prisma.rack.findMany({
+                
+            })
             .catch((e) => {
                 throw e;
                 })
@@ -19,7 +21,14 @@ const readFunctions = {
     },
     querySwitch: {
         queryAll: async () => {
-            const allSwitchs = await prisma.switch.findMany({include:{ Ports:true }})
+            const allSwitchs = await prisma.switch.findMany(
+                {
+                    orderBy: {
+                        code: 'asc'
+                    },
+                    include:{ Ports:true }
+                }
+            )
                 .catch((e) => {
                     throw e;
                     })
@@ -28,6 +37,22 @@ const readFunctions = {
                 });
 
             return allSwitchs
+        },
+        queryFind: async (switchId:number) => {
+            const queryFindSwitch = await prisma.switch.findUnique({
+                where: {
+                    id: switchId
+                }
+            })
+
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+
+            return queryFindSwitch
         }
     },
     queryPort: {
@@ -64,7 +89,13 @@ const readFunctions = {
     },
     queryDepartment: {
         queryAll: async () => {
-            const allDepatments = await prisma.department.findMany()
+            const allDepatments = await prisma.department.findMany(
+                {
+                    orderBy: {
+                        departName: 'asc'
+                    }
+                }
+            )
             .catch((e) => {
                 throw e;
                 })
@@ -74,10 +105,26 @@ const readFunctions = {
 
             return allDepatments
         },
-        queryFind: async () => {
-            return "Apenas um departamento"
+        queryFind: async (departId: number) => {
+            const queryFindDepartments = await prisma.department.findUnique({
+                where: {
+                    id: departId
+                },
+                include: {
+                    Ports: true
+                }
+            })
+
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+
+            return queryFindDepartments
         }
-    }
+    },
 }
 
 export default readFunctions

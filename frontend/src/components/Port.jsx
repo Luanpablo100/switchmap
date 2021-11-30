@@ -12,7 +12,9 @@ const Port = ({port}) => {
 
     return (
         <div className="sw-port">
-            <input type="text" value={port.code} className={'port-input'} onClick={handlePortClick} readOnly/>
+            <img src="./img/ethernet.png" alt="" className="ethernet-img" onClick={handlePortClick}/>
+            {port.code}
+            {/* <input type="text" value={port.code} className={'port-input'} onClick={handlePortClick} readOnly/> */}
         </div>
     )
 }

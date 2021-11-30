@@ -1,8 +1,19 @@
 .sw-port {
     width: 25px;
-    height: 25px;
     background-color: dimgray;
-    margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    color: white;
+}
+
+.up .sw-port {
+    flex-wrap: wrap-reverse;
+}
+
+.down .sw-port {
+    flex-wrap:wrap;
 }
 
 .port-input {
@@ -19,4 +30,9 @@
 .port-input:hover {
     background-color: chartreuse;
     color: white;
+}
+
+.ethernet-img {
+    width: 100%;
+    cursor: pointer;
 }

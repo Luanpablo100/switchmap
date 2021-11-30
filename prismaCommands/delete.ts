@@ -15,6 +15,34 @@ const deleteFunctions = {
             .finally(async () => {
             await prisma.$disconnect();
             });
+    },
+    deleteSwitch: async (switchId:number) => {
+        await prisma.switch.delete({
+            where: {
+                id: switchId
+            }
+        })
+
+        .catch((e) => {
+            throw e;
+            })
+        .finally(async () => {
+        await prisma.$disconnect();
+        });
+    },
+    deleteDepartment: async (departId:number) => {
+        await prisma.department.delete({
+            where: {
+                id: departId
+            }
+        })
+
+        .catch((e) => {
+            throw e;
+            })
+        .finally(async () => {
+        await prisma.$disconnect();
+        });
     }
 }
 

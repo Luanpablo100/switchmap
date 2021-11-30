@@ -31,13 +31,14 @@ const insertFunctions = {
             await prisma.$disconnect();
             });
     },
-    newPort: async (portId: string, switchId: string, portDesc:string, departmentId: number)=> {
+    newPort: async (portId: string, switchId: string, portDesc:string, departmentId: number, patchportdesc: string)=> {
         await prisma.port.create({
             data: {
                 code: portId,
                 switchCode: switchId,
                 desc: portDesc,
-                departId: departmentId
+                departId: departmentId,
+                patchportdesc: patchportdesc
             }
         })
             .catch((e) => {
@@ -53,7 +54,7 @@ const insertFunctions = {
                 departName: name
             }
         })
-    }
+    },
 }
 
 export default insertFunctions
