@@ -64,7 +64,7 @@ const App = () => {
 
   // const HOST = "localhost"
   const host = {
-    name: 'localhost',
+    name: '10.20.101.14',
     port: '3001'
   }
   // const PORT = "3001"
@@ -121,6 +121,9 @@ const App = () => {
       <HeaderElement handleFilterPorts={handleFilterPorts} handleCancelFilter={handleCancelFilter} departmentData={departments}/>
       <div className="hack">
         <Routes>
+          <Route exact path='/'>
+            <Redirect to="/dashboard"/>
+          </Route>
           <Route exact path="/switchmap" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
           <Route path="/switchmap/port/:portId" element={<PortInfo handleSetNewHackData={handleSetNewHackData} server={host}/>} />
           <Route path="/switchmap/create/" element={<Create handleSetNewHackData={handleSetNewHackData}/>}/>
