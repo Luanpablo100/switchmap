@@ -6,13 +6,13 @@ const Manage = () => {
     return ( 
         <div className="container">
 
-            <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/switchmap" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Gerenciar</h1>
             </div>
             <div className="link-container">
-                <Link to="/manage/switch" className="react-link-2">Switchs</Link>
-                <Link to="/manage/department" className="react-link-2">Departamentos</Link>
+                <Link to="/switchmap/manage/switch" className="react-link-2">Switchs</Link>
+                <Link to="/switchmap/manage/department" className="react-link-2">Departamentos</Link>
             </div>
         </div>
      );

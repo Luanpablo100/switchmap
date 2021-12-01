@@ -21,7 +21,7 @@ const HeaderElement = ({handleFilterPorts, handleCancelFilter, departmentData}) 
 
     return ( 
         <div className="header-container">
-            <Link to="/" style={{textDecoration: 'none', color: 'white'}}><h1 style={{marginLeft: "10px"}}>Switchmap</h1></Link>
+            <Link to="/switchmap" style={{textDecoration: 'none', color: 'white'}}><h1 style={{marginLeft: "10px"}}>Switchmap</h1></Link>
             <div style={{display: 'flex', alignItems: 'center'}}>
                 <HiFilter style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleClickFilterButton}/> <ImCross style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}} onClick={handleCancelFilter}/>
                 <div className="select">
@@ -33,10 +33,10 @@ const HeaderElement = ({handleFilterPorts, handleCancelFilter, departmentData}) 
                 </div>
             </div>
             <div>
-                <Link to="/create" className="icon-link">
+                <Link to="/switchmap/create" className="icon-link">
                     <BsFillPlusSquareFill style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}}/>
                 </Link>
-                <Link to="/manage" className="icon-link">
+                <Link to="/switchmap/manage" className="icon-link">
                     <BsGearFill style={{width:'30px', height: "30px", margin: "10px 10px 10px 0px"}}/>
                 </Link>
             </div>

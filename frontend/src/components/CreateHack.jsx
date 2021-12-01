@@ -18,7 +18,7 @@ const CreateHack = ({handleSetNewHackData, server}) => {
 
         const postData = { rackId: inputHackNumber}
         await axios.post(`http://${server.name}:${server.port}/hack/add`, postData)
-        handleSetNewHackData().then(navigate("/"))
+        handleSetNewHackData().then(navigate("/switchmap"))
     }
 
     const handleChangeInputValue = () => {
@@ -30,7 +30,7 @@ const CreateHack = ({handleSetNewHackData, server}) => {
         <div className="add-container">
 
             <div>
-                <Link to="/create" className="react-link">Voltar</Link>
+                <Link to="/switchmap/create" className="react-link">Voltar</Link>
                 <h1>Adicionar hack</h1>
             </div>
             <div className="input-container">

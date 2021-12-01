@@ -33,7 +33,7 @@ const ManageDepartment = ({handleSetNewDepartmentData, server}) => {
         const handleDeleteButtonClick = async() => {
             await axios.delete(`http://${server.name}:${server.port}/department/${params.departId}`)
 
-            handleSetNewDepartmentData().then(navigate("/manage/department"))
+            handleSetNewDepartmentData().then(navigate("/switchmap/manage/department"))
         }
 
         const handleChangeInputValue = () => {
@@ -50,7 +50,7 @@ const ManageDepartment = ({handleSetNewDepartmentData, server}) => {
             const newData = {...departmentData, departName: inputDepartName}
 
             await axios.put(`http://${server.name}:${server.port}/department/${params.departId}`, newData)
-            handleSetNewDepartmentData().then(navigate('/manage/department'))
+            handleSetNewDepartmentData().then(navigate('/switchmap/manage/department'))
         }
             
     return ( 
@@ -58,7 +58,7 @@ const ManageDepartment = ({handleSetNewDepartmentData, server}) => {
        
         <div className="container">
             <div>
-                <Link to="/manage/department" className="react-link">Voltar</Link>
+                <Link to="/switchmap/manage/department" className="react-link">Voltar</Link>
             </div>
             <div className="title-container">
                 <h1>Gerenciar departamento</h1>

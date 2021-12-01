@@ -121,18 +121,18 @@ const App = () => {
       <HeaderElement handleFilterPorts={handleFilterPorts} handleCancelFilter={handleCancelFilter} departmentData={departments}/>
       <div className="hack">
         <Routes>
-          <Route exact path="/" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
-          <Route path="port/:portId" element={<PortInfo handleSetNewHackData={handleSetNewHackData} server={host}/>} />
-          <Route path="create/" element={<Create handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="port/add/" element={<CreatePort handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
-          <Route path="switch/add/" element={<CreateSwitch handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
-          <Route path="department/add/" element={<CreateDepartment handleSetNewDepartmentData={handleSetNewDepartmentData} server={host}/>}/>
-          <Route path="/hack/add" element={<CreateHack handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
-          <Route path="/manage" element={<Manage handleSetNewHackData={handleSetNewHackData}/>}/>
-          <Route path="/manage/switch" element={<SwitchList switchdata={hackData}/>}/>
-          <Route path="/switch/:switchId" element={<ManageSwitch handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
-          <Route path="/manage/department" element={<DepartList departmentData={departments}/>}/>
-          <Route path="/department/:departId" element={<ManageDepartment handleSetNewDepartmentData={handleSetNewDepartmentData} server={host}/>}/>
+          <Route exact path="/switchmap" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
+          <Route path="/switchmap/port/:portId" element={<PortInfo handleSetNewHackData={handleSetNewHackData} server={host}/>} />
+          <Route path="/switchmap/create/" element={<Create handleSetNewHackData={handleSetNewHackData}/>}/>
+          <Route path="/switchmap/port/add/" element={<CreatePort handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
+          <Route path="/switchmap/switch/add/" element={<CreateSwitch handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
+          <Route path="/switchmap/department/add/" element={<CreateDepartment handleSetNewDepartmentData={handleSetNewDepartmentData} server={host}/>}/>
+          <Route path="/switchmap/hack/add" element={<CreateHack handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
+          <Route path="/switchmap/manage" element={<Manage handleSetNewHackData={handleSetNewHackData}/>}/>
+          <Route path="/switchmap/manage/switch" element={<SwitchList switchdata={hackData}/>}/>
+          <Route path="/switchmap/switch/:switchId" element={<ManageSwitch handleSetNewHackData={handleSetNewHackData} server={host}/>}/>
+          <Route path="/switchmap/manage/department" element={<DepartList departmentData={departments}/>}/>
+          <Route path="/switchmap/department/:departId" element={<ManageDepartment handleSetNewDepartmentData={handleSetNewDepartmentData} server={host}/>}/>
         </Routes>
       </div>
     </Router>

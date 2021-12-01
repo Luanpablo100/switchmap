@@ -6,14 +6,14 @@ const DepartList = ({departmentData}) => {
 
     return ( 
         <div className="container">
-            <Link to="/manage" className="react-link">Voltar</Link>
+            <Link to="/switchmap/manage" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Gerenciar departamentos</h1>
             </div>
             <div className="switch-list">
                 {departmentData.map(department => {
                     return (
-                        <Link to={`/department/${department.id}`} className={"department-div"}>
+                        <Link to={`/switchmap/department/${department.id}`} className={"department-div"}>
                             {/* <p className="switch-name">Switch</p> */}
                             <p className='department-name'>
                                 {department.departName}
