@@ -3,7 +3,7 @@ import PortInfo from "./components/PortInfo";
 import axios from "axios";
 import SwitchsElements from "./components/Switchs";
 import './App.css'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import CreatePort from "./components/CreatePort";
 import HeaderElement from "./components/Header";
 import Create from "./components/Create";
@@ -121,9 +121,7 @@ const App = () => {
       <HeaderElement handleFilterPorts={handleFilterPorts} handleCancelFilter={handleCancelFilter} departmentData={departments}/>
       <div className="hack">
         <Routes>
-          <Route exact path='/'>
-            <Redirect to="/dashboard"/>
-          </Route>
+          <Route path="/" element={<Navigate replace to="/switchmap" />} />
           <Route exact path="/switchmap" element={<SwitchsElements data={hackData} handleFilterPorts={handleFilterPorts}/>}/>
           <Route path="/switchmap/port/:portId" element={<PortInfo handleSetNewHackData={handleSetNewHackData} server={host}/>} />
           <Route path="/switchmap/create/" element={<Create handleSetNewHackData={handleSetNewHackData}/>}/>
