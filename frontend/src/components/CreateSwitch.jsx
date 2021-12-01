@@ -11,6 +11,11 @@ const CreateSwitch = ({handleSetNewHackData, server}) => {
 
     const handleCreateSwitchButtonClick = async () => {
         const inputSwitchCode = (document.getElementById("inputSwitchCode").value)
+
+        if(inputSwitchCode === '' || inputSwitchCode === null) {
+            return alert(`Campos necessários estão vazios!`)
+        }
+
         // const inputRackCode = (document.getElementById("inputRackCode").value)
         const postData = { code: inputSwitchCode/*, rackCode: inputRackCode*/}
         await axios.post(`http://${server.name}:${server.port}/switch/add`, postData)

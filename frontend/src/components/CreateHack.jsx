@@ -11,6 +11,11 @@ const CreateHack = ({handleSetNewHackData, server}) => {
 
     const handleCreateHackButtonClick = async () => {
         const inputHackNumber = (document.getElementById("inputHackNumber").value)
+
+        if(inputHackNumber === '' || inputHackNumber === null) {
+            return alert(`Campos necessários estão vazios!`)
+        }
+
         const postData = { rackId: inputHackNumber}
         await axios.post(`http://${server.name}:${server.port}/hack/add`, postData)
         handleSetNewHackData().then(navigate("/"))
@@ -29,10 +34,12 @@ const CreateHack = ({handleSetNewHackData, server}) => {
                 <h1>Adicionar hack</h1>
             </div>
             <div className="input-container">
-                <label htmlFor="inputHackNumber" >Número do rack</label>
-                <InputElement configuration={"inputHackNumber"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
+                <form action="">
+                    <label htmlFor="inputHackNumber" >Número do rack</label>
+                    <InputElement configuration={"inputHackNumber"} type={"text"} handleChangeInputValue={handleChangeInputValue}>{""}</InputElement>
 
-                <ButtonElement onClick={handleCreateHackButtonClick}> Cadastrar</ButtonElement>
+                    <ButtonElement onClick={handleCreateHackButtonClick}> Cadastrar</ButtonElement>
+                </form>
             </div>
         </div>
     );
