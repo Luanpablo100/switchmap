@@ -7,7 +7,7 @@ const Port = ({port}) => {
     const navigate = useNavigate()
 
     function handlePortClick() {
-        navigate(`/port/${port.id}`)
+        navigate(`/switchmap/port/${port.id}`)
     }
 
     return (

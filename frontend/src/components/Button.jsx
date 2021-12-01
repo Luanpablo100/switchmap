@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Button.css"
 
-const ButtonElement = ({children, onClick, type}) => {
+const ButtonElement = ({children, onClick}) => {
     return ( 
         <div className="buttons" onClick={onClick}>
             <div className="button-container">

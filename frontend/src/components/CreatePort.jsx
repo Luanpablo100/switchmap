@@ -40,7 +40,7 @@ const CreatePort = ({handleSetNewHackData, server}) => {
 
 
         await axios.post(`http://${server.name}:${server.port}/port/add`, postData)
-        handleSetNewHackData().then(navigate("/"))
+        handleSetNewHackData().then(navigate("/switchmap"))
     }
 
     const handleChangeInputValue = () => {
@@ -51,7 +51,7 @@ const CreatePort = ({handleSetNewHackData, server}) => {
 
         <div className="add-container">
 
-            <Link to="/create" className="react-link">Voltar</Link>
+            <Link to="/switchmap/create" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Adicionar porta</h1>
             </div>

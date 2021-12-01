@@ -18,7 +18,7 @@ const CreateDepartment = ({handleSetNewDepartmentData, server}) => {
 
         const postData = { departName: inputDepartmentName}
         await axios.post(`http://${server.name}:${server.port}/department/add`, postData)
-        handleSetNewDepartmentData().then(navigate("/"))
+        handleSetNewDepartmentData().then(navigate("/swichmap"))
     }
 
     const handleChangeInputValue = () => {
@@ -30,7 +30,7 @@ const CreateDepartment = ({handleSetNewDepartmentData, server}) => {
         <div className="add-container">
 
             <div>
-                <Link to="/create" className="react-link">Voltar</Link>
+                <Link to="/switchmap/create" className="react-link">Voltar</Link>
                 <h1>Adicionar departamento</h1>
             </div>
             <div className="input-container">

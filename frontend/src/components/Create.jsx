@@ -8,15 +8,15 @@ const Create = () => {
 
         <div className="container">
 
-            <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/switchmap" className="react-link">Voltar</Link>
             <div className="title-container">
                 <h1>Novo</h1>
             </div>
             <div className="link-container">
-            <Link to="/port/add" className="react-link-2">Switchport</Link>
+            <Link to="/switchmap/port/add" className="react-link-2">Switchport</Link>
 
-            <Link to="/switch/add" className="react-link-2">Switch</Link>
-            <Link to="/department/add" className="react-link-2">Departamento</Link>
+            <Link to="/switchmap/switch/add" className="react-link-2">Switch</Link>
+            <Link to="/switchmap/department/add" className="react-link-2">Departamento</Link>
 
             </div>
         </div>

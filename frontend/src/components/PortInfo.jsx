@@ -53,7 +53,7 @@ const PortInfo = ({handleSetNewHackData, server}) => {
         const handleDeleteButtonClick = async() => {
             await axios.delete(`http://${server.name}:${server.port}/port/${params.portId}`)
 
-            handleSetNewHackData().then(navigate("/"))
+            handleSetNewHackData().then(navigate("/switchmap"))
         }
 
         const handleChangeInputValue = () => {
@@ -73,7 +73,7 @@ const PortInfo = ({handleSetNewHackData, server}) => {
             const newData = {...portData, code: inputPortCode, desc: inputPortDesc, departId: inputPortDepartment, patchportdesc: inputPatchPortDesc}
 
             await axios.put(`http://${server.name}:${server.port}/port/${params.portId}`, newData)
-            handleSetNewHackData().then(navigate('/'))
+            handleSetNewHackData().then(navigate('/switchmap'))
         }
 
         const handleChangeSelectValue = () => {
@@ -85,7 +85,7 @@ const PortInfo = ({handleSetNewHackData, server}) => {
        
         <div className="info-container">
         <div>
-            <Link to="/" className="react-link">Voltar</Link>
+            <Link to="/switchmap" className="react-link">Voltar</Link>
         </div>
             <div className="title-container">
                 

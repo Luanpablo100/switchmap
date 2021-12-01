@@ -33,7 +33,7 @@ const ManageSwitch = ({handleSetNewHackData, server}) => {
         const handleDeleteButtonClick = async() => {
             await axios.delete(`http://${server.name}:${server.port}/switch/${params.switchId}`)
 
-            handleSetNewHackData().then(navigate("/"))
+            handleSetNewHackData().then(navigate("/switchmap"))
         }
 
         const handleChangeInputValue = () => {
@@ -50,7 +50,7 @@ const ManageSwitch = ({handleSetNewHackData, server}) => {
             const newData = {...switchData, switchcode: inputPortCode}
 
             await axios.put(`http://${server.name}:${server.port}/switch/${params.switchId}`, newData)
-            handleSetNewHackData().then(navigate('/'))
+            handleSetNewHackData().then(navigate('/switchmap'))
         }
             
     return ( 
@@ -58,7 +58,7 @@ const ManageSwitch = ({handleSetNewHackData, server}) => {
        
         <div className="container">
             <div>
-                <Link to="/manage/switch" className="react-link">Voltar</Link>
+                <Link to="/switchmap/manage/switch" className="react-link">Voltar</Link>
             </div>
             <div className="title-container">
                 <h1>Gerenciar switch</h1>
