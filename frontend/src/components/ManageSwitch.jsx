@@ -42,6 +42,11 @@ const ManageSwitch = ({handleSetNewHackData, server}) => {
 
         const handleUpdateData = async() => {
             const inputPortCode = document.getElementById('input-switch-code').value
+
+            if(inputPortCode === '' || inputPortCode === null) {
+                return alert(`Campos necessários estão vazios!`)
+            }
+
             const newData = {...switchData, switchcode: inputPortCode}
 
             await axios.put(`http://${server.name}:${server.port}/switch/${params.switchId}`, newData)

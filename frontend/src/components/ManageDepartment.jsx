@@ -42,6 +42,11 @@ const ManageDepartment = ({handleSetNewDepartmentData, server}) => {
 
         const handleUpdateData = async() => {
             const inputDepartName = document.getElementById('input-depart-name').value
+
+            if(inputDepartName === '' || inputDepartName === null) {
+                return alert(`Campos necessários estão vazios!`)
+            }
+
             const newData = {...departmentData, departName: inputDepartName}
 
             await axios.put(`http://${server.name}:${server.port}/department/${params.departId}`, newData)
@@ -60,7 +65,7 @@ const ManageDepartment = ({handleSetNewDepartmentData, server}) => {
             </div>
             <div className="description">
                 <h3>Nome</h3>
-                <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-depart-name"} type={"text"} key={departmentData.id}>{departmentData.departName}</InputElement>              
+                <InputElement handleChangeInputValue={handleChangeInputValue} configuration={"input-depart-name"} type={"text"} key={departmentData.id} >{departmentData.departName}</InputElement>              
             </div>
             <div className="port-control">
                 <BiSave  className="save-icon" onClick={handleUpdateData}/>

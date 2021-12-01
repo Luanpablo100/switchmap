@@ -1,6 +1,4 @@
-import { PrismaClient } from ".prisma/client";
-
-const prisma = new PrismaClient()
+import prisma from "../prisma/lib/prisma";
 
 const editFunctions = {
     editPort: async (portId: number, portCode: string, portDesc: string, departmentId: number, patchportdesc: string) => {

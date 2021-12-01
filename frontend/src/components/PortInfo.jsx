@@ -65,6 +65,11 @@ const PortInfo = ({handleSetNewHackData, server}) => {
             const inputPortDesc = document.getElementById('input-port-desc').value
             const inputPatchPortDesc = document.getElementById('input-patch-port-desc').value
             const inputPortDepartment = document.getElementById('department-select').value
+
+            if(inputPortCode === '' || inputPortCode === null || inputPortDepartment === '' || inputPortDepartment === null) {
+                return alert(`Campos necessários estão vazios!`)
+            }
+
             const newData = {...portData, code: inputPortCode, desc: inputPortDesc, departId: inputPortDepartment, patchportdesc: inputPatchPortDesc}
 
             await axios.put(`http://${server.name}:${server.port}/port/${params.portId}`, newData)

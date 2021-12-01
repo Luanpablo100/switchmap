@@ -11,6 +11,11 @@ const CreateDepartment = ({handleSetNewDepartmentData, server}) => {
 
     const handleCreateDepartmentButtonClick = async () => {
         const inputDepartmentName = (document.getElementById("inputDepartmentName").value)
+
+        if(inputDepartmentName === '' || inputDepartmentName === null) {
+            return alert(`Campos necessários estão vazios!`)
+        }
+
         const postData = { departName: inputDepartmentName}
         await axios.post(`http://${server.name}:${server.port}/department/add`, postData)
         handleSetNewDepartmentData().then(navigate("/"))
