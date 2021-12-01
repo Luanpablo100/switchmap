@@ -86,3 +86,9 @@
     -webkit-transform: rotate(40deg);
             transform: rotate(40deg);
   }
+
+  .effect01 span button {
+    border: none;
+    background-color: transparent;
+    color: #FFF;
+  }
