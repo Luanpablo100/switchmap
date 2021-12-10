@@ -15,7 +15,7 @@ export default function Home({departments}) {
           </div>
 
           <div className={styles.listDiv}>
-              {departments.map(department => (<div className={styles.listElementDiv}><p className={styles.elementName}>{department.departName}</p></div>))}
+              {departments.map(department => (<Link href={`/switchmap/manage/department/${department.id}`}><div className={styles.listElementDiv}><p className={styles.elementName}>{department.departName}</p></div></Link>))}
           </div>
           
       </Container>
