@@ -1,16 +1,13 @@
 .hack {
-    width: 80vw;
-    margin: 30px auto;
+    /* width: 80vw; */
     overflow: auto;
-    min-height: 300px;
-    border: 2px solid chartreuse;
+    /* border: 2px solid chartreuse; */
     padding: 30px;
     border-radius: 10px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
@@ -22,3 +19,7 @@
 .header h1 {
     margin: 0;
 }
+
+/* .switchs {
+    
+} */

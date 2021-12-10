@@ -14,7 +14,7 @@ export default function Home({switchs}) {
             <h1>Gerenciar Switchs</h1>
           </div>
           <div className={styles.listDiv}>
-              {switchs.map(sw => (<div className={styles.switchDiv}>Switch <p className={styles.elementName}> {sw.code}</p></div>))}
+              {switchs.map(sw => (<Link href={`/switchmap/manage/switch/${sw.id}`}><div className={styles.switchDiv}>Switch <p className={styles.elementName}> {sw.code}</p> - Rack <p className={styles.elementName}>{sw.rackCode}</p></div></Link>))}
           </div>
       </Container>
   )

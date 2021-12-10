@@ -1,28 +1,56 @@
 import Container from '../../../components/container'
 
+import InputComponent from '../../../components/input';
+
 import Link from 'next/link';
+import Router from 'next/router';
+
+import { CgTrash } from "react-icons/cg"
+import { BiSave } from 'react-icons/bi'
 
 import prismaExecute from '../../../prisma/commands';
+import DepartmentSelect from '../../../components/departmentSelect';
 
-export default function Home({port}) {
+export default function Home({port, departments}) {
+
+  async function handleSavePort() {
+    return ''
+}
+
+async function handleDeletePort() {
+    const portId = port.id
+    
+    const deleteData = {portId: portId}
+
+    fetch('/api/delete/port', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(deleteData),
+    }).then(Router.push('/switchmap'))
+}
+
   return (
-
       <Container>
         <div>
           <Link href={'/switchmap'}><a>Voltar</a></Link>
-          <h1>Porta {port.code} - Switch {port.switchCode}</h1>
-          <h2>Departamento: {port.department.departName}</h2>
-          {console.log(port)}
-          <h2>Descrição: {port.desc}</h2>
-          <h2>Descrição patch panel: {port.patchportdesc}</h2>
+          <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
+          <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCorsw'}>{port.switchCode}</InputComponent>
+          <DepartmentSelect departments={departments}/>
+          <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
+          <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
+          <BiSave onClick={handleSavePort} className='reactIconsBigger'/>
+          <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
         </div>
       </Container>
   )
 }
 
 export async function getServerSideProps(context) {
-const portData = await prismaExecute.read.port.unique(parseInt(context.params.id))
+const portData = await prismaExecute.read.port.unique(parseInt(context.params.id));
+const departData = await prismaExecute.read.department.all()
   return {
-    props: {port: portData},
+    props: {port: portData, departments: departData},
   }
 }
