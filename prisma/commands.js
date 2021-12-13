@@ -9,9 +9,12 @@ const prismaExecute = {
                         Switchs: {
                             include: {
                                 Ports: true,
+                            },
+                            orderBy: {
+                                code: 'asc',
                             }
-                        }
-                    }
+                        },
+                    },
                 })
                 .catch((e) => {
                     throw e;

@@ -13,8 +13,21 @@ import DepartmentSelect from '../../../components/departmentSelect';
 
 export default function Home({port, departments}) {
 
-  async function handleSavePort() {
-    return ''
+  async function handleUpdatePort() {
+    const portId = port.id
+    const inputPortCode = document.getElementById('inputPortCode').value
+    const inputPortDesc = document.getElementById('inputPortDesc').value
+    const inputPatchPortDesc = document.getElementById('inputPatchPortDesc').value
+    const inputDepartId = document.getElementById('selectDepartment').value
+
+    const updateData = {portId: portId, portCode: inputPortCode, portDesc: inputPortDesc, patchPortDesc: inputPatchPortDesc, departId: inputDepartId}
+    fetch('/api/switchmap/update/port', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updateData),
+  }).then(Router.push('/switchmap'))
 }
 
 async function handleDeletePort() {
@@ -22,7 +35,7 @@ async function handleDeletePort() {
     
     const deleteData = {portId: portId}
 
-    fetch('/api/delete/port', {
+    fetch('/api/switchmap/delete/port', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -37,10 +50,10 @@ async function handleDeletePort() {
           <Link href={'/switchmap'}><a>Voltar</a></Link>
           <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
           <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
-          <DepartmentSelect departments={departments}/>
+          <DepartmentSelect departments={departments} identify={'selectDepartment'}/>
           <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
           <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
-          <BiSave onClick={handleSavePort} className='reactIconsBigger'/>
+          <BiSave onClick={handleUpdatePort} className='reactIconsBigger'/>
           <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
         </div>
       </Container>

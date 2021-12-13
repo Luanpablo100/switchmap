@@ -11,11 +11,11 @@ export default function Home({departments}) {
     event.preventDefault()
     const portCode = document.getElementById('inputPortCode').value
     const switchCode = document.getElementById('inputSwitchCode').value
-    const departId = document.getElementById('selectDepartId').value
+    const departId = document.getElementById('departmentSelect').value
     const portDesc = document.getElementById('inputPortDesc').value
     const patchPortDesc = document.getElementById('inputPatchPortDesc').value
     const postData = {portCode:portCode, switchCode:switchCode, departId:departId, portDesc: portDesc, patchPortDesc: patchPortDesc}
-    fetch('/api/add/port', {
+    fetch('/api/switchmap/add/port', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +35,7 @@ export default function Home({departments}) {
             <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/>
             <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}/>
             {/* <InputComponent labelDesc={"Departamento"} identify={'inputDepartId'}/> */}
-            <DepartmentSelect departments={departments} identify={'selectDepartId'}/>
+            <DepartmentSelect departments={departments} identify={'departmentSelect'}/>
             <InputComponent labelDesc={"Descrição"} identify={'inputPortDesc'}/>
             <InputComponent labelDesc={"Desc. Patch Panel"} identify={'inputPatchPortDesc'}/>
             <ButtonComponent>Enviar</ButtonComponent>

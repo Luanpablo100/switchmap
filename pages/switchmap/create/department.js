@@ -8,7 +8,7 @@ export default function Home() {
     event.preventDefault()
     const departName = document.getElementById('inputDepartName').value
     const postData = {departName: departName}
-    fetch('/api/add/department', {
+    fetch('/api/switchmap/add/department', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

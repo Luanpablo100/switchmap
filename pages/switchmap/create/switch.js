@@ -8,7 +8,7 @@ export default function Home() {
     event.preventDefault()
     const switchCode = document.getElementById('inputSwitchCode').value
     const postData = {switchCode: switchCode}
-    fetch('/api/add/switch', {
+    fetch('/api/switchmap/add/switch', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

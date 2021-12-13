@@ -10,8 +10,18 @@ import prismaExecute from '../../../../prisma/commands';
 import InputComponent from '../../../../components/input';
 
 export default function Home({sw}) {
-    async function handleSaveSwitch() {
-        return ''
+    async function handleUpdateSwitch() {
+        const switchId = sw.id
+        const switchCode = document.getElementById('inputSwitchCode').value
+        const updateData = {switchId: switchId, switchCode: switchCode}
+
+        fetch('/api/switchmap/update/switch', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updateData),
+      }).then(Router.push('/switchmap/manage/switch'))
     }
 
     async function handleDeleteSwitch() {
@@ -19,7 +29,7 @@ export default function Home({sw}) {
         
         const deleteData = {switchId: switchId}
 
-        fetch('/api/delete/switch', {
+        fetch('/api/switchmap/delete/switch', {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
@@ -34,8 +44,8 @@ export default function Home({sw}) {
       <Container>
         <div>
           <Link href={'/switchmap/manage/switch'}><a>Voltar</a></Link>
-          <InputComponent labelDesc={'Número do Switch'} identify={'inputSwitchCode'}>{sw.code}</InputComponent>
-          <BiSave onClick={handleSaveSwitch} className='reactIconsBigger'/>
+          <InputComponent identify={'inputSwitchCode'} labelDesc={'Código do Switch'}>{sw.code}</InputComponent>
+          <BiSave onClick={handleUpdateSwitch} className='reactIconsBigger'/>
           <CgTrash onClick={handleDeleteSwitch} className='reactIconsBigger'/>
         </div>
       </Container>

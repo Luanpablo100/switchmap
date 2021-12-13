@@ -28,14 +28,3 @@ export default function DepartmentSelect({departments, identify}) {
         </>
     )
 }
-
-// <div className="select">
-//                     <select name="department-select" id="department-select" className="select-element">
-
-//                         {departments.map((department)=> {
-//                             return <option value={department.id}>{department.departName}</option>
-//                         })}
-
-//                     </select>
-
-//                 </div> 
