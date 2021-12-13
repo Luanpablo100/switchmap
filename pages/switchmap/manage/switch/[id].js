@@ -7,6 +7,7 @@ import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 
 import prismaExecute from '../../../../prisma/commands';
+import InputComponent from '../../../../components/input';
 
 export default function Home({sw}) {
     async function handleSaveSwitch() {
@@ -33,7 +34,7 @@ export default function Home({sw}) {
       <Container>
         <div>
           <Link href={'/switchmap/manage/switch'}><a>Voltar</a></Link>
-          <h1>Código do switch: {sw.code}</h1>
+          <InputComponent labelDesc={'Número do Switch'} identify={'inputSwitchCode'}>{sw.code}</InputComponent>
           <BiSave onClick={handleSaveSwitch} className='reactIconsBigger'/>
           <CgTrash onClick={handleDeleteSwitch} className='reactIconsBigger'/>
         </div>

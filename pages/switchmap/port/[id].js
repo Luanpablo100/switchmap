@@ -36,7 +36,7 @@ async function handleDeletePort() {
         <div>
           <Link href={'/switchmap'}><a>Voltar</a></Link>
           <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
-          <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCorsw'}>{port.switchCode}</InputComponent>
+          <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
           <DepartmentSelect departments={departments}/>
           <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
           <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>

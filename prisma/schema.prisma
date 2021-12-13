@@ -30,7 +30,7 @@ model Port {
   switchCode Int
   switch Switch @relation(fields: [switchCode], references: [id])
   desc String @default("")
-  departId Int
+  departId Int @default(1)
   department Department @relation(fields: [departId], references:[id])
   patchportdesc String @default("")
 }
