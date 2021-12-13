@@ -4,7 +4,7 @@ const prismaExecute = {
     read: {
         hack: {
             all: async () => {
-                const allRacks = await prisma.rack.findMany({
+                const allRacks = await prisma.hack.findMany({
                     include: {
                         Switchs: {
                             include: {

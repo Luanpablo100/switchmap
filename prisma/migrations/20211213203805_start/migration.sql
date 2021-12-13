@@ -1,5 +1,5 @@
 -- CreateTable
-CREATE TABLE "Rack" (
+CREATE TABLE "Hack" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "code" TEXT NOT NULL
 );
@@ -9,7 +9,7 @@ CREATE TABLE "Switch" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "code" TEXT NOT NULL,
     "rackCode" TEXT NOT NULL DEFAULT '1',
-    CONSTRAINT "Switch_rackCode_fkey" FOREIGN KEY ("rackCode") REFERENCES "Rack" ("code") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Switch_rackCode_fkey" FOREIGN KEY ("rackCode") REFERENCES "Hack" ("code") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -31,4 +31,4 @@ CREATE TABLE "Department" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Rack_code_key" ON "Rack"("code");
+CREATE UNIQUE INDEX "Hack_code_key" ON "Hack"("code");

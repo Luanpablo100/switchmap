@@ -3,6 +3,8 @@ import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
 
+import Router from 'next/router'
+
 export default function Home() {
   async function submitSwitch(event) {
     event.preventDefault()
@@ -14,7 +16,7 @@ export default function Home() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(postData),
-    })
+    }).then(Router.push('/switchmap'))
   }
 
   return (
