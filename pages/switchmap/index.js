@@ -13,7 +13,6 @@ import {BiReset} from 'react-icons/bi'
 import styles from '../../styles/hack.module.css'
 
 import { useState } from 'react'
-import InputComponent from '../../components/input'
 import Select from '../../components/select'
 
 export default function Home({originData, departments}) {
@@ -92,7 +91,6 @@ export default function Home({originData, departments}) {
               </div>
             </div>
             <div className={styles.controlChild}>
-              {/* <InputComponent identify={'inputSetHackShown'} labelDesc={'Hack a exibir'}/> */}
               <Select identify={'inputSetHackShown'} datas={originData}/>
               <div>
                 <button onClick={setHackShown}>Pesquisar</button>

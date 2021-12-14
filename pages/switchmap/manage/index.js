@@ -10,6 +10,7 @@ export default function Home() {
           <Link href={'/switchmap'}><a>Voltar</a></Link>
           <h1>Gerenciar</h1>
         </div>
+        <Link href='/switchmap/manage/hack'>Hacks</Link>
         <Link href='/switchmap/manage/department'>Departamentos</Link>
         <Link href='/switchmap/manage/switch'>Switchs</Link>
       </Container>
