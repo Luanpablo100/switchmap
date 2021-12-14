@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Rack {
+model Hack {
   id Int @id @default(autoincrement())
   code String @unique
   Switchs Switch[]
@@ -20,7 +20,7 @@ model Switch {
   id Int @id @default(autoincrement())
   code String
   rackCode String
-  rack Rack @relation(fields: [rackCode], references: [code])
+  rack Hack @relation(fields: [rackCode], references: [code])
   Ports Port[]
 }
 
@@ -30,7 +30,7 @@ model Port {
   switchCode Int
   switch Switch @relation(fields: [switchCode], references: [id])
   desc String @default("")
-  departId Int
+  departId Int @default(1)
   department Department @relation(fields: [departId], references:[id])
   patchportdesc String @default("")
 }

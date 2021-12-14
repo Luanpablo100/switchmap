@@ -34,7 +34,6 @@ export default function Home({departments}) {
           <form method='POST' onSubmit={submitSwitch}>
             <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/>
             <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}/>
-            {/* <InputComponent labelDesc={"Departamento"} identify={'inputDepartId'}/> */}
             <DepartmentSelect departments={departments} identify={'departmentSelect'}/>
             <InputComponent labelDesc={"Descrição"} identify={'inputPortDesc'}/>
             <InputComponent labelDesc={"Desc. Patch Panel"} identify={'inputPatchPortDesc'}/>

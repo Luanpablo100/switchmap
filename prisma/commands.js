@@ -4,7 +4,7 @@ const prismaExecute = {
     read: {
         hack: {
             all: async () => {
-                const allRacks = await prisma.rack.findMany({
+                const allRacks = await prisma.hack.findMany({
                     include: {
                         Switchs: {
                             include: {
@@ -24,6 +24,22 @@ const prismaExecute = {
                 });
     
                 return allRacks
+            },
+            unique: async (rackId) => {
+                const findedHack = prisma.hack.findUnique({
+                    where: {
+                        id: rackId
+                    }
+                })
+
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+
+                return findedHack
             }
         },
         switch: {
@@ -135,7 +151,7 @@ const prismaExecute = {
     },
     insert: {
         hack: async(rackId) => {
-            await prisma.rack.create({
+            await prisma.hack.create({
                 data: {
                     code: rackId
                 }
@@ -239,6 +255,16 @@ const prismaExecute = {
             .finally(async () => {
             await prisma.$disconnect();
             });
+        },
+        hack: async(hackId, hackCodename) => {
+            await prisma.hack.update({
+                where: {
+                    id: hackId
+                },
+                data: {
+                    code: hackCodename
+                }
+            })
         }
     },
     delete: {
@@ -276,6 +302,20 @@ const prismaExecute = {
                 }
             })
     
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+        },
+        hack: async(hackId) => {
+            await prisma.hack.delete({
+                where: {
+                    id: hackId
+                }
+            })
+
             .catch((e) => {
                 throw e;
                 })

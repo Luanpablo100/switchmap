@@ -46,3 +46,17 @@
       margin: 10px 0 5px 0;
       font-size: 1.1rem;
   }
+
+  .noDepartmentAlert {
+    border: 5px solid red;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    padding: 15px 5px;
+  }
+
+  .createLink {
+    color: chartreuse;
+    font-weight: bold;
+  }

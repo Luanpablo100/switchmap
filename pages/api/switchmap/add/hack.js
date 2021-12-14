@@ -2,10 +2,9 @@ import prismaExecute from "../../../../prisma/commands";
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const {switchCode, hackCode} = req.body
-        console.log(switchCode, hackCode)
-        const createdSwitch = await prismaExecute.insert.switch(switchCode,hackCode)
-        return res.status(200).json(createdSwitch)
+        const hackCodename = req.body.codename
+        const createdHack = await prismaExecute.insert.hack(hackCodename)
+        return res.status(200).json(createdHack)
     }
     return res.json({message: 'Erro! A requisição realizada não é do tipo POST!'})
 }

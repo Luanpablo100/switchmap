@@ -13,7 +13,6 @@ import {BiReset} from 'react-icons/bi'
 import styles from '../../styles/hack.module.css'
 
 import { useState } from 'react'
-import InputComponent from '../../components/input'
 import Select from '../../components/select'
 
 export default function Home({originData, departments}) {
@@ -61,31 +60,51 @@ export default function Home({originData, departments}) {
     localStorage.setItem('switchmapHackId', 0)
   }
 
+  function isNull(hack) {
+    if (hack === undefined) {
+      return (
+          <Container>
+            <h2>Seu banco de dados está vazio!</h2>
+          </Container>
+        )
+    } else if (hack.Switchs[0] === undefined){
+      return (
+        <Container>
+          <h2>Não há switchs para serem exibidos!</h2>
+        </Container>
+      )
+    } else {
+      return (
+        <Container>
+          {
+            hackData.Switchs.map(sw => (
+              <SwitchElement sw={sw} key={sw.id}/>
+            ))
+          }
+
+          <div  className={styles.controls}>
+            <div className={styles.controlChild}>
+              <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
+              <div>
+                <HiFilter onClick={filterPorts} className='reactIcons'/>
+                <ImCross onClick={cancelFilter} className='reactIcons'/>
+              </div>
+            </div>
+            <div className={styles.controlChild}>
+              <Select identify={'inputSetHackShown'} datas={originData}/>
+              <div>
+                <button onClick={setHackShown}>Pesquisar</button>
+                <BiReset onClick={resetHackShown} className='reactIcons'/>
+              </div>
+            </div>
+          </div>
+        </Container>
+      )
+    }
+  } 
   return (
     <>
-       <Container>
-        {hackData.Switchs.map(sw => (
-          <SwitchElement sw={sw} key={sw.id}/>
-          )
-          )}
-        <div  className={styles.controls}>
-          <div className={styles.controlChild}>
-            <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
-            <div>
-              <HiFilter onClick={filterPorts} className='reactIcons'/>
-              <ImCross onClick={cancelFilter} className='reactIcons'/>
-            </div>
-          </div>
-          <div className={styles.controlChild}>
-            {/* <InputComponent identify={'inputSetHackShown'} labelDesc={'Hack a exibir'}/> */}
-            <Select identify={'inputSetHackShown'} datas={originData}/>
-            <div>
-              <button onClick={setHackShown}>Pesquisar</button>
-              <BiReset onClick={resetHackShown} className='reactIcons'/>
-            </div>
-          </div>
-        </div>
-      </Container>
+     {isNull(hackData)}
     </>
   )
 }

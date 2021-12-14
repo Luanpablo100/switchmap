@@ -16,5 +16,6 @@ export default function InputComponent({labelDesc, identify, children}) {
             <label htmlFor={identify}>{labelDesc}</label>
             <input className={styles.inputElement} id={identify}/>
         </div>
+
     );
 }

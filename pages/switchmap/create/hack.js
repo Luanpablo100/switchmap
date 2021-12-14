@@ -6,11 +6,11 @@ import ButtonComponent from '../../../components/button'
 import Router from 'next/router'
 
 export default function Home() {
-  async function submitSwitch(event) {
+  async function submitDepartment(event) {
     event.preventDefault()
-    const departName = document.getElementById('inputDepartName').value
-    const postData = {departName: departName}
-    fetch('/api/switchmap/add/department', {
+    const hackCodename = document.getElementById('inputHackCodename').value
+    const postData = {codename: hackCodename}
+    fetch('/api/switchmap/add/hack', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -23,11 +23,11 @@ export default function Home() {
       <Container>
         <div>
           <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
-          <h1>Adicionar departamento</h1>
+          <h1>Adicionar hack</h1>
         </div>
         <div>
-          <form method='POST' onSubmit={submitSwitch}>
-            <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
+          <form method='POST' onSubmit={submitDepartment}>
+            <InputComponent labelDesc={"Codinome do hack"} identify={'inputHackCodename'}/>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
         </div>
