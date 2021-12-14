@@ -19,7 +19,7 @@ model Rack {
 model Switch {
   id Int @id @default(autoincrement())
   code String
-  rackCode String @default("1")
+  rackCode String
   rack Rack @relation(fields: [rackCode], references: [code])
   Ports Port[]
 }
