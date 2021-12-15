@@ -76,6 +76,20 @@ const prismaExecute = {
                 });
     
                 return queryFindSwitch
+            },
+            fromHack: async(hackId) => {
+                const switchs = await prisma.switch.findMany({
+                    where: {
+                        rackCode: hackId
+                    }
+                })
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+                return switchs
             }
         },
         port: {

@@ -2,15 +2,17 @@ import Container from '../../../components/container'
 import Link from 'next/link'
 import Router from 'next/router'
 import InputComponent from '../../../components/input'
+import SwitchSelect from '../../../components/switchSelect'
 import ButtonComponent from '../../../components/button'
 import DepartmentSelect from '../../../components/departmentSelect'
 import prismaExecute from '../../../prisma/commands'
 
-export default function Home({departments}) {
+export default function Home({departments, switchs}) {
+
   async function submitSwitch(event) {
     event.preventDefault()
     const portCode = document.getElementById('inputPortCode').value
-    const switchCode = document.getElementById('inputSwitchCode').value
+    const switchCode = document.getElementById('switchSelect').value
     const departId = document.getElementById('departmentSelect').value
     const portDesc = document.getElementById('inputPortDesc').value
     const patchPortDesc = document.getElementById('inputPatchPortDesc').value
@@ -33,7 +35,7 @@ export default function Home({departments}) {
         <div>
           <form method='POST' onSubmit={submitSwitch}>
             <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/>
-            <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}/>
+            <SwitchSelect switchs={switchs} identify='switchSelect'/>
             <DepartmentSelect departments={departments} identify={'departmentSelect'}/>
             <InputComponent labelDesc={"Descrição"} identify={'inputPortDesc'}/>
             <InputComponent labelDesc={"Desc. Patch Panel"} identify={'inputPatchPortDesc'}/>
@@ -45,9 +47,10 @@ export default function Home({departments}) {
 }
 
 export async function getServerSideProps(context) {
+  const switchs = await prismaExecute.read.switch.all()
   const departData = await prismaExecute.read.department.all()
     return {
-      props: {departments: departData},
+      props: {departments: departData, switchs: switchs},
     }
   }
   

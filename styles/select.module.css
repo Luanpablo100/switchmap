@@ -25,6 +25,7 @@
     height: 3em;
     border-radius: .25em;
     overflow: hidden;
+    margin: 10px 0;
   }
   /* Arrow */
   .select::after {
