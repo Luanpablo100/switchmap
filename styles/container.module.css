@@ -1,0 +1,35 @@
+.hack {
+    /* width: 80vw; */
+    overflow: auto;
+    /* border: 2px solid chartreuse; */
+    padding: 30px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    background-color: rgb(36, 38, 39);
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.headerLinks {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.reactIconsHeader {
+    margin: 0 5px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}

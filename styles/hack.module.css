@@ -1,0 +1,19 @@
+.controls {
+    display: flex;
+}
+
+.controlChild {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 20px;
+}
+
+.controlGrandSon {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+}

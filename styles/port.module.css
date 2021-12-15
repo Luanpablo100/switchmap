@@ -1,0 +1,10 @@
+.swport {
+    width: 25px;
+    background-color: dimgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    color: white;
+    cursor: pointer;
+}

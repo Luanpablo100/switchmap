@@ -1,0 +1,18 @@
+.btnElement {
+  width: 120px;
+  height: 40px;
+  font-size: large;
+  font-weight: bold;
+  color: chartreuse;
+  border-radius: 10px;
+  background-color: transparent;
+  outline: none;
+  border: 2px solid;
+  cursor: pointer;
+}
+
+.btnElement:hover {
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.322);
+  transition: .2s;
+  width: 125px;
+}
