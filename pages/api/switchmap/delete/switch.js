@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
         const deletedSwitch = await prismaExecute.delete.switch(switchId)
 
-        res.status(200).json(deletedSwitch)
+        return res.status(200).json(deletedSwitch)
     }
     return res.json({message: 'Erro! A requisição realizada não é do tipo DELETE!'})
 }

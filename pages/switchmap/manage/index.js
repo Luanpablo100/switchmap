@@ -14,9 +14,9 @@ export default function Home() {
           <h1>Gerenciar</h1>
         </div>
         <div className={styles.listDiv}>
-          <Link href='/switchmap/manage/hack'><a><div className={styles.linkDiv}><Image src='/images/data-server.png' width={400} height={400}/>Hack</div></a></Link>
-          <Link href='/switchmap/manage/department'><a><div className={styles.linkDiv}><Image src='/images/meeting-room.png' width={400} height={400}/>Departamento</div></a></Link>
-          <Link href='/switchmap/manage/switch'><a><div className={styles.linkDiv}><Image src='/images/switch.png' width={400} height={400}/>Switch</div></a></Link>
+          <Link href='/switchmap/manage/hack'><a><div className={styles.linkDiv}><Image src='/images/data-server.png' width={400} height={400} alt='Server'/>Hack</div></a></Link>
+          <Link href='/switchmap/manage/department'><a><div className={styles.linkDiv}><Image src='/images/meeting-room.png' width={400} height={400} alt='Departments'/>Departamento</div></a></Link>
+          <Link href='/switchmap/manage/switch'><a><div className={styles.linkDiv}><Image src='/images/switch.png' width={400} height={400} alt='Switch'/>Switch</div></a></Link>
         </div>
       </Container>
   )

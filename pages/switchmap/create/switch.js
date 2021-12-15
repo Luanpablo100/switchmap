@@ -2,14 +2,17 @@ import Container from '../../../components/container'
 import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
+import Select from '../../../components/select'
+
+import prismaExecute from '../../../prisma/commands'
 
 import Router from 'next/router'
 
-export default function Home() {
+export default function Home({hacks}) {
   async function submitSwitch(event) {
     event.preventDefault()
     const switchCode = document.getElementById('inputSwitchCode').value
-    const hackCode = document.getElementById('inputHackCode').value
+    const hackCode = document.getElementById('selectHackCode').value
     const postData = {switchCode: switchCode, hackCode: hackCode}
     fetch('/api/switchmap/add/switch', {
       method: 'POST',
@@ -29,10 +32,18 @@ export default function Home() {
         <div>
           <form method='POST' onSubmit={submitSwitch}>
             <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
-            <InputComponent labelDesc={"Codinome do Hack"} identify={'inputHackCode'}></InputComponent>
+            <Select datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
         </div>
       </Container>
   )
 }
+
+export async function getServerSideProps(context) {
+  const hacksData = await prismaExecute.read.hack.all()
+    return {
+      props: {hacks: hacksData},
+    }
+  }
+  
