@@ -1,7 +1,7 @@
 import styles from '../styles/select.module.css'
 import Link from 'next/link'
 
-export default function DepartmentSelect({departments, identify}) {
+export default function DepartmentSelect({departments, identify, labelDesc}) {
     function isNull(departments) {
         if(departments[0] === undefined) {
             return (
@@ -11,11 +11,13 @@ export default function DepartmentSelect({departments, identify}) {
             )
         } else {
             return (
-
+                <div>
+                {labelDesc !== undefined ? <label htmlFor={identify}>{labelDesc}</label> : ''}
                 <div className={styles.select}>
                     <select className={styles.selectDiv} id={identify}>
                         {departments.map(department => (<option value={department.id} key={department.id}>{department.departName}</option>))}
                     </select>
+                </div>
                 </div>
             )
         }

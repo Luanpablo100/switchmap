@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
         const deletedDepartment = await prismaExecute.delete.department(parseInt(departId))
 
-        res.status(200).json(deletedDepartment)
+        return res.status(200).json(deletedDepartment)
     }
     return res.json({message: 'Erro! A requisição realizada não é do tipo DELETE!'})
 }
