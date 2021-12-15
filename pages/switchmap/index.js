@@ -14,6 +14,7 @@ import styles from '../../styles/hack.module.css'
 
 import { useState } from 'react'
 import Select from '../../components/select'
+import ButtonComponent from '../../components/button'
 
 export default function Home({originData, departments}) {
 
@@ -65,12 +66,26 @@ export default function Home({originData, departments}) {
       return (
           <Container>
             <h2>Seu banco de dados está vazio!</h2>
+            <div className={styles.controlChild}>
+              <Select identify={'inputSetHackShown'} datas={originData}/>
+              <div>
+                <button onClick={setHackShown}>Pesquisar</button>
+                <BiReset onClick={resetHackShown} className='reactIcons'/>
+              </div>
+            </div>
           </Container>
         )
     } else if (hack.Switchs[0] === undefined){
       return (
         <Container>
           <h2>Não há switchs para serem exibidos!</h2>
+          <div className={styles.controlChild}>
+              <Select identify={'inputSetHackShown'} datas={originData}/>
+              <div>
+                <button onClick={setHackShown}>Pesquisar</button>
+                <BiReset onClick={resetHackShown} className='reactIcons'/>
+              </div>
+            </div>
         </Container>
       )
     } else {
@@ -93,7 +108,7 @@ export default function Home({originData, departments}) {
             <div className={styles.controlChild}>
               <Select identify={'inputSetHackShown'} datas={originData}/>
               <div>
-                <button onClick={setHackShown}>Pesquisar</button>
+                <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                 <BiReset onClick={resetHackShown} className='reactIcons'/>
               </div>
             </div>

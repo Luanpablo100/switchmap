@@ -8,7 +8,7 @@ CREATE TABLE "Hack" (
 CREATE TABLE "Switch" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "code" TEXT NOT NULL,
-    "rackCode" TEXT NOT NULL DEFAULT '1',
+    "rackCode" TEXT NOT NULL,
     CONSTRAINT "Switch_rackCode_fkey" FOREIGN KEY ("rackCode") REFERENCES "Hack" ("code") ON DELETE RESTRICT ON UPDATE CASCADE
 );
 

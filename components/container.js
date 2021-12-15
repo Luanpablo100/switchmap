@@ -17,9 +17,9 @@ export default function Container({children}) {
 
         <div className={containerStyles.header}>
             <Link href="/switchmap"><a><h1>Switchmap</h1></a></Link>
-            <div>
-                <Link href="/switchmap/create"><a><BsFillPlusSquareFill className='reactIcons'/></a></Link>
-                <Link href="/switchmap/manage"><a><BsGearFill className='reactIcons'/></a></Link>
+            <div className={containerStyles.headerLinks}>
+                <Link href="/switchmap/create"><a><BsFillPlusSquareFill className={containerStyles.reactIconsHeader}/></a></Link>
+                <Link href="/switchmap/manage"><a><BsGearFill className={containerStyles.reactIconsHeader}/></a></Link>
             </div>
         </div>
         <div className={containerStyles.hack}>

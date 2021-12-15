@@ -29,7 +29,7 @@ export default function Home() {
         <div>
           <form method='POST' onSubmit={submitSwitch}>
             <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
-            <InputComponent labelDesc={"Número do Hack"} identify={'inputHackCode'}></InputComponent>
+            <InputComponent labelDesc={"Codinome do Hack"} identify={'inputHackCode'}></InputComponent>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
         </div>

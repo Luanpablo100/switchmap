@@ -1,11 +1,7 @@
 import styles from '../styles/button.module.css'
 
-export default function ButtonComponent({children}) {
+export default function ButtonComponent({children, onFunction}) {
     return ( 
-        <div className={styles.buttons}>
-            <div className={styles.buttonContainer}>
-                <span className={`${styles.btn} ${styles.effect01}`}><span><button type='sumbmit'>{children}</button></span></span>
-            </div>
-        </div>
+        <button type='submit' className={styles.btnElement} onClick={onFunction}>{children}</button>
      );
 }
