@@ -1,12 +1,13 @@
 import Container from '../../components/container'
 import SwitchElement from '../../components/switchElement'
 import DepartmentSelect from '../../components/departmentSelect'
+import Select from '../../components/select'
+import ButtonComponent from '../../components/button'
 
 import prismaExecute from '../../prisma/commands'
 
+import { useState } from 'react'
 import { useEffect } from 'react'
-
-import Router from 'next/router'
 
 import {HiFilter} from 'react-icons/hi'
 import {ImCross} from 'react-icons/im'
@@ -14,12 +15,9 @@ import {BiReset} from 'react-icons/bi'
 
 import styles from '../../styles/hack.module.css'
 
-import { useState } from 'react'
-import Select from '../../components/select'
-import ButtonComponent from '../../components/button'
-
 export default function Home({originData, departments}) {
 
+  //Handle with witch hack is show
   let localSelect = 0
   if (typeof window !== "undefined") {
 
@@ -36,6 +34,10 @@ export default function Home({originData, departments}) {
   let selectedHack = originData[localSelect]
 
   const [hackData, setHackData] = useState(selectedHack)
+
+
+
+  //Handle with filter switch ports
 
   const filterPorts = () => {
     let filterId = document.getElementById('departmentSelectFilter').value
@@ -55,6 +57,8 @@ export default function Home({originData, departments}) {
       return setHackData(jsonData[localSelect])
   }
 
+  //Set hack funtions
+
   const setHackShown = async() => {
     const inputSetHackShown = document.getElementById('inputSetHackShown').value
     localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
@@ -64,9 +68,15 @@ export default function Home({originData, departments}) {
     setHackData(jsonData[setLocalSelect])
   }
 
-  const resetHackShown = () => {
+  const resetHackShown = async() => {
     localStorage.setItem('switchmapHackId', 0)
+    const setLocalSelect = localStorage.getItem('switchmapHackId')
+    const data = await fetch('/api/switchmap/read/hack')
+    const jsonData = await data.json()
+    setHackData(jsonData[setLocalSelect])
   }
+
+  // UseEffect to reload the page on changes
 
   useEffect(async () => {
     const data = await fetch('/api/switchmap/read/hack')
@@ -74,35 +84,33 @@ export default function Home({originData, departments}) {
     setHackData(jsonData[localSelect])
   }, [])
 
+
+  //Function to show alert messages if database are empty, or did'nt have anything to show
+
   function isNull(hack) {
-    if (hack === undefined) {
+    if (hack === undefined) { //If database are empty
       return (
           <Container>
             <h2>Seu banco de dados está vazio!</h2>
-            <div className={styles.controlChild}>
-              <Select identify={'inputSetHackShown'} datas={originData}/>
-              <div>
-                <button onClick={setHackShown}>Pesquisar</button>
-                <BiReset onClick={resetHackShown} className='reactIcons'/>
-              </div>
-            </div>
           </Container>
         )
-    } else if (hack.Switchs[0] === undefined){
+    } else if (hack.Switchs[0] === undefined){ //If has no one switch
       return (
         <Container>
           <h2>Não há switchs para serem exibidos!</h2>
-          <div className={styles.controlChild}>
+          <div  className={styles.controls}>
+            <div className={styles.controlChild}>
               <Select identify={'inputSetHackShown'} datas={originData}/>
-              <div>
-                <button onClick={setHackShown}>Pesquisar</button>
+              <div className={styles.controlGrandSon}>
+                <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                 <BiReset onClick={resetHackShown} className='reactIcons'/>
               </div>
             </div>
+          </div>
         </Container>
       )
     } else {
-      return (
+      return ( //Else, if are content on database, they will render the container with data
         <Container>
           {
             hackData.Switchs.map(sw => (
@@ -113,14 +121,14 @@ export default function Home({originData, departments}) {
           <div  className={styles.controls}>
             <div className={styles.controlChild}>
               <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
-              <div>
-                <HiFilter onClick={filterPorts} className='reactIcons'/>
-                <ImCross onClick={cancelFilter} className='reactIcons'/>
+              <div className={styles.controlGrandSon}>
+                <HiFilter onClick={filterPorts} className='reactIcons iconFilter'/>
+                <ImCross onClick={cancelFilter} className='reactIcons iconFilter'/>
               </div>
             </div>
             <div className={styles.controlChild}>
               <Select identify={'inputSetHackShown'} datas={originData}/>
-              <div>
+              <div className={styles.controlGrandSon}>
                 <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                 <BiReset onClick={resetHackShown} className='reactIcons'/>
               </div>
@@ -130,6 +138,7 @@ export default function Home({originData, departments}) {
       )
     }
   } 
+
   return (
     <>
      {isNull(hackData)}
