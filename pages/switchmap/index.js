@@ -4,6 +4,8 @@ import DepartmentSelect from '../../components/departmentSelect'
 
 import prismaExecute from '../../prisma/commands'
 
+import { useEffect } from 'react'
+
 import Router from 'next/router'
 
 import {HiFilter} from 'react-icons/hi'
@@ -46,19 +48,30 @@ export default function Home({originData, departments}) {
     setHackData(newData)
   }
 
-  const cancelFilter = () => {
-    return Router.reload()
+  const cancelFilter = async() => {   
+      const data = await fetch('/api/switchmap/read/hack')
+      const jsonData = await data.json()
+      return setHackData(jsonData[localSelect])
   }
 
-  const setHackShown = () => {
+  const setHackShown = async() => {
     const inputSetHackShown = document.getElementById('inputSetHackShown').value
     localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
-    return Router.reload()
+    const setLocalSelect = localStorage.getItem('switchmapHackId')
+    const data = await fetch('/api/switchmap/read/hack')
+    const jsonData = await data.json()
+    setHackData(jsonData[setLocalSelect])
   }
 
   const resetHackShown = () => {
     localStorage.setItem('switchmapHackId', 0)
   }
+
+  useEffect(async () => {
+    const data = await fetch('/api/switchmap/read/hack')
+    const jsonData = await data.json()
+    setHackData(jsonData[localSelect])
+  }, [])
 
   function isNull(hack) {
     if (hack === undefined) {
@@ -78,7 +91,7 @@ export default function Home({originData, departments}) {
         <Container>
           {
             hackData.Switchs.map(sw => (
-              <SwitchElement sw={sw} key={sw.id}/>
+              <SwitchElement sw={sw} key={sw.id} hackData={hackData}/>
             ))
           }
 
