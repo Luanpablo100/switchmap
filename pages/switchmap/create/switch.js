@@ -2,11 +2,11 @@ import Container from '../../../components/container'
 import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
-import Select from '../../../components/select'
 
 import prismaExecute from '../../../prisma/commands'
 
 import Router from 'next/router'
+import SelectHack from '../../../components/selectHack'
 
 export default function Home({hacks}) {
   async function submitSwitch(event) {
@@ -32,7 +32,7 @@ export default function Home({hacks}) {
         <div>
           <form method='POST' onSubmit={submitSwitch}>
             <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
-            <Select datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
+            <SelectHack datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
         </div>
