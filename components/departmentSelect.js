@@ -27,7 +27,7 @@ export default function DepartmentSelect({departments, identify, labelDesc, port
                             {portDeparment !== undefined ? <option value={portDepartmentName.id}>{portDepartmentName.departName}</option> : null}
                             {departments.map(department => {
                                 if (portDepartmentName !== undefined && department.id === portDepartmentName.id) {return null}
-                                <option value={department.id} key={department.id}>{department.departName}</option>
+                                return <option value={department.id} key={department.id}>{department.departName}</option>
                             })}
                         </select>
 
