@@ -2,7 +2,7 @@ import styles from '../styles/switch.module.css'
 
 import Ports from './ports';
 
-export default function SwitchElement({sw}) {
+export default function SwitchElement({sw, departments}) {
 
     let even
     let odd
@@ -11,19 +11,12 @@ export default function SwitchElement({sw}) {
     return (
         <div className={styles.switch}>
             <div>
-                {<Ports ports={odd} orientation={"up"} key={`${sw.id}-up`}/>}
-                {<Ports ports={even} orientation={"down"} key={`${sw.id}-down`}/>}
+                {<Ports ports={odd} orientation={"up"} key={`${sw.id}-up`} departments={departments}/>}
+                {<Ports ports={even} orientation={"down"} key={`${sw.id}-down`} departments={departments}/>}
             </div>
             <div className={styles.swcode}>
                 <h1>{sw.code}</h1>
             </div>
         </div>
     )
-
-
-    return (
-        <div className={styles.switch}>
-            <Ports/>
-        </div>
-    );
 }

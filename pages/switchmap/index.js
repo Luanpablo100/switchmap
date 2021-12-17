@@ -34,8 +34,7 @@ export default function Home({originData, departments}) {
   let selectedHack = originData[localSelect]
 
   const [hackData, setHackData] = useState(selectedHack)
-
-
+  const [departmentData, setDepartmentData] = useState(departments)
 
   //Handle with filter switch ports
 
@@ -114,7 +113,7 @@ export default function Home({originData, departments}) {
         <Container>
           {
             hackData.Switchs.map(sw => (
-              <SwitchElement sw={sw} key={sw.id} hackData={hackData}/>
+              <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData}/>
             ))
           }
 
