@@ -13,6 +13,13 @@ import DepartmentSelect from '../../../components/departmentSelect';
 
 export default function Home({port, departments}) {
 
+  let portDepartment
+    if(departments !== undefined) {
+        portDepartment = departments.find(department => department.id === port.departId)
+        console.log(portDepartment)
+    }
+
+
   async function handleUpdatePort() {
     const portId = port.id
     const inputPortCode = document.getElementById('inputPortCode').value
@@ -50,7 +57,7 @@ async function handleDeletePort() {
           <Link href={'/switchmap'}><a>Voltar</a></Link>
           <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
           <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
-          <DepartmentSelect departments={departments} identify={'selectDepartment'}/>
+          <DepartmentSelect departments={departments} identify={'selectDepartment'} portDeparment={port.departId}/>
           <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
           <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
           <BiSave onClick={handleUpdatePort} className='reactIconsBigger'/>
