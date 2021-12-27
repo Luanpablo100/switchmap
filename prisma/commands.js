@@ -209,10 +209,11 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        department: async (name) => {
+        department: async (name, color) => {
             await prisma.department.create({
                 data: {
-                    departName: name
+                    departName: name,
+                    color: color
                 }
             })
         },
@@ -254,13 +255,14 @@ const prismaExecute = {
             await prisma.$disconnect();
             });
         },
-        department: async (departId, departName) => {
+        department: async (departId, departName, color) => {
             await prisma.department.update({
                 where: {
                     id: departId
                 },
                 data: {
-                    departName: departName
+                    departName: departName,
+                    color: color
                 }
             })
             .catch((e) => {

@@ -1,7 +1,7 @@
 import styles from '../styles/input.module.css'
 import { useEffect } from 'react';
 
-export default function InputComponent({labelDesc, identify, children}) {
+export default function InputComponent({labelDesc, identify, children, type}) {
 
     useEffect(()=> {
         const actualInput = document.getElementById(identify)
@@ -14,7 +14,7 @@ export default function InputComponent({labelDesc, identify, children}) {
     return ( 
         <div className={styles.group}>
             <label htmlFor={identify}>{labelDesc}</label>
-            <input className={styles.inputElement} id={identify}/>
+            <input className={styles.inputElement} id={identify} type={type ? type : 'text'}/>
         </div>
 
     );

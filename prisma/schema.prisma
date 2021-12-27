@@ -39,4 +39,5 @@ model Department {
   id Int @id @default(autoincrement())
   departName String
   Ports Port[]
+  color String @default("#FFF")
 }

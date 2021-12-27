@@ -9,7 +9,8 @@ export default function Home() {
   async function submitSwitch(event) {
     event.preventDefault()
     const departName = document.getElementById('inputDepartName').value
-    const postData = {departName: departName}
+    const departColor = document.getElementById('inputDepartColor').value
+    const postData = {departName: departName, color: departColor}
     fetch('/api/switchmap/add/department', {
       method: 'POST',
       headers: {
@@ -28,6 +29,7 @@ export default function Home() {
         <div>
           <form method='POST' onSubmit={submitSwitch}>
             <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
+            <InputComponent labelDesc={"Cor da porta"} identify={'inputDepartColor'} type={'color'}/>
             <ButtonComponent>Enviar</ButtonComponent>
           </form>
         </div>

@@ -1,7 +1,8 @@
 import styles from '../styles/port.module.css'
 
-import Image from 'next/image'
 import Link from 'next/link'
+
+import SvgPort from './svgPort'
 
 export default function Port({port, orientation, departments}) {
     let portDepartment
@@ -12,23 +13,7 @@ export default function Port({port, orientation, departments}) {
     return (
         <Link href={`/switchmap/port/${port.id}`}>
             <div className={`${styles.swport} ${orientation}`}>
-                {portDepartment.departName === 'VAZIO' 
-                    ?
-                    <Image
-                    src={'/images/ethernet-off.png'}
-                    alt='Ethernet connection image'
-                    width={25}
-                    height={25}
-                    />
-                    : 
-                    <Image
-                    src={'/ethernet.png'}
-                    alt='Ethernet connection image'
-                    width={25}
-                    height={25}
-                    />
-                    
-                }
+                <SvgPort fill={portDepartment.color}/>
                 {port.code}
             </div>
         </Link>

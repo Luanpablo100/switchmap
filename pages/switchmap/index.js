@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import {HiFilter} from 'react-icons/hi'
 import {ImCross} from 'react-icons/im'
 import {BiReset} from 'react-icons/bi'
+import { MdOutlineSubtitles } from 'react-icons/md'
 
 import styles from '../../styles/hack.module.css'
 
@@ -83,6 +84,16 @@ export default function Home({originData, departments}) {
     setHackData(jsonData[localSelect])
   }, [])
 
+  function showSubtitles() {
+    if(document.getElementById('subtitles').style.width !== '0px') {
+      document.getElementById('subtitles').style.width = "0px"
+      document.getElementById('subtitles').style.height = "0px"
+    } else {
+      document.getElementById('subtitles').style.width = "auto"
+      document.getElementById('subtitles').style.height = "auto"
+    }
+  }
+
 
   //Function to show alert messages if database are empty, or did'nt have anything to show
 
@@ -111,25 +122,35 @@ export default function Home({originData, departments}) {
     } else {
       return ( //Else, if are content on database, they will render the container with data
         <Container>
-          {
-            hackData.Switchs.map(sw => (
-              <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData}/>
-            ))
-          }
-
-          <div  className={styles.controls}>
-            <div className={styles.controlChild}>
-              <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
-              <div className={styles.controlGrandSon}>
-                <HiFilter onClick={filterPorts} className='reactIcons iconFilter'/>
-                <ImCross onClick={cancelFilter} className='reactIcons iconFilter'/>
-              </div>
+          <div style={{position: 'absolute', left: '0', marginLeft: '10px'}}>
+            <MdOutlineSubtitles size={50} onClick={showSubtitles}/>
+            <div id="subtitles" style={{overflow: 'hidden'}}>
+            {departments.map(department => (
+              <div style={{display: 'flex', alignItems: 'center', textAlign: 'center', marginBottom: '5px'}}><div style={{backgroundColor: department.color, width: '20px', height: '20px', borderRadius: '10px', marginRight: '5px', border: '1px solid #FFF'}}></div><span>{department.departName}</span></div>
+            ))}
             </div>
-            <div className={styles.controlChild}>
-              <Select identify={'inputSetHackShown'} datas={originData}/>
-              <div className={styles.controlGrandSon}>
-                <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
-                <BiReset onClick={resetHackShown} className='reactIcons'/>
+          </div>
+          <div>
+            {
+              hackData.Switchs.map(sw => (
+                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData}/>
+              ))
+            }
+
+            <div  className={styles.controls}>
+              <div className={styles.controlChild}>
+                <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
+                <div className={styles.controlGrandSon}>
+                  <HiFilter onClick={filterPorts} className='reactIcons iconFilter'/>
+                  <ImCross onClick={cancelFilter} className='reactIcons iconFilter'/>
+                </div>
+              </div>
+              <div className={styles.controlChild}>
+                <Select identify={'inputSetHackShown'} datas={originData}/>
+                <div className={styles.controlGrandSon}>
+                  <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
+                  <BiReset onClick={resetHackShown} className='reactIcons'/>
+                </div>
               </div>
             </div>
           </div>
