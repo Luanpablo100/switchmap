@@ -101,6 +101,7 @@ export default function Home({originData, departments}) {
   }
 
   async function search(event) {
+    event.preventDefault()
     const inputValue = event.target.value 
     const fetchData = {value: inputValue, hack:hackData.code}
     const query = await fetch('/api/switchmap/search', {
@@ -158,7 +159,7 @@ export default function Home({originData, departments}) {
           </div>
           <div>
           <div className={styles.searchDiv}>
-            <form onKeyUp={search}>
+            <form onKeyUp={search} onSubmit={search}>
               <input className={styles.serchInput}/>
             </form>
             <ImSearch size={20}/>
