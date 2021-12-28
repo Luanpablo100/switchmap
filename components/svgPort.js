@@ -13,6 +13,7 @@ const SvgPort = ({fill}) => (
     }}
     viewBox="0 0 4334.92 4334.92"
   >
+    <title>Switchport</title>
     <defs>
       <style>{".fil0{fill:#000}.fil3{fill:#9f7935}"}</style>
     </defs>

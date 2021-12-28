@@ -26,15 +26,17 @@ export default function Home({hacks}) {
   return (
       <Container>
         <div>
-          <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
-          <h1>Adicionar switch</h1>
-        </div>
-        <div>
-          <form method='POST' onSubmit={submitSwitch}>
-            <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
-            <SelectHack datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
-            <ButtonComponent>Enviar</ButtonComponent>
-          </form>
+          <div>
+            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <h1>Adicionar switch</h1>
+          </div>
+          <div>
+            <form method='POST' onSubmit={submitSwitch}>
+              <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
+              <SelectHack datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
+              <ButtonComponent>Enviar</ButtonComponent>
+            </form>
+          </div>
         </div>
       </Container>
   )

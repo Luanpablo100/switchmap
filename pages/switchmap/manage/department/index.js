@@ -9,6 +9,8 @@ import Link from 'next/link'
 export default function Home({departments}) {
   return (
       <Container>
+        <div className={styles.content}>
+
           <div>
             <Link href={'/switchmap/manage'}><a>Voltar</a></Link>
             <h1>Gerenciar departamentos</h1>
@@ -18,6 +20,7 @@ export default function Home({departments}) {
               {departments.map(department => (<Link href={`/switchmap/manage/department/${department.id}`} key={department.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{department.departName}</p></div></Link>))}
           </div>
           
+        </div>
       </Container>
   )
 }

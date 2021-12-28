@@ -54,14 +54,16 @@ async function handleDeletePort() {
   return (
       <Container>
         <div>
-          <Link href={'/switchmap'}><a>Voltar</a></Link>
-          <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
-          <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
-          <DepartmentSelect departments={departments} identify={'selectDepartment'} portDeparment={port.departId}/>
-          <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
-          <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
-          <BiSave onClick={handleUpdatePort} className='reactIconsBigger'/>
-          <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
+          <div>
+            <Link href={'/switchmap'}><a>Voltar</a></Link>
+            <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
+            <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
+            <DepartmentSelect departments={departments} identify={'selectDepartment'} portDeparment={port.departId}/>
+            <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
+            <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
+            <BiSave onClick={handleUpdatePort} className='reactIconsBigger'/>
+            <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
+          </div>
         </div>
       </Container>
   )

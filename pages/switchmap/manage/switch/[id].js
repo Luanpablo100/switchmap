@@ -43,10 +43,12 @@ export default function Home({sw}) {
 
       <Container>
         <div>
-          <Link href={'/switchmap/manage/switch'}><a>Voltar</a></Link>
-          <InputComponent identify={'inputSwitchCode'} labelDesc={'Código do Switch'}>{sw.code}</InputComponent>
-          <BiSave onClick={handleUpdateSwitch} className='reactIconsBigger'/>
-          <CgTrash onClick={handleDeleteSwitch} className='reactIconsBigger'/>
+          <div>
+            <Link href={'/switchmap/manage/switch'}><a>Voltar</a></Link>
+            <InputComponent identify={'inputSwitchCode'} labelDesc={'Código do Switch'}>{sw.code}</InputComponent>
+            <BiSave onClick={handleUpdateSwitch} className='reactIconsBigger'/>
+            <CgTrash onClick={handleDeleteSwitch} className='reactIconsBigger'/>
+          </div>
         </div>
       </Container>
   )

@@ -9,6 +9,8 @@ import Link from 'next/link'
 export default function Home({hacks}) {
   return (
       <Container>
+        <div className={styles.content}>
+
           <div>
             <Link href={'/switchmap/manage'}><a>Voltar</a></Link>
             <h1>Gerenciar hacks</h1>
@@ -18,6 +20,7 @@ export default function Home({hacks}) {
               {hacks.map(hack => (<Link href={`/switchmap/manage/hack/${hack.id}`} key={hack.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{hack.code}</p></div></Link>))}
           </div>
           
+        </div>
       </Container>
   )
 }

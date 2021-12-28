@@ -43,10 +43,12 @@ export default function Home({hack}) {
 
       <Container>
         <div>
-          <Link href={'/switchmap/manage/hack'}><a>Voltar</a></Link>
-          <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.code}</InputComponent>
-          <BiSave onClick={handleUpdateHack} className='reactIconsBigger'/>
-          <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
+          <div>
+            <Link href={'/switchmap/manage/hack'}><a>Voltar</a></Link>
+            <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.code}</InputComponent>
+            <BiSave onClick={handleUpdateHack} className='reactIconsBigger'/>
+            <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
+          </div>
         </div>
       </Container>
   )

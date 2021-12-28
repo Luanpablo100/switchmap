@@ -29,18 +29,20 @@ export default function Home({departments, switchs}) {
   return (
       <Container>
         <div>
-          <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
-          <h1>Adicionar switch</h1>
-        </div>
-        <div>
-          <form method='POST' onSubmit={submitSwitch}>
-            <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/>
-            <SwitchSelect switchs={switchs} identify='switchSelect' labelDesc={'Switch'}/>
-            <DepartmentSelect departments={departments} identify={'departmentSelect'} labelDesc="Departamento"/>
-            <InputComponent labelDesc={"Descrição"} identify={'inputPortDesc'}/>
-            <InputComponent labelDesc={"Desc. Patch Panel"} identify={'inputPatchPortDesc'}/>
-            <ButtonComponent>Enviar</ButtonComponent>
-          </form>
+          <div>
+            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <h1>Adicionar switch</h1>
+          </div>
+          <div>
+            <form method='POST' onSubmit={submitSwitch}>
+              <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/>
+              <SwitchSelect switchs={switchs} identify='switchSelect' labelDesc={'Switch'}/>
+              <DepartmentSelect departments={departments} identify={'departmentSelect'} labelDesc="Departamento"/>
+              <InputComponent labelDesc={"Descrição"} identify={'inputPortDesc'}/>
+              <InputComponent labelDesc={"Desc. Patch Panel"} identify={'inputPatchPortDesc'}/>
+              <ButtonComponent>Enviar</ButtonComponent>
+            </form>
+          </div>
         </div>
       </Container>
   )

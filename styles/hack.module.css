@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
 .controlChild {
     display: flex;
     flex-direction: column;
@@ -16,4 +21,34 @@
     justify-content: space-evenly;
     align-items: center;
     width: 200px;
+}
+
+.divSubtitles {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin-left: 10px;
+    margin-top: 60px;
+}
+
+.subtitles {
+    overflow: hidden;
+    width: 0;
+    height: 0;
+}
+
+.subtitle {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 5px;
+    
+}
+
+.subtitleColor {
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    margin-right: 5px;
+    border: 1px solid #FFF;
 }

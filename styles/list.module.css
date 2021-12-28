@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.content {
+    max-width: 90%;
+    overflow-x: auto;
+}
+
 .listElementDiv {
     background-color: rgba(36, 36, 36, 0.76);
     margin: 20px;

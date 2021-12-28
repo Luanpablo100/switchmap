@@ -23,15 +23,17 @@ export default function Home() {
   return (
       <Container>
         <div>
-          <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
-          <h1>Adicionar departamento</h1>
-        </div>
-        <div>
-          <form method='POST' onSubmit={submitSwitch}>
-            <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
-            <InputComponent labelDesc={"Cor da porta"} identify={'inputDepartColor'} type={'color'}/>
-            <ButtonComponent>Enviar</ButtonComponent>
-          </form>
+          <div>
+            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <h1>Adicionar departamento</h1>
+          </div>
+          <div>
+            <form method='POST' onSubmit={submitSwitch}>
+              <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
+              <InputComponent labelDesc={"Cor da porta"} identify={'inputDepartColor'} type={'color'}/>
+              <ButtonComponent>Enviar</ButtonComponent>
+            </form>
+          </div>
         </div>
       </Container>
   )

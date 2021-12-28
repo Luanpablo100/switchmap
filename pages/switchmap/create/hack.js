@@ -22,14 +22,16 @@ export default function Home() {
   return (
       <Container>
         <div>
-          <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
-          <h1>Adicionar hack</h1>
-        </div>
-        <div>
-          <form method='POST' onSubmit={submitDepartment}>
-            <InputComponent labelDesc={"Codinome do hack"} identify={'inputHackCodename'}/>
-            <ButtonComponent>Enviar</ButtonComponent>
-          </form>
+          <div>
+            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <h1>Adicionar hack</h1>
+          </div>
+          <div>
+            <form method='POST' onSubmit={submitDepartment}>
+              <InputComponent labelDesc={"Codinome do hack"} identify={'inputHackCodename'}/>
+              <ButtonComponent>Enviar</ButtonComponent>
+            </form>
+          </div>
         </div>
       </Container>
   )

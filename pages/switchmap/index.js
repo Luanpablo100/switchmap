@@ -78,19 +78,25 @@ export default function Home({originData, departments}) {
 
   // UseEffect to reload the page on changes
 
-  useEffect(async () => {
-    const data = await fetch('/api/switchmap/read/hack')
-    const jsonData = await data.json()
-    setHackData(jsonData[localSelect])
+  useEffect(() => {
+    async function fetchData() {
+      const data = await fetch('/api/switchmap/read/hack')
+      const jsonData = await data.json()
+        setHackData(jsonData[localSelect])
+    }
+    fetchData()
   }, [])
 
+  let isShow = false
   function showSubtitles() {
-    if(document.getElementById('subtitles').style.width !== '0px') {
-      document.getElementById('subtitles').style.width = "0px"
-      document.getElementById('subtitles').style.height = "0px"
-    } else {
+    if(isShow === false) {
       document.getElementById('subtitles').style.width = "auto"
       document.getElementById('subtitles').style.height = "auto"
+      isShow = true
+    } else {
+      document.getElementById('subtitles').style.width = "0px"
+      document.getElementById('subtitles').style.height = "0px"
+      isShow = false
     }
   }
 
@@ -122,11 +128,14 @@ export default function Home({originData, departments}) {
     } else {
       return ( //Else, if are content on database, they will render the container with data
         <Container>
-          <div style={{position: 'absolute', left: '0', marginLeft: '10px'}}>
-            <MdOutlineSubtitles size={50} onClick={showSubtitles}/>
-            <div id="subtitles" style={{overflow: 'hidden'}}>
+          <div className={styles.divSubtitles}>
+            <MdOutlineSubtitles size={50} onClick={showSubtitles} style={{cursor:'pointer'}}/>
+            <div id="subtitles" className={styles.subtitles}>
             {departments.map(department => (
-              <div style={{display: 'flex', alignItems: 'center', textAlign: 'center', marginBottom: '5px'}}><div style={{backgroundColor: department.color, width: '20px', height: '20px', borderRadius: '10px', marginRight: '5px', border: '1px solid #FFF'}}></div><span>{department.departName}</span></div>
+              <div key={department.id} className={styles.subtitle}>
+                <div style={{backgroundColor: department.color}} className={styles.subtitleColor}></div>
+                <span>{department.departName}</span>
+              </div>
             ))}
             </div>
           </div>
