@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 import {HiFilter} from 'react-icons/hi'
-import {ImCross} from 'react-icons/im'
+import {ImCross, ImSearch} from 'react-icons/im'
 import {BiReset} from 'react-icons/bi'
 import { MdOutlineSubtitles } from 'react-icons/md'
 
@@ -100,6 +100,21 @@ export default function Home({originData, departments}) {
     }
   }
 
+  async function search(event) {
+    const inputValue = event.target.value 
+    const fetchData = {value: inputValue, hack:hackData.code}
+    const query = await fetch('/api/switchmap/search', {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+      body: JSON.stringify(fetchData)
+    })
+    const jsonQuery = await query.json()
+    setHackData(jsonQuery[localSelect])
+    // setHackData(jsonQuery)
+  }
+
 
   //Function to show alert messages if database are empty, or did'nt have anything to show
 
@@ -113,13 +128,15 @@ export default function Home({originData, departments}) {
     } else if (hack.Switchs[0] === undefined){ //If has no one switch
       return (
         <Container>
-          <h2>Não há switchs para serem exibidos!</h2>
-          <div  className={styles.controls}>
-            <div className={styles.controlChild}>
-              <Select identify={'inputSetHackShown'} datas={originData}/>
-              <div className={styles.controlGrandSon}>
-                <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
-                <BiReset onClick={resetHackShown} className='reactIcons'/>
+          <div>
+            <h2>Não há switchs para serem exibidos!</h2>
+            <div  className={styles.controls}>
+              <div className={styles.controlChild}>
+                <Select identify={'inputSetHackShown'} datas={originData}/>
+                <div className={styles.controlGrandSon}>
+                  <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
+                  <BiReset onClick={resetHackShown} className='reactIcons'/>
+                </div>
               </div>
             </div>
           </div>
@@ -140,6 +157,12 @@ export default function Home({originData, departments}) {
             </div>
           </div>
           <div>
+          <div className={styles.searchDiv}>
+            <form onKeyUp={search}>
+              <input className={styles.serchInput}/>
+            </form>
+            <ImSearch size={20}/>
+          </div>
             {
               hackData.Switchs.map(sw => (
                 <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData}/>

@@ -104,6 +104,37 @@ const prismaExecute = {
                     
                 return allPorts
             },
+            search: async (value, hack) => {
+                const search  = await prisma.hack.findMany({
+                    where: {
+                        code: hack,
+                    },
+                    include: {
+                        Switchs: {
+                            include: {
+                                Ports: {
+                                    where: {
+                                        desc: {
+                                            contains: value
+                                        },
+                                    }
+                                }
+                            },
+                            orderBy: {
+                                code: 'asc',
+                            }
+                        },
+                    },
+                })
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+
+                return search
+            },
             unique: async (portId) => {
                 const queryFindPorts = await prisma.port.findUnique({
                     where: {

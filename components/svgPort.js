@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const SvgPort = ({fill}) => (
+const SvgPort = ({fill, desc}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
@@ -13,7 +13,7 @@ const SvgPort = ({fill}) => (
     }}
     viewBox="0 0 4334.92 4334.92"
   >
-    <title>Switchport</title>
+    <title>{desc}</title>
     <defs>
       <style>{".fil0{fill:#000}.fil3{fill:#9f7935}"}</style>
     </defs>
