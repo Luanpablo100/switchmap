@@ -15,7 +15,7 @@ export default function Home({switchs}) {
               <h1>Gerenciar Switchs</h1>
             </div>
             <div className={styles.listDiv}>
-                {switchs.map(sw => (<Link href={`/switchmap/manage/switch/${sw.id}`} key={sw.id}><div className={styles.switchDiv}>Switch <p className={styles.elementName}> {sw.code}</p> - Hack: <p className={styles.elementName}>{sw.rackCode}</p></div></Link>))}
+                {switchs.map(sw => (<Link href={`/switchmap/manage/switch/${sw.id}`} key={sw.id}><div className={styles.switchDiv}>Switch <p className={styles.elementName}>{sw.code}</p> <span>- Hack: </span><p className={styles.elementName}>{sw.rackCode}</p></div></Link>))}
             </div>
         </div>
       </Container>

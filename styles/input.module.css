@@ -26,3 +26,9 @@
 }
 
 .inputElement:focus { outline:none; }
+
+.inputElement[type=color] {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+}
