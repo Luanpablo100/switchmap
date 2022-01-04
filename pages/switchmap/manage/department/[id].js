@@ -45,7 +45,6 @@ export default function Home({department}) {
 
       <Container>
         <div>
-
           <div>
             <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
             <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>

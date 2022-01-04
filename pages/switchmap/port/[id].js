@@ -20,7 +20,8 @@ export default function Home({port, departments}) {
     }
 
 
-  async function handleUpdatePort() {
+  async function handleUpdatePort(event) {
+    event.preventDefault()
     const portId = port.id
     const inputPortCode = document.getElementById('inputPortCode').value
     const inputPortDesc = document.getElementById('inputPortDesc').value
@@ -55,14 +56,16 @@ async function handleDeletePort() {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap'}><a>Voltar</a></Link>
-            <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
-            <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
-            <DepartmentSelect departments={departments} identify={'selectDepartment'} portDeparment={port.departId}/>
-            <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
-            <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
-            <BiSave onClick={handleUpdatePort} className='reactIconsBigger'/>
-            <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
+              <Link href={'/switchmap'}><a>Voltar</a></Link>
+            <form method='POST' onSubmit={handleUpdatePort}>
+              <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
+              <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
+              <DepartmentSelect departments={departments} identify={'selectDepartment'} portDeparment={port.departId}/>
+              <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
+              <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
+              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdatePort} className='reactIconsBigger'/></button>
+              <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
+            </form>
           </div>
         </div>
       </Container>
