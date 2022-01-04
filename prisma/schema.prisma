@@ -14,6 +14,7 @@ model Hack {
   id Int @id @default(autoincrement())
   code String @unique
   Switchs Switch[]
+  departments Department[]
 }
 
 model Switch {
@@ -35,9 +36,19 @@ model Port {
   patchportdesc String @default("")
 }
 
+model Group {
+  id Int @id @default(autoincrement())
+  name String
+  color String @default("#FFF")
+  departments Department[]
+}
+
 model Department {
   id Int @id @default(autoincrement())
   departName String
   Ports Port[]
-  color String @default("#FFF")
+  groupId Int @default(1)
+  group Group @relation(fields: [groupId], references: [id])
+  hackId Int @default(1)
+  hack Hack @relation(fields: [hackId], references: [id])
 }

@@ -8,15 +8,15 @@ import prismaExecute from '../../../../prisma/commands';
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 import InputComponent from '../../../../components/input';
+import SelectGroup from '../../../../components/selectGroup';
 
-export default function Home({department}) {
+export default function Home({department, groups}) {
 
     async function handleUpdateDepartment() {
       const departId = department.id
       const departName = document.getElementById('inputDepartName').value
-      const departColor =  document.getElementById('inputDepartColor').value
-      console.log(departColor)
-      const updateData = {departId: departId, departName: departName, color: departColor}
+      const groupId =  document.getElementById('selectGroup').value
+      const updateData = {departId: departId, departName: departName, groupId: groupId}
 
       fetch('/api/switchmap/update/department', {
         method: 'PUT',
@@ -45,11 +45,10 @@ export default function Home({department}) {
 
       <Container>
         <div>
-
           <div>
             <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
             <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>
-            <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.color}</InputComponent>
+            <SelectGroup labelDesc={'Grupo'} datas={groups} identify={'selectGroup'}/>
             <BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/>
             <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
           </div>
@@ -60,7 +59,8 @@ export default function Home({department}) {
 
 export async function getServerSideProps(context) {
 const departmentData = await prismaExecute.read.department.unique(parseInt(context.params.id))
+const groupsData = await prismaExecute.read.group.all()
   return {
-    props: {department: departmentData},
+    props: {department: departmentData, groups: groupsData},
   }
 }
