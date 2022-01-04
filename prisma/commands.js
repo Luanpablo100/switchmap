@@ -161,6 +161,9 @@ const prismaExecute = {
                     {
                         orderBy: {
                             departName: 'asc'
+                        },
+                        include: {
+                            group: true
                         }
                     }
                 )
@@ -193,6 +196,35 @@ const prismaExecute = {
                 return queryFindDepartments
             }
         },
+        group: {
+            all: async () => {
+                const allGroups = await prisma.group.findMany()
+
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+    
+                return allGroups
+            },
+            unique: async(groupId) => {
+                const findGroup = await prisma.group.findUnique({
+                    where: {
+                        id: groupId
+                    }
+                })
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+    
+                return findGroup
+            }
+        }
     },
     insert: {
         hack: async(rackId) => {
@@ -240,14 +272,34 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        department: async (name, color) => {
+        department: async (name, groupId) => {
             await prisma.department.create({
                 data: {
                     departName: name,
-                    color: color
+                    groupId: groupId
                 }
             })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
         },
+        group: async (name, color) => {
+            await prisma.group.create({
+                data: {
+                    name: name,
+                    color: color,
+                }
+            })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+        }
     },
     update: {
         port: async (portId, portCode, portDesc, departmentId, patchportdesc) => {
@@ -286,14 +338,14 @@ const prismaExecute = {
             await prisma.$disconnect();
             });
         },
-        department: async (departId, departName, color) => {
+        department: async (departId, departName, groupId) => {
             await prisma.department.update({
                 where: {
                     id: departId
                 },
                 data: {
                     departName: departName,
-                    color: color
+                    groupId: groupId
                 }
             })
             .catch((e) => {
@@ -312,6 +364,23 @@ const prismaExecute = {
                     code: hackCodename
                 }
             })
+        },
+        group:  async(groupId, groupName, groupColor) => {
+            await prisma.group.update({
+                where: {
+                    id: groupId
+                },
+                data: {
+                    name: groupName,
+                    color: groupColor
+                }
+            })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
         }
     },
     delete: {
@@ -363,6 +432,19 @@ const prismaExecute = {
                 }
             })
 
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+        },
+        group: async(groupId)=> {
+            await prisma.group.delete({
+                where: {
+                    id: groupId
+                }
+            })
             .catch((e) => {
                 throw e;
                 })

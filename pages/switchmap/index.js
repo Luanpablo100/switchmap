@@ -16,7 +16,7 @@ import { MdOutlineSubtitles } from 'react-icons/md'
 
 import styles from '../../styles/hack.module.css'
 
-export default function Home({originData, departments}) {
+export default function Home({originData, departments, groupsData}) {
 
   //Handle with witch hack is show
   let localSelect = 0
@@ -36,6 +36,7 @@ export default function Home({originData, departments}) {
 
   const [hackData, setHackData] = useState(selectedHack)
   const [departmentData, setDepartmentData] = useState(departments)
+  const [groups, setGroups] = useState(groupsData)
 
   //Handle with filter switch ports
 
@@ -149,10 +150,10 @@ export default function Home({originData, departments}) {
           <div className={styles.divSubtitles}>
             <MdOutlineSubtitles size={50} onClick={showSubtitles} style={{cursor:'pointer'}}/>
             <div id="subtitles" className={styles.subtitles}>
-            {departments.map(department => (
-              <div key={department.id} className={styles.subtitle}>
-                <div style={{backgroundColor: department.color}} className={styles.subtitleColor}></div>
-                <span>{department.departName}</span>
+            {groups.map(group => (
+              <div key={group.id} className={styles.subtitle}>
+                <div style={{backgroundColor: group.color}} className={styles.subtitleColor}></div>
+                <span>{group.name}</span>
               </div>
             ))}
             </div>
@@ -202,7 +203,8 @@ export default function Home({originData, departments}) {
 export async function getServerSideProps(context) {
   const originData = await prismaExecute.read.hack.all()
   const departments = await prismaExecute.read.department.all()
+  const groupsData = await prismaExecute.read.group.all()
   return {
-    props: {originData, departments},
+    props: {originData, departments, groupsData},
   }
 }

@@ -13,7 +13,7 @@ export default function Port({port, orientation, departments}) {
     return (
         <Link href={`/switchmap/port/${port.id}`}>
             <div className={`${styles.swport} ${orientation}`}>
-                <SvgPort fill={portDepartment.color} key={portDepartment.id} desc={port.desc}/>
+                <SvgPort fill={portDepartment.group === null ? '#null' : portDepartment.group.color} key={portDepartment.id} desc={port.desc}/>
                 {port.code}
             </div>
         </Link>

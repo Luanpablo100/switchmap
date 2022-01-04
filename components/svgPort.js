@@ -1,7 +1,13 @@
 import * as React from "react"
 
-const SvgPort = ({fill, desc}) => (
-  <svg
+const SvgPort = ({fill, desc}) => {
+  if(fill === '#null') {
+    return (
+      <span>nl</span>
+    )
+  } else {
+    return (
+      <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlSpace="preserve"
     style={{
@@ -53,6 +59,8 @@ const SvgPort = ({fill, desc}) => (
       </g>
     </g>
   </svg>
-)
+    )
+  }
+}
 
 export default SvgPort

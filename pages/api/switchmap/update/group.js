@@ -2,11 +2,11 @@ import prismaExecute from "../../../../prisma/commands";
 
 export default async function handler(req, res) {
     if (req.method === 'PUT') {
-        const {departId, departName, groupId} = req.body
+        const {groupId, groupName, groupColor} = req.body
 
-        const updatedDepartment = await prismaExecute.update.department(departId, departName, parseInt(groupId))
+        const updatedGroup = await prismaExecute.update.group(groupId, groupName, groupColor)
 
-        return res.status(200).json(updatedDepartment)
+        return res.status(200).json(updatedGroup)
     }
     return res.json({message: 'Erro! A requisição realizada não é do tipo PUT!'})
 }
