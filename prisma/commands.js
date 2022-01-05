@@ -106,9 +106,6 @@ const prismaExecute = {
             },
             search: async (value, hack) => {
                 const search  = await prisma.hack.findMany({
-                    where: {
-                        code: hack,
-                    },
                     include: {
                         Switchs: {
                             include: {

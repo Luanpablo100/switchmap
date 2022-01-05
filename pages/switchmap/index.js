@@ -19,22 +19,7 @@ import styles from '../../styles/hack.module.css'
 export default function Home({originData, departments, groupsData}) {
 
   //Handle with witch hack is show
-  let localSelect = 0
-  if (typeof window !== "undefined") {
-
-    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
-
-    if (isLocalHackIdNull === null) {
-      localStorage.setItem('switchmapHackId', 0)
-      localSelect = localStorage.getItem('switchmapHackId')
-    } else {
-      localSelect = isLocalHackIdNull
-    }
-  }
-
-  let selectedHack = originData[localSelect]
-
-  const [hackData, setHackData] = useState(selectedHack)
+  const [hackData, setHackData] = useState()
   const [departmentData, setDepartmentData] = useState(departments)
   const [groups, setGroups] = useState(groupsData)
 
@@ -79,12 +64,27 @@ export default function Home({originData, departments, groupsData}) {
 
   // UseEffect to reload the page on changes
 
+  
   useEffect(() => {
+    let localSelect
+    
+    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
+
+    if (isLocalHackIdNull === null) {
+      localStorage.setItem('switchmapHackId', 0)
+      localSelect = localStorage.getItem('switchmapHackId')
+    } else {
+      localSelect = isLocalHackIdNull
+    }
+
+    setHackData(originData[localSelect])
+
     async function fetchData() {
       const data = await fetch('/api/switchmap/read/hack')
       const jsonData = await data.json()
         setHackData(jsonData[localSelect])
     }
+
     fetchData()
   }, [])
 
@@ -104,7 +104,7 @@ export default function Home({originData, departments, groupsData}) {
   async function search(event) {
     event.preventDefault()
     const inputValue = event.target.value 
-    const fetchData = {value: inputValue, hack:hackData.code}
+    const fetchData = {value: inputValue}
     const query = await fetch('/api/switchmap/search', {
       headers: {
         'Content-Type': 'application/json',
