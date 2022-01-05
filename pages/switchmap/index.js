@@ -22,6 +22,7 @@ export default function Home({originData, departments, groupsData}) {
   const [hackData, setHackData] = useState()
   const [departmentData, setDepartmentData] = useState(departments)
   const [groups, setGroups] = useState(groupsData)
+  const [localSelect, setLocalSelect] = useState()
 
   //Handle with filter switch ports
 
@@ -114,7 +115,6 @@ export default function Home({originData, departments, groupsData}) {
     })
     const jsonQuery = await query.json()
     setHackData(jsonQuery[localSelect])
-    // setHackData(jsonQuery)
   }
 
 
