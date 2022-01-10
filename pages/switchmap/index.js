@@ -114,6 +114,18 @@ export default function Home({originData, departments, groupsData}) {
       body: JSON.stringify(fetchData)
     })
     const jsonQuery = await query.json()
+    
+    let localSelect
+    
+    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
+
+    if (isLocalHackIdNull === null) {
+      localStorage.setItem('switchmapHackId', 0)
+      localSelect = localStorage.getItem('switchmapHackId')
+    } else {
+      localSelect = isLocalHackIdNull
+    }
+
     setHackData(jsonQuery[localSelect])
   }
 
