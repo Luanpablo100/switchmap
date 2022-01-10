@@ -13,6 +13,10 @@ import {HiFilter} from 'react-icons/hi'
 import {ImCross, ImSearch} from 'react-icons/im'
 import {BiReset} from 'react-icons/bi'
 import { MdOutlineSubtitles } from 'react-icons/md'
+import { VscFilePdf } from 'react-icons/vsc'
+
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 import styles from '../../styles/hack.module.css'
 
@@ -23,6 +27,39 @@ export default function Home({originData, departments, groupsData}) {
   const [departmentData, setDepartmentData] = useState(departments)
   const [groups, setGroups] = useState(groupsData)
   const [localSelect, setLocalSelect] = useState()
+
+  const exportPDF = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
+
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "Switchmap report";
+    const headers = [["Switch", "Porta", "Descrição", "Departamento"]];
+
+    const data = []
+    hackData.Switchs.map(sw=> {
+      sw.Ports.map(port => { 
+        const portDepartment = departments.find(department => department.id === port.departId)
+        data.push([sw.code, port.code, port.desc, portDepartment.departName])
+      })
+
+    });
+
+    let content = {
+      startY: 50,
+      head: headers,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(content);
+    doc.save("switchmapReport.pdf")
+  }
 
   //Handle with filter switch ports
 
@@ -196,6 +233,7 @@ export default function Home({originData, departments, groupsData}) {
                 <div className={styles.controlGrandSon}>
                   <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                   <BiReset onClick={resetHackShown} className='reactIcons'/>
+                  <VscFilePdf size={30} onClick={exportPDF} style={{cursor:'pointer'}}/>
                 </div>
               </div>
             </div>
