@@ -31,7 +31,7 @@ export default function Home({departments, switchs}) {
         <div>
           <div>
             <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
-            <h1>Adicionar switch</h1>
+            <h1>Adicionar porta</h1>
           </div>
           <div>
             <form method='POST' onSubmit={submitSwitch}>

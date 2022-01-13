@@ -23,6 +23,8 @@ model Switch {
   rackCode String
   rack Hack @relation(fields: [rackCode], references: [code])
   Ports Port[]
+  typeId Int @default(1)
+  type SwitchType @relation(fields: [typeId], references: [id])
 }
 
 model Port {
@@ -51,4 +53,13 @@ model Department {
   group Group @relation(fields: [groupId], references: [id])
   hackId Int @default(1)
   hack Hack @relation(fields: [hackId], references: [id])
+}
+
+model SwitchType {
+  id Int @id @default(autoincrement())
+  name String
+  switchs Switch[]
+  color1 String
+  color2 String
+  color3 String
 }

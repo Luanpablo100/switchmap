@@ -20,12 +20,13 @@ import "jspdf-autotable";
 
 import styles from '../../styles/hack.module.css'
 
-export default function Home({originData, departments, groupsData}) {
+export default function Home({originData, departments, groupsData, typesData}) {
 
   //Handle with witch hack is show
   const [hackData, setHackData] = useState()
   const [departmentData, setDepartmentData] = useState(departments)
   const [groups, setGroups] = useState(groupsData)
+  const [swTypes, setSwTypes] = useState(typesData)
   const [localSelect, setLocalSelect] = useState()
 
   const exportPDF = () => {
@@ -113,6 +114,7 @@ export default function Home({originData, departments, groupsData}) {
       localSelect = localStorage.getItem('switchmapHackId')
     } else {
       localSelect = isLocalHackIdNull
+      console.log(localSelect)
     }
 
     setHackData(originData[localSelect])
@@ -216,7 +218,7 @@ export default function Home({originData, departments, groupsData}) {
           </div>
             {
               hackData.Switchs.map(sw => (
-                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData}/>
+                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData} types={swTypes}/>
               ))
             }
 
@@ -254,7 +256,8 @@ export async function getServerSideProps(context) {
   const originData = await prismaExecute.read.hack.all()
   const departments = await prismaExecute.read.department.all()
   const groupsData = await prismaExecute.read.group.all()
+  const typesData = await prismaExecute.read.switchType.all()
   return {
-    props: {originData, departments, groupsData},
+    props: {originData, departments, groupsData, typesData},
   }
 }

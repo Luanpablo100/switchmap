@@ -20,6 +20,7 @@ export default function SwitchElement({sw, departments}) {
             </div>
             <div className={styles.swcode}>
                 <h1>{sw.code}</h1>
+                {console.log(sw)}
             </div>
         </div>
     )
