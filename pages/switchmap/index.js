@@ -6,8 +6,9 @@ import ButtonComponent from '../../components/button'
 
 import prismaExecute from '../../prisma/commands'
 
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
+import Link from 'next/link'
 
 import {HiFilter} from 'react-icons/hi'
 import {ImCross, ImSearch} from 'react-icons/im'
@@ -114,7 +115,6 @@ export default function Home({originData, departments, groupsData, typesData}) {
       localSelect = localStorage.getItem('switchmapHackId')
     } else {
       localSelect = isLocalHackIdNull
-      console.log(localSelect)
     }
 
     setHackData(originData[localSelect])
@@ -175,14 +175,20 @@ export default function Home({originData, departments, groupsData, typesData}) {
     if (hack === undefined) { //If database are empty
       return (
           <Container>
-            <h2>Seu banco de dados está vazio!</h2>
+            <div className={styles.centerDiv}>
+              <h2>Seu banco de dados está vazio!</h2>
+              <h3>Primeiro, crie um hack!</h3>
+              <Link href='/switchmap/create/hack'><a>Criar hack</a></Link>
+            </div>
           </Container>
         )
     } else if (hack.Switchs[0] === undefined){ //If has no one switch
       return (
         <Container>
-          <div>
-            <h2>Não há switchs para serem exibidos!</h2>
+          <div className={styles.centerDiv}>
+            <h2>Não há switchs para serem exibidos neste hack!</h2>
+            <Link href='/switchmap/create/switch'><a>Criar switch</a></Link>
+
             <div  className={styles.controls}>
               <div className={styles.controlChild}>
                 <Select identify={'inputSetHackShown'} datas={originData}/>

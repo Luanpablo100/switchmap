@@ -32,9 +32,9 @@ export default function Home() {
           <div>
             <form method='POST' onSubmit={submitSwType}>
               <InputComponent labelDesc={"Nome do estilo"} identify={'inputTypeName'}/>
-              <InputComponent labelDesc={"Cor 1"} identify={'inputTypeColor1'} type={'color'}/>
-              <InputComponent labelDesc={"Cor 2"} identify={'inputTypeColor2'} type={'color'}/>
-              <InputComponent labelDesc={"Cor 3"} identify={'inputTypeColor3'} type={'color'}/>
+              <InputComponent labelDesc={"Cor de fundo"} identify={'inputTypeColor1'} type={'color'}/>
+              <InputComponent labelDesc={"Cor da borda"} identify={'inputTypeColor2'} type={'color'}/>
+              <InputComponent labelDesc={"Cor de fundo das portas"} identify={'inputTypeColor3'} type={'color'}/>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>

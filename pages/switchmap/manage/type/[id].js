@@ -49,9 +49,9 @@ export default function Home({type}) {
           <div>
             <Link href={'/switchmap/manage/type'}><a>Voltar</a></Link>
             <InputComponent identify={'inputTypeName'} labelDesc={'Nome do departamento'}>{type.name}</InputComponent>
-            <InputComponent identify={'inputTypeColor1'} labelDesc={'Cor 1'} type={'color'}>{type.color1}</InputComponent>
-            <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor 2'} type={'color'}>{type.color2}</InputComponent>
-            <InputComponent identify={'inputTypeColor3'} labelDesc={'Cor 3'} type={'color'}>{type.color3}</InputComponent>
+            <InputComponent identify={'inputTypeColor1'} labelDesc={'Cor de fundo'} type={'color'}>{type.color1}</InputComponent>
+            <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor da borda'} type={'color'}>{type.color2}</InputComponent>
+            <InputComponent identify={'inputTypeColor3'} labelDesc={'Cor de fundo das portas'} type={'color'}>{type.color3}</InputComponent>
             <BiSave onClick={handleUpdateType} className='reactIconsBigger'/>
             {console.log(type)}
             <CgTrash onClick={handleDeleteType} className='reactIconsBigger'/>
