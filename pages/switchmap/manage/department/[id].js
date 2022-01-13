@@ -49,7 +49,7 @@ export default function Home({department}) {
           <div>
             <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
             <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>
-            <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.departName}</InputComponent>
+            <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.color}</InputComponent>
             <BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/>
             <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
           </div>
