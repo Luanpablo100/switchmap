@@ -37,6 +37,6 @@ yarn-error.log*
 #SQLite Database
 /prisma/dev.db
 
-/prisma/migrations
-
 .dev.db
+
+/prisma/migrations
