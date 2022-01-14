@@ -35,7 +35,7 @@ export default function Home() {
               <InputComponent labelDesc={"Nome do estilo"} identify={'inputTypeName'}/>
               <InputComponent labelDesc={"Cor de fundo"} identify={'inputTypeColor1'} type={'color'}/>
               <InputComponent labelDesc={"Cor da borda"} identify={'inputTypeColor2'} type={'color'}/>
-              <InputComponent labelDesc={"Cor de fundo dos numeros"} identify={'inputTypeColor3'} type={'color'}/>
+              <InputComponent labelDesc={"Cor de fundo dos números"} identify={'inputTypeColor3'} type={'color'}/>
               <InputComponent labelDesc={"Entorno das portas"} identify={'inputTypeColor4'} type={'color'}/>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>

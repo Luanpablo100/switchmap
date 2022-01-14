@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const SvgPort = ({fill, desc}) => {
+const SvgPort = ({fill, desc, border}) => {
   if(fill === '#null') {
     return (
       <span>nl</span>
@@ -21,7 +21,7 @@ const SvgPort = ({fill, desc}) => {
   >
     <title>{desc}</title>
     <defs>
-      <style>{".fil0{fill:#000}.fil3{fill:#9f7935}"}</style>
+      <style>{`.fil0{fill:${border}}.fil3{fill:#9f7935}`}</style>
     </defs>
     <g id="Camada_x0020_1">
       <g id="_2202454032320">
