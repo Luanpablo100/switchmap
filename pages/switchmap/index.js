@@ -78,6 +78,17 @@ export default function Home({originData, departments, groupsData, typesData}) {
   }
 
   const cancelFilter = async() => {   
+    let localSelect
+    
+    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
+
+    if (isLocalHackIdNull === null) {
+      localStorage.setItem('switchmapHackId', 0)
+      localSelect = localStorage.getItem('switchmapHackId')
+    } else {
+      localSelect = isLocalHackIdNull
+    }
+    
       const data = await fetch('/api/switchmap/hack')
       const jsonData = await data.json()
       return setHackData(jsonData[localSelect])
