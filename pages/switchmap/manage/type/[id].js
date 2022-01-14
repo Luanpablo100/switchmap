@@ -18,7 +18,8 @@ export default function Home({type}) {
       const color2 =  document.getElementById('inputTypeColor2').value
       const color3 =  document.getElementById('inputTypeColor3').value
       const color4 =  document.getElementById('inputTypeColor4').value
-      const updateData = {typeId: typeId, typeName: typeName, color1: color1, color2: color2, color3: color3, color4:color4}
+      const color5 =  document.getElementById('inputTypeColor5').value
+      const updateData = {typeId: typeId, typeName: typeName, color1: color1, color2: color2, color3: color3, color4:color4, color5:color5}
 
       fetch('/api/switchmap/swtype', {
         method: 'PUT',
@@ -54,6 +55,7 @@ export default function Home({type}) {
             <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor da borda'} type={'color'}>{type.color2}</InputComponent>
             <InputComponent identify={'inputTypeColor3'} labelDesc={'Cor de fundo dos números'} type={'color'}>{type.color3}</InputComponent>
             <InputComponent identify={'inputTypeColor4'} labelDesc={'Entorno das portas'} type={'color'}>{type.color4}</InputComponent>
+            <InputComponent identify={'inputTypeColor5'} labelDesc={'Cor do texto'} type={'color'}>{type.color5}</InputComponent>
             <BiSave onClick={handleUpdateType} className='reactIconsBigger'/>
             <CgTrash onClick={handleDeleteType} className='reactIconsBigger'/>
           </div>

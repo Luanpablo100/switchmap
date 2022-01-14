@@ -13,7 +13,8 @@ export default function Home() {
     const color2 = document.getElementById('inputTypeColor2').value
     const color3 = document.getElementById('inputTypeColor3').value
     const color4 = document.getElementById('inputTypeColor4').value
-    const postData = {typeName: typeName, color1: color1, color2:color2, color3:color3, color4:color4}
+    const color5 = document.getElementById('inputTypeColor5').value
+    const postData = {typeName: typeName, color1: color1, color2:color2, color3:color3, color4:color4, color5: color5}
     fetch('/api/switchmap/swtype', {
       method: 'POST',
       headers: {
@@ -37,6 +38,7 @@ export default function Home() {
               <InputComponent labelDesc={"Cor da borda"} identify={'inputTypeColor2'} type={'color'}/>
               <InputComponent labelDesc={"Cor de fundo dos números"} identify={'inputTypeColor3'} type={'color'}/>
               <InputComponent labelDesc={"Entorno das portas"} identify={'inputTypeColor4'} type={'color'}/>
+              <InputComponent labelDesc={"Cor do texto"} identify={'inputTypeColor5'} type={'color'}/>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>
