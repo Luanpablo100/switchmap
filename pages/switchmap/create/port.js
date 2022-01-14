@@ -46,7 +46,7 @@ export default function Home({departments, switchs}) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(postData),
-      }).then(Router.push('/switchmap'))
+      }).then(alert("Criando...").then(Router.push('/switchmap')))
 
     } else {
       alert("Erro no envio!")
