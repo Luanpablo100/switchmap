@@ -38,3 +38,5 @@ yarn-error.log*
 /prisma/dev.db
 
 .dev.db
+
+/prisma/migrations
