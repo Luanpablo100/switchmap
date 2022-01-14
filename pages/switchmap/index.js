@@ -6,8 +6,9 @@ import ButtonComponent from '../../components/button'
 
 import prismaExecute from '../../prisma/commands'
 
-import { useState } from 'react'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
+
+import Link from 'next/link'
 
 import {HiFilter} from 'react-icons/hi'
 import {ImCross, ImSearch} from 'react-icons/im'
@@ -20,12 +21,13 @@ import "jspdf-autotable";
 
 import styles from '../../styles/hack.module.css'
 
-export default function Home({originData, departments, groupsData}) {
+export default function Home({originData, departments, groupsData, typesData}) {
 
   //Handle with witch hack is show
   const [hackData, setHackData] = useState()
   const [departmentData, setDepartmentData] = useState(departments)
   const [groups, setGroups] = useState(groupsData)
+  const [swTypes, setSwTypes] = useState(typesData)
   const [localSelect, setLocalSelect] = useState()
 
   const exportPDF = () => {
@@ -173,14 +175,20 @@ export default function Home({originData, departments, groupsData}) {
     if (hack === undefined) { //If database are empty
       return (
           <Container>
-            <h2>Seu banco de dados está vazio!</h2>
+            <div className={styles.centerDiv}>
+              <h2>Seu banco de dados está vazio!</h2>
+              <h3>Primeiro, crie um hack!</h3>
+              <Link href='/switchmap/create/hack'><a>Criar hack</a></Link>
+            </div>
           </Container>
         )
     } else if (hack.Switchs[0] === undefined){ //If has no one switch
       return (
         <Container>
-          <div>
-            <h2>Não há switchs para serem exibidos!</h2>
+          <div className={styles.centerDiv}>
+            <h2>Não há switchs para serem exibidos neste hack!</h2>
+            <Link href='/switchmap/create/switch'><a>Criar switch</a></Link>
+
             <div  className={styles.controls}>
               <div className={styles.controlChild}>
                 <Select identify={'inputSetHackShown'} datas={originData}/>
@@ -216,7 +224,7 @@ export default function Home({originData, departments, groupsData}) {
           </div>
             {
               hackData.Switchs.map(sw => (
-                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData}/>
+                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData} types={swTypes}/>
               ))
             }
 
@@ -254,7 +262,8 @@ export async function getServerSideProps(context) {
   const originData = await prismaExecute.read.hack.all()
   const departments = await prismaExecute.read.department.all()
   const groupsData = await prismaExecute.read.group.all()
+  const typesData = await prismaExecute.read.switchType.all()
   return {
-    props: {originData, departments, groupsData},
+    props: {originData, departments, groupsData, typesData},
   }
 }

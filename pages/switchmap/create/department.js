@@ -44,7 +44,6 @@ export default function Home({groupsData}) {
 
 export async function getServerSideProps(context) {
   const groupsData = await prismaExecute.read.group.all()
-  console.log(groupsData)
   return {
     props: {groupsData},
   }

@@ -9,11 +9,14 @@ import { BiSave } from 'react-icons/bi'
 import prismaExecute from '../../../../prisma/commands';
 import InputComponent from '../../../../components/input';
 
-export default function Home({sw}) {
+import SelectGroup from '../../../../components/selectGroup';
+
+export default function Home({sw, types}) {
     async function handleUpdateSwitch() {
         const switchId = sw.id
         const switchCode = document.getElementById('inputSwitchCode').value
-        const updateData = {switchId: switchId, switchCode: switchCode}
+        const swTypeId = document.getElementById('selectSwType').value
+        const updateData = {switchId: switchId, switchCode: switchCode, swTypeId: swTypeId}
 
         fetch('/api/switchmap/update/switch', {
           method: 'PUT',
@@ -46,6 +49,7 @@ export default function Home({sw}) {
           <div>
             <Link href={'/switchmap/manage/switch'}><a>Voltar</a></Link>
             <InputComponent identify={'inputSwitchCode'} labelDesc={'Código do Switch'}>{sw.code}</InputComponent>
+            <SelectGroup datas={types} identify={'selectSwType'} labelDesc={'Estilo'}/>
             <BiSave onClick={handleUpdateSwitch} className='reactIconsBigger'/>
             <CgTrash onClick={handleDeleteSwitch} className='reactIconsBigger'/>
           </div>
@@ -56,7 +60,8 @@ export default function Home({sw}) {
 
 export async function getServerSideProps(context) {
 const switchData = await prismaExecute.read.switch.unique(parseInt(context.params.id))
+const typesData = await prismaExecute.read.switchType.all()
   return {
-    props: {sw: switchData},
+    props: {sw: switchData, types: typesData},
   }
 }

@@ -19,6 +19,7 @@ export default function Home() {
             <Link href='/switchmap/manage/group'><a><div className={styles.linkDiv}><Image src='/images/meeting-room.png' width={400} height={400} alt='Departments'/>Grupo</div></a></Link>
             <Link href='/switchmap/manage/department'><a><div className={styles.linkDiv}><Image src='/images/meeting-room.png' width={400} height={400} alt='Departments'/>Departamento</div></a></Link>
             <Link href='/switchmap/manage/switch'><a><div className={styles.linkDiv}><Image src='/images/switch.png' width={400} height={400} alt='Switch'/>Switch</div></a></Link>
+            <Link href='/switchmap/manage/type'><a><div className={styles.linkDiv}><Image src='/images/switch.png' width={400} height={400} alt='Style'/>Estilos</div></a></Link>
           </div>
         </div>
       </Container>

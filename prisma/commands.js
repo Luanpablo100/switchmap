@@ -49,7 +49,9 @@ const prismaExecute = {
                         orderBy: {
                             code: 'asc'
                         },
-                        include:{ Ports:true }
+                        include: {
+                            Ports: true
+                        }
                     }
                 )
                     .catch((e) => {
@@ -221,6 +223,36 @@ const prismaExecute = {
     
                 return findGroup
             }
+        },
+        switchType: {
+            all: async () => {
+                const allTypes = await prisma.switchType.findMany()
+                
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+    
+                return allTypes
+            },
+            unique: async(typeId) => {
+                const findType = await prisma.switchType.findUnique({
+                    where: {
+                        id: typeId
+                    }
+                })
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+    
+                return findType
+
+            }
         }
     },
     insert: {
@@ -238,11 +270,12 @@ const prismaExecute = {
                 });
     
         },
-        switch: async(switchCode, rackId) => {
+        switch: async(switchCode, rackId, swTypeId) => {
             await prisma.switch.create({
                 data: {
                     code: switchCode,
-                    rackCode: rackId
+                    rackCode: rackId,
+                    typeId: swTypeId
                 }
             })
                 .catch((e) => {
@@ -252,16 +285,17 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        port: async (portId, switchId, portDesc, departmentId, patchportdesc)=> {
+        port: async (portCode, switchCode, portDesc, departmentId, patchportdesc) => {
             await prisma.port.create({
                 data: {
-                    code: portId,
-                    switchCode: switchId,
+                    code: portCode,
+                    switchCode: switchCode,
                     desc: portDesc,
                     departId: departmentId,
                     patchportdesc: patchportdesc
                 }
             })
+            
                 .catch((e) => {
                     throw e;
                     })
@@ -296,6 +330,22 @@ const prismaExecute = {
             .finally(async () => {
             await prisma.$disconnect();
             });
+        },
+        switchType: async(name, color1, color2, color3) => {
+            await prisma.switchType.create({
+                data: {
+                    name: name,
+                    color1: color1,
+                    color2: color2,
+                    color3: color3
+                }
+            })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            })
         }
     },
     update: {
@@ -318,13 +368,14 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        switch: async (switchid, switchcode) => {
+        switch: async (switchid, switchcode, swTypeId) => {
             await prisma.switch.update({
                 where: {
                     id:switchid,
                 },
                 data: {
-                    code: switchcode
+                    code: switchcode,
+                    typeId: swTypeId
                 }
             })
     
@@ -370,6 +421,25 @@ const prismaExecute = {
                 data: {
                     name: groupName,
                     color: groupColor
+                }
+            })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+        },
+        switchType: async(typeId, name, color1, color2, color3) => {
+            await prisma.switchType.update({
+                where: {
+                    id: typeId
+                },
+                data: {
+                    name: name,
+                    color1: color1,
+                    color2: color2,
+                    color3: color3
                 }
             })
             .catch((e) => {
@@ -440,6 +510,19 @@ const prismaExecute = {
             await prisma.group.delete({
                 where: {
                     id: groupId
+                }
+            })
+            .catch((e) => {
+                throw e;
+                })
+            .finally(async () => {
+            await prisma.$disconnect();
+            });
+        },
+        switchType: async(typeId) => {
+            await prisma.switchType.delete({
+                where: {
+                    id: typeId
                 }
             })
             .catch((e) => {
