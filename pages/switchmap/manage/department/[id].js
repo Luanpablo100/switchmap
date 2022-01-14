@@ -48,6 +48,7 @@ export default function Home({department, groups}) {
           <div>
             <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
             <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>
+            <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.color}</InputComponent>
             <SelectGroup labelDesc={'Grupo'} datas={groups} identify={'selectGroup'}/>
             <BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/>
             <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
