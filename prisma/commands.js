@@ -285,16 +285,17 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        port: async (portId, switchId, portDesc, departmentId, patchportdesc)=> {
+        port: async (portCode, switchCode, portDesc, departmentId, patchportdesc) => {
             await prisma.port.create({
                 data: {
-                    code: portId,
-                    switchCode: switchId,
+                    code: portCode,
+                    switchCode: switchCode,
                     desc: portDesc,
                     departId: departmentId,
                     patchportdesc: patchportdesc
                 }
             })
+            
                 .catch((e) => {
                     throw e;
                     })
