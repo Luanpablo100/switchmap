@@ -29,7 +29,7 @@ export default function Home({port, departments}) {
     const inputDepartId = document.getElementById('selectDepartment').value
 
     const updateData = {portId: portId, portCode: inputPortCode, portDesc: inputPortDesc, patchPortDesc: inputPatchPortDesc, departId: inputDepartId}
-    fetch('/api/switchmap/update/port', {
+    fetch('/api/switchmap/port', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ async function handleDeletePort() {
     
     const deleteData = {portId: portId}
 
-    fetch('/api/switchmap/delete/port', {
+    fetch('/api/switchmap/port', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

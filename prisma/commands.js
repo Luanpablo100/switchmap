@@ -331,13 +331,14 @@ const prismaExecute = {
             await prisma.$disconnect();
             });
         },
-        switchType: async(name, color1, color2, color3) => {
+        switchType: async(name, color1, color2, color3, color4) => {
             await prisma.switchType.create({
                 data: {
                     name: name,
                     color1: color1,
                     color2: color2,
-                    color3: color3
+                    color3: color3,
+                    color4: color4
                 }
             })
             .catch((e) => {
@@ -430,7 +431,7 @@ const prismaExecute = {
             await prisma.$disconnect();
             });
         },
-        switchType: async(typeId, name, color1, color2, color3) => {
+        switchType: async(typeId, name, color1, color2, color3, color4) => {
             await prisma.switchType.update({
                 where: {
                     id: typeId
@@ -439,7 +440,8 @@ const prismaExecute = {
                     name: name,
                     color1: color1,
                     color2: color2,
-                    color3: color3
+                    color3: color3,
+                    color4: color4
                 }
             })
             .catch((e) => {

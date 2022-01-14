@@ -24,7 +24,7 @@ export default function Home({departments, switchs}) {
       const manyPorts = areMany
       
       const postData = {portCodeInit: portCodeInit, portCodeEnd:portCodeEnd, departId:departId, switchCode: switchCode, manyPorts: manyPorts}
-      fetch('/api/switchmap/add/port', {
+      fetch('/api/switchmap/port', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ export default function Home({departments, switchs}) {
       const portDesc = document.getElementById('inputPortDesc').value
       const patchPortDesc = document.getElementById('inputPatchPortDesc').value
       const postData = {portCode:portCode, switchCode:switchCode, departId:departId, portDesc: portDesc, patchPortDesc: patchPortDesc}
-      fetch('/api/switchmap/add/port', {
+      fetch('/api/switchmap/port', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

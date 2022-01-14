@@ -1,7 +1,11 @@
-import prismaExecute from "../../../../prisma/commands";
+import prismaExecute from "../../../prisma/commands";
 
 export default async function handler(req, res) {
-    if (req.method === 'POST') {
+    if(req.method === 'GET') {
+
+    }
+
+    else if (req.method === 'POST') {
 
         if (req.body.manyPorts !== true) {
             const {portCode, switchCode, departId, portDesc, patchPortDesc} = req.body
@@ -17,6 +21,24 @@ export default async function handler(req, res) {
             
             return res.status(200).json({message: "Created!"})
         }
+
+    } else if(req.method === 'PUT') {
+
+        const {portId, portCode, portDesc, patchPortDesc, departId} = req.body
+
+        const updatedPort = await prismaExecute.update.port(portId, portCode, portDesc, parseInt(departId), patchPortDesc)
+
+        return res.status(200).json(updatedPort)
+
+    } else if(req.method === 'DELETE') {
+
+        const {portId} = req.body
+
+        const deletedPort = await prismaExecute.delete.port(portId)
+
+        return res.status(200).json(deletedPort)
+
+    } else {
+        return res.json({message: 'Erro na requisição!'})
     }
-    return res.json({message: 'Erro! A requisição realizada não é do tipo POST!'})
 }

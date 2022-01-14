@@ -16,7 +16,7 @@ export default function Home({hack}) {
       const hackCodeName = document.getElementById('inputHackCodename').value
       const updateData = {hackId: hackId, codename: hackCodeName}
 
-      fetch('/api/switchmap/update/hack', {
+      fetch('/api/switchmap/hack', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export default function Home({hack}) {
         
         const deleteData = {hackId: hackId}
 
-        fetch('/api/switchmap/delete/hack', {
+        fetch('/api/switchmap/hack', {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',

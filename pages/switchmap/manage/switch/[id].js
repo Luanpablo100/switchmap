@@ -18,7 +18,7 @@ export default function Home({sw, types}) {
         const swTypeId = document.getElementById('selectSwType').value
         const updateData = {switchId: switchId, switchCode: switchCode, swTypeId: swTypeId}
 
-        fetch('/api/switchmap/update/switch', {
+        fetch('/api/switchmap/switch', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export default function Home({sw, types}) {
         
         const deleteData = {switchId: switchId}
 
-        fetch('/api/switchmap/delete/switch', {
+        fetch('/api/switchmap/switch', {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',

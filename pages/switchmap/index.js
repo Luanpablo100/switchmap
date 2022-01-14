@@ -78,7 +78,6 @@ export default function Home({originData, departments, groupsData, typesData}) {
   }
 
   const cancelFilter = async() => {   
-
     let localSelect
     
     let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
@@ -90,7 +89,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
       localSelect = isLocalHackIdNull
     }
     
-      const data = await fetch('/api/switchmap/read/hack')
+      const data = await fetch('/api/switchmap/hack')
       const jsonData = await data.json()
       return setHackData(jsonData[localSelect])
   }
@@ -101,7 +100,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
     const inputSetHackShown = document.getElementById('inputSetHackShown').value
     localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
     const setLocalSelect = localStorage.getItem('switchmapHackId')
-    const data = await fetch('/api/switchmap/read/hack')
+    const data = await fetch('/api/switchmap/hack')
     const jsonData = await data.json()
     setHackData(jsonData[setLocalSelect])
   }
@@ -109,7 +108,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
   const resetHackShown = async() => {
     localStorage.setItem('switchmapHackId', 0)
     const setLocalSelect = localStorage.getItem('switchmapHackId')
-    const data = await fetch('/api/switchmap/read/hack')
+    const data = await fetch('/api/switchmap/hack')
     const jsonData = await data.json()
     setHackData(jsonData[setLocalSelect])
   }
@@ -132,7 +131,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
     setHackData(originData[localSelect])
 
     async function fetchData() {
-      const data = await fetch('/api/switchmap/read/hack')
+      const data = await fetch('/api/switchmap/hack')
       const jsonData = await data.json()
         setHackData(jsonData[localSelect])
     }
