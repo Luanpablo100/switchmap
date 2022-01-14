@@ -17,7 +17,7 @@ export default function Home({hacks, types}) {
     const hackCode = document.getElementById('selectHackCode').value
     const swTypeId = document.getElementById('selectSwType').value
     const postData = {switchCode: switchCode, hackCode: hackCode, swTypeId: swTypeId}
-    fetch('/api/switchmap/add/switch', {
+    fetch('/api/switchmap/switch', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

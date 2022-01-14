@@ -19,7 +19,7 @@ export default function Home({type}) {
       const color3 =  document.getElementById('inputTypeColor3').value
       const updateData = {typeId: typeId, typeName: typeName, color1: color1, color2: color2, color3: color3}
 
-      fetch('/api/switchmap/update/swtype', {
+      fetch('/api/switchmap/swtype', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export default function Home({type}) {
         
         const deleteData = {typeId: typeId}
 
-        fetch('/api/switchmap/delete/swtype', {
+        fetch('/api/switchmap/swtype', {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',

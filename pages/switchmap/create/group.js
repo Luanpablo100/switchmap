@@ -11,7 +11,7 @@ export default function Home() {
     const groupName = document.getElementById('inputGroupName').value
     const groupColor = document.getElementById('inputGroupColor').value
     const postData = {groupName: groupName, color: groupColor}
-    fetch('/api/switchmap/add/group', {
+    fetch('/api/switchmap/group', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ export default function Home({department, groups}) {
       const groupId =  document.getElementById('selectGroup').value
       const updateData = {departId: departId, departName: departName, groupId: groupId}
 
-      fetch('/api/switchmap/update/department', {
+      fetch('/api/switchmap/department', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export default function Home({department, groups}) {
         
         const deleteData = {departId: departId}
 
-        fetch('/api/switchmap/delete/department', {
+        fetch('/api/switchmap/department', {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',

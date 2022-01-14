@@ -14,7 +14,7 @@ export default function Home({groupsData}) {
     const departName = document.getElementById('inputDepartName').value
     const groupId = document.getElementById('selectGroup').value
     const postData = {departName: departName, groupId: groupId}
-    fetch('/api/switchmap/add/department', {
+    fetch('/api/switchmap/department', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

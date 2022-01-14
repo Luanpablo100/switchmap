@@ -10,7 +10,7 @@ export default function Home() {
     event.preventDefault()
     const hackCodename = document.getElementById('inputHackCodename').value
     const postData = {codename: hackCodename}
-    fetch('/api/switchmap/add/hack', {
+    fetch('/api/switchmap/hack', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

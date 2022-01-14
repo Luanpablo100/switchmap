@@ -17,7 +17,7 @@ export default function Home({group}) {
       const groupColor =  document.getElementById('inputGroupColor').value
       const updateData = {groupId: groupId, groupName: groupName, groupColor: groupColor}
 
-      fetch('/api/switchmap/update/group', {
+      fetch('/api/switchmap/group', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default function Home({group}) {
         
         const deleteData = {groupId: groupId}
 
-        fetch('/api/switchmap/delete/group', {
+        fetch('/api/switchmap/group', {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
