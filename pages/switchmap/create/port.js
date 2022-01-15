@@ -1,18 +1,21 @@
-import Container from '../../../components/container'
+import prismaExecute from '../../../prisma/commands'
+
 import Link from 'next/link'
-import Router from 'next/router'
+
+import Container from '../../../components/container'
 import InputComponent from '../../../components/input'
 import SwitchSelect from '../../../components/switchSelect'
 import ButtonComponent from '../../../components/button'
 import DepartmentSelect from '../../../components/departmentSelect'
-import prismaExecute from '../../../prisma/commands'
 
 import { useState } from 'react'
+
+import createElement from '../../../lib/fetch/create'
 
 export default function Home({departments, switchs}) {
   const [areMany, setAreMany] = useState(false)
   
-  async function submitSwitch(event) {
+  async function handleCreatePort(event) {
     event.preventDefault()
 
     if(areMany === true) {
@@ -24,13 +27,8 @@ export default function Home({departments, switchs}) {
       const manyPorts = areMany
       
       const postData = {portCodeInit: portCodeInit, portCodeEnd:portCodeEnd, departId:departId, switchCode: switchCode, manyPorts: manyPorts}
-      fetch('/api/switchmap/port', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      }).then(Router.push('/switchmap'))
+      
+      createElement('port', postData)
 
     } else if(areMany === false) {
 
@@ -40,13 +38,8 @@ export default function Home({departments, switchs}) {
       const portDesc = document.getElementById('inputPortDesc').value
       const patchPortDesc = document.getElementById('inputPatchPortDesc').value
       const postData = {portCode:portCode, switchCode:switchCode, departId:departId, portDesc: portDesc, patchPortDesc: patchPortDesc}
-      fetch('/api/switchmap/port', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(postData),
-      }).then(alert("Criando...").then(Router.push('/switchmap')))
+      
+      createElement('port', postData)
 
     } else {
       alert("Erro no envio!")
@@ -66,7 +59,7 @@ export default function Home({departments, switchs}) {
             <h1>Adicionar porta</h1>
           </div>
           <div>
-            <form method='POST' onSubmit={submitSwitch}>
+            <form method='POST' onSubmit={handleCreatePort}>
               <label>Múltiplas portas</label>
               <input type='checkbox' onChange={changeManyPorts}></input>
               {areMany === true 

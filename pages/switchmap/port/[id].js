@@ -3,7 +3,6 @@ import Container from '../../../components/container'
 import InputComponent from '../../../components/input';
 
 import Link from 'next/link';
-import Router from 'next/router';
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
@@ -11,17 +10,21 @@ import { BiSave } from 'react-icons/bi'
 import prismaExecute from '../../../prisma/commands';
 import DepartmentSelect from '../../../components/departmentSelect';
 
+import updateElement from '../../../lib/fetch/update';
+import deleteElement from '../../../lib/fetch/delete';
+
 export default function Home({port, departments}) {
 
   let portDepartment
-    if(departments !== undefined) {
-        portDepartment = departments.find(department => department.id === port.departId)
-        console.log(portDepartment)
-    }
+  if(departments !== undefined) {
+      portDepartment = departments.find(department => department.id === port.departId)
+  }
 
 
   async function handleUpdatePort(event) {
+
     event.preventDefault()
+
     const portId = port.id
     const inputPortCode = document.getElementById('inputPortCode').value
     const inputPortDesc = document.getElementById('inputPortDesc').value
@@ -29,13 +32,8 @@ export default function Home({port, departments}) {
     const inputDepartId = document.getElementById('selectDepartment').value
 
     const updateData = {portId: portId, portCode: inputPortCode, portDesc: inputPortDesc, patchPortDesc: inputPatchPortDesc, departId: inputDepartId}
-    fetch('/api/switchmap/port', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(updateData),
-  }).then(Router.push('/switchmap'))
+    
+    updateElement('port', updateData)
 }
 
 async function handleDeletePort() {
@@ -43,13 +41,7 @@ async function handleDeletePort() {
     
     const deleteData = {portId: portId}
 
-    fetch('/api/switchmap/port', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(deleteData),
-    }).then(Router.push('/switchmap'))
+    deleteElement('port', deleteData)
 }
 
   return (

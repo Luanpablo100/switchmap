@@ -3,21 +3,18 @@ import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
 
-import Router from 'next/router'
+import createElement from '../../../lib/fetch/create'
 
 export default function Home() {
-  async function submitGroup(event) {
+
+  async function handleCreateGroup(event) {
     event.preventDefault()
+
     const groupName = document.getElementById('inputGroupName').value
     const groupColor = document.getElementById('inputGroupColor').value
     const postData = {groupName: groupName, color: groupColor}
-    fetch('/api/switchmap/group', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    }).then(Router.push('/switchmap'))
+   
+    createElement('group', postData)
   }
 
   return (
@@ -28,7 +25,7 @@ export default function Home() {
             <h1>Adicionar grupo</h1>
           </div>
           <div>
-            <form method='POST' onSubmit={submitGroup}>
+            <form method='POST' onSubmit={handleCreateGroup}>
               <InputComponent labelDesc={"Nome do grupo"} identify={'inputGroupName'}/>
               <InputComponent labelDesc={"Cor do grupo"} identify={'inputGroupColor'} type={'color'}/>
               <ButtonComponent>Enviar</ButtonComponent>

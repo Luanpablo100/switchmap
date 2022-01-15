@@ -5,23 +5,23 @@ import ButtonComponent from '../../../components/button'
 
 import prismaExecute from '../../../prisma/commands'
 
-import Router from 'next/router'
+import createElement from '../../../lib/fetch/create'
+
 import SelectGroup from '../../../components/selectGroup'
 
 export default function Home({groupsData}) {
-  async function submitDepartment(event) {
+
+  async function handleCreateDepartment(event) {
+
     event.preventDefault()
+
     const departName = document.getElementById('inputDepartName').value
     const groupId = document.getElementById('selectGroup').value
     const postData = {departName: departName, groupId: groupId}
-    fetch('/api/switchmap/department', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    }).then(Router.push('/switchmap'))
+
+    createElement('department', postData)
   }
+
 
   return (
       <Container>
@@ -31,7 +31,7 @@ export default function Home({groupsData}) {
             <h1>Adicionar departamento</h1>
           </div>
           <div>
-            <form method='POST' onSubmit={submitDepartment}>
+            <form method='POST' onSubmit={handleCreateDepartment}>
               <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
               <SelectGroup identify={'selectGroup'} labelDesc={'Grupo'} datas={groupsData}/>
               <ButtonComponent>Enviar</ButtonComponent>

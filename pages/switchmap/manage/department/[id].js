@@ -1,9 +1,11 @@
 import Container from '../../../../components/container'
 
 import Link from 'next/link';
-import Router from 'next/router';
 
 import prismaExecute from '../../../../prisma/commands';
+
+import updateElement from '../../../../lib/fetch/update';
+import deleteElement from '../../../../lib/fetch/delete';
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
@@ -12,19 +14,15 @@ import SelectGroup from '../../../../components/selectGroup';
 
 export default function Home({department, groups}) {
 
-    async function handleUpdateDepartment() {
+    async function handleUpdateDepartment(event) {
+      event.preventDefault()
+
       const departId = department.id
       const departName = document.getElementById('inputDepartName').value
       const groupId =  document.getElementById('selectGroup').value
       const updateData = {departId: departId, departName: departName, groupId: groupId}
 
-      fetch('/api/switchmap/department', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updateData),
-    }).then(Router.push('/switchmap/manage/department'))
+      updateElement('department', updateData)
     }
 
     async function handleDeleteDepartment() {
@@ -32,13 +30,7 @@ export default function Home({department, groups}) {
         
         const deleteData = {departId: departId}
 
-        fetch('/api/switchmap/department', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(deleteData),
-        }).then(Router.push('/switchmap/manage/department'))
+        deleteElement('department', deleteData)
     }
 
   return (
@@ -46,12 +38,14 @@ export default function Home({department, groups}) {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
-            <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>
-            <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.color}</InputComponent>
-            <SelectGroup labelDesc={'Grupo'} datas={groups} identify={'selectGroup'}/>
-            <BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/>
-            <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
+            <form method='POST' onSubmit={handleUpdateDepartment}>
+              <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
+              <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>
+              <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.color}</InputComponent>
+              <SelectGroup labelDesc={'Grupo'} datas={groups} identify={'selectGroup'}/>
+              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
+              <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
+            </form>
           </div>
         </div>
       </Container>

@@ -1,28 +1,25 @@
 import Container from '../../../../components/container'
 
 import Link from 'next/link';
-import Router from 'next/router';
 
 import prismaExecute from '../../../../prisma/commands';
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 import InputComponent from '../../../../components/input';
+import updateElement from '../../../../lib/fetch/update';
+import deleteElement from '../../../../lib/fetch/delete';
 
 export default function Home({hack}) {
 
-    async function handleUpdateHack() {
+    async function handleUpdateHack(event) {
+      event.preventDefault()
+
       const hackId = hack.id
       const hackCodeName = document.getElementById('inputHackCodename').value
       const updateData = {hackId: hackId, codename: hackCodeName}
 
-      fetch('/api/switchmap/hack', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updateData),
-    }).then(Router.push('/switchmap/manage/hack'))
+      updateElement('hack', updateData)      
     }
 
     async function handleDeleteHack() {
@@ -30,13 +27,7 @@ export default function Home({hack}) {
         
         const deleteData = {hackId: hackId}
 
-        fetch('/api/switchmap/hack', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(deleteData),
-        }).then(Router.push('/switchmap/manage/hack'))
+        deleteElement('hack', deleteData)
     }
 
   return (
@@ -44,10 +35,12 @@ export default function Home({hack}) {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/manage/hack'}><a>Voltar</a></Link>
-            <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.code}</InputComponent>
-            <BiSave onClick={handleUpdateHack} className='reactIconsBigger'/>
-            <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
+            <form method='POST' onSubmit={handleUpdateHack}>
+              <Link href={'/switchmap/manage/hack'}><a>Voltar</a></Link>
+              <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.code}</InputComponent>
+              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateHack} className='reactIconsBigger'/></button>
+              <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
+            </form>
           </div>
         </div>
       </Container>

@@ -5,25 +5,23 @@ import ButtonComponent from '../../../components/button'
 
 import prismaExecute from '../../../prisma/commands'
 
-import Router from 'next/router'
+import createElement from '../../../lib/fetch/create'
 
 import SelectHack from '../../../components/selectHack'
 import SelectGroup from '../../../components/selectGroup'
 
 export default function Home({hacks, types}) {
-  async function submitSwitch(event) {
+
+  async function handleCreateSwitch(event) {
+
     event.preventDefault()
+
     const switchCode = document.getElementById('inputSwitchCode').value
     const hackCode = document.getElementById('selectHackCode').value
     const swTypeId = document.getElementById('selectSwType').value
     const postData = {switchCode: switchCode, hackCode: hackCode, swTypeId: swTypeId}
-    fetch('/api/switchmap/switch', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    }).then(Router.push('/switchmap'))
+
+    createElement('switch', postData)
   }
 
   return (
@@ -34,7 +32,7 @@ export default function Home({hacks, types}) {
             <h1>Adicionar switch</h1>
           </div>
           <div>
-            <form method='POST' onSubmit={submitSwitch}>
+            <form method='POST' onSubmit={handleCreateSwitch}>
               <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
               <SelectHack datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
               <SelectGroup datas={types} identify={'selectSwType'} labelDesc={'Estilo'}/>

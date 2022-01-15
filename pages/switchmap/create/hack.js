@@ -3,20 +3,17 @@ import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
 
-import Router from 'next/router'
+import createElement from '../../../lib/fetch/create'
 
 export default function Home() {
-  async function submitDepartment(event) {
+
+  async function handleCreateRack(event) {
     event.preventDefault()
+
     const hackCodename = document.getElementById('inputHackCodename').value
     const postData = {codename: hackCodename}
-    fetch('/api/switchmap/hack', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(postData),
-    }).then(Router.push('/switchmap'))
+
+    createElement('hack', postData)
   }
 
   return (
@@ -27,7 +24,7 @@ export default function Home() {
             <h1>Adicionar hack</h1>
           </div>
           <div>
-            <form method='POST' onSubmit={submitDepartment}>
+            <form method='POST' onSubmit={handleCreateRack}>
               <InputComponent labelDesc={"Codinome do hack"} identify={'inputHackCodename'}/>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
