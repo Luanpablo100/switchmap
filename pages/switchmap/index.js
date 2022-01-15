@@ -4,22 +4,21 @@ import DepartmentSelect from '../../components/departmentSelect'
 import Select from '../../components/select'
 import ButtonComponent from '../../components/button'
 
+import createElement from '../../lib/fetch/create'
 import prismaExecute from '../../prisma/commands'
 
 import { useState, useEffect } from 'react'
 
 import Link from 'next/link'
 
-import {HiFilter} from 'react-icons/hi'
-import {ImCross, ImSearch} from 'react-icons/im'
-import {BiReset} from 'react-icons/bi'
+import { HiFilter } from 'react-icons/hi'
+import { ImCross, ImSearch } from 'react-icons/im'
+import { BiReset } from 'react-icons/bi'
 import { MdOutlineSubtitles } from 'react-icons/md'
 import { VscFilePdf } from 'react-icons/vsc'
 
-import jsPDF from "jspdf";
-import "jspdf-autotable";
-
 import styles from '../../styles/hack.module.css'
+import exportPDF from '../../lib/functions/exportPDF'
 
 export default function Home({originData, departments, groupsData, typesData}) {
 
@@ -30,37 +29,8 @@ export default function Home({originData, departments, groupsData, typesData}) {
   const [swTypes, setSwTypes] = useState(typesData)
   const [localSelect, setLocalSelect] = useState()
 
-  const exportPDF = () => {
-    const unit = "pt";
-    const size = "A4"; // Use A1, A2, A3 or A4
-    const orientation = "portrait"; // portrait or landscape
-
-    const marginLeft = 40;
-    const doc = new jsPDF(orientation, unit, size);
-
-    doc.setFontSize(15);
-
-    const title = "Switchmap report";
-    const headers = [["Switch", "Porta", "Descrição", "Departamento"]];
-
-    const data = []
-    hackData.Switchs.map(sw=> {
-      sw.Ports.map(port => { 
-        const portDepartment = departments.find(department => department.id === port.departId)
-        data.push([sw.code, port.code, port.desc, portDepartment.departName])
-      })
-
-    });
-
-    let content = {
-      startY: 50,
-      head: headers,
-      body: data
-    };
-
-    doc.text(title, marginLeft, 40);
-    doc.autoTable(content);
-    doc.save("switchmapReport.pdf")
+  function handleSavePDF () {
+    exportPDF(hackData, departments)
   }
 
   //Handle with filter switch ports
@@ -78,17 +48,6 @@ export default function Home({originData, departments, groupsData, typesData}) {
   }
 
   const cancelFilter = async() => {   
-    let localSelect
-    
-    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
-
-    if (isLocalHackIdNull === null) {
-      localStorage.setItem('switchmapHackId', 0)
-      localSelect = localStorage.getItem('switchmapHackId')
-    } else {
-      localSelect = isLocalHackIdNull
-    }
-    
       const data = await fetch('/api/switchmap/hack')
       const jsonData = await data.json()
       return setHackData(jsonData[localSelect])
@@ -99,52 +58,54 @@ export default function Home({originData, departments, groupsData, typesData}) {
   const setHackShown = async() => {
     const inputSetHackShown = document.getElementById('inputSetHackShown').value
     localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
-    const setLocalSelect = localStorage.getItem('switchmapHackId')
+
     const data = await fetch('/api/switchmap/hack')
     const jsonData = await data.json()
-    setHackData(jsonData[setLocalSelect])
+
+    setHackData(jsonData[localSelect])
   }
 
   const resetHackShown = async() => {
     localStorage.setItem('switchmapHackId', 0)
-    const setLocalSelect = localStorage.getItem('switchmapHackId')
     const data = await fetch('/api/switchmap/hack')
     const jsonData = await data.json()
-    setHackData(jsonData[setLocalSelect])
+    setHackData(jsonData[localSelect])
   }
 
   // UseEffect to reload the page on changes
-
-  
   useEffect(() => {
-    let localSelect
-    
+
     let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
 
     if (isLocalHackIdNull === null) {
-      localStorage.setItem('switchmapHackId', 0)
-      localSelect = localStorage.getItem('switchmapHackId')
-    } else {
-      localSelect = isLocalHackIdNull
-    }
 
-    setHackData(originData[localSelect])
+      localStorage.setItem('switchmapHackId', 0)
+      setLocalSelect(localStorage.getItem('switchmapHackId'))
+
+    } else {
+
+      setLocalSelect(isLocalHackIdNull)
+    }
 
     async function fetchData() {
       const data = await fetch('/api/switchmap/hack')
       const jsonData = await data.json()
-        setHackData(jsonData[localSelect])
+
+      setHackData(jsonData[localSelect])
     }
 
     fetchData()
-  }, [])
+  }, [localSelect])
 
   let isShow = false
   function showSubtitles() {
+
     if(isShow === false) {
+
       document.getElementById('subtitles').style.width = "auto"
       document.getElementById('subtitles').style.height = "auto"
       isShow = true
+
     } else {
       document.getElementById('subtitles').style.width = "0px"
       document.getElementById('subtitles').style.height = "0px"
@@ -153,28 +114,14 @@ export default function Home({originData, departments, groupsData, typesData}) {
   }
 
   async function search(event) {
+
     event.preventDefault()
+
     const inputValue = event.target.value 
     const fetchData = {value: inputValue}
-    const query = await fetch('/api/switchmap/search', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      method: 'POST',
-      body: JSON.stringify(fetchData)
-    })
+    
+    const query = await createElement('search', fetchData)
     const jsonQuery = await query.json()
-    
-    let localSelect
-    
-    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
-
-    if (isLocalHackIdNull === null) {
-      localStorage.setItem('switchmapHackId', 0)
-      localSelect = localStorage.getItem('switchmapHackId')
-    } else {
-      localSelect = isLocalHackIdNull
-    }
 
     setHackData(jsonQuery[localSelect])
   }
@@ -239,7 +186,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
               ))
             }
 
-            <div  className={styles.controls}>
+            <div className={styles.controls}>
               <div className={styles.controlChild}>
                 <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
                 <div className={styles.controlGrandSon}>
@@ -252,7 +199,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
                 <div className={styles.controlGrandSon}>
                   <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                   <BiReset onClick={resetHackShown} className='reactIcons'/>
-                  <VscFilePdf size={30} onClick={exportPDF} style={{cursor:'pointer'}}/>
+                  <VscFilePdf size={30} onClick={handleSavePDF} style={{cursor:'pointer'}}/>
                 </div>
               </div>
             </div>
