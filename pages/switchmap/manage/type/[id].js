@@ -21,7 +21,8 @@ export default function Home({type}) {
       const color2 =  document.getElementById('inputTypeColor2').value
       const color3 =  document.getElementById('inputTypeColor3').value
       const color4 =  document.getElementById('inputTypeColor4').value
-      const updateData = {typeId: typeId, typeName: typeName, color1: color1, color2: color2, color3: color3, color4:color4}
+      const color5 =  document.getElementById('inputTypeColor5').value
+      const updateData = {typeId: typeId, typeName: typeName, color1: color1, color2: color2, color3: color3, color4:color4, color5:color5}
 
       updateElement('swtype', updateData)
     }
