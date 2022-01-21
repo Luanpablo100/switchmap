@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     else if (req.method === 'POST') {
 
         const {switchCode, hackCode, swTypeId} = req.body
-        const createdSwitch = await prismaExecute.insert.switch(switchCode,hackCode, parseInt(swTypeId))
+        const createdSwitch = await prismaExecute.insert.switch(switchCode, parseInt(hackCode), parseInt(swTypeId))
         return res.status(200).json(createdSwitch)
 
     } else if(req.method === 'PUT') {

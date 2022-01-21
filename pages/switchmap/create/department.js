@@ -6,8 +6,7 @@ import ButtonComponent from '../../../components/button'
 import prismaExecute from '../../../prisma/commands'
 
 import createElement from '../../../lib/fetch/create'
-
-import SelectGroup from '../../../components/selectGroup'
+import Select from '../../../components/select'
 
 export default function Home({groupsData}) {
 
@@ -33,7 +32,7 @@ export default function Home({groupsData}) {
           <div>
             <form method='POST' onSubmit={handleCreateDepartment}>
               <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
-              <SelectGroup identify={'selectGroup'} labelDesc={'Grupo'} datas={groupsData}/>
+              <Select identify={'selectGroup'} labelDesc={'Grupo'} data={groupsData}/>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>

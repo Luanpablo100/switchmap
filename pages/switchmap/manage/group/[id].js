@@ -38,7 +38,7 @@ export default function Home({group}) {
           <div>
             <form method='POST' onSubmit={handleUpdateGroup}>
               <Link href={'/switchmap/manage/group'}><a>Voltar</a></Link>
-              <InputComponent identify={'inputGroupName'} labelDesc={'Nome do departamento'}>{group.name}</InputComponent>
+              <InputComponent identify={'inputGroupName'} labelDesc={'Nome do departamento'}>{group.codename}</InputComponent>
               <InputComponent identify={'inputGroupColor'} labelDesc={'Cor do grupo'} type={'color'}>{group.color}</InputComponent>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateGroup} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>

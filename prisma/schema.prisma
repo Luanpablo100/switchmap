@@ -12,16 +12,16 @@ datasource db {
 
 model Hack {
   id Int @id @default(autoincrement())
-  code String @unique
+  codename String @unique
   Switchs Switch[]
   departments Department[]
 }
 
 model Switch {
   id Int @id @default(autoincrement())
-  code String
-  rackCode String
-  rack Hack @relation(fields: [rackCode], references: [code])
+  codename String
+  rackCode Int
+  rack Hack @relation(fields: [rackCode], references: [id])
   Ports Port[]
   typeId Int @default(1)
   type SwitchType @relation(fields: [typeId], references: [id])
@@ -29,7 +29,7 @@ model Switch {
 
 model Port {
   id Int @id @default(autoincrement())
-  code String
+  codename String
   switchCode Int
   switch Switch @relation(fields: [switchCode], references: [id])
   desc String @default("")
@@ -40,14 +40,14 @@ model Port {
 
 model Group {
   id Int @id @default(autoincrement())
-  name String
+  codename String
   color String @default("#FFF")
   departments Department[]
 }
 
 model Department {
   id Int @id @default(autoincrement())
-  departName String
+  codename String
   Ports Port[]
   groupId Int @default(1)
   group Group @relation(fields: [groupId], references: [id])
@@ -57,7 +57,7 @@ model Department {
 
 model SwitchType {
   id Int @id @default(autoincrement())
-  name String
+  codename String
   switchs Switch[]
   color1 String
   color2 String

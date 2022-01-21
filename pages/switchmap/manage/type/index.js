@@ -17,7 +17,7 @@ export default function Home({swtypes}) {
           </div>
 
           <div className={styles.listDiv}>
-              {swtypes.map(type => (<Link href={`/switchmap/manage/type/${type.id}`} key={type.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{type.name}</p></div></Link>))}
+              {swtypes.map(type => (<Link href={`/switchmap/manage/type/${type.id}`} key={type.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{type.codename}</p></div></Link>))}
           </div>
           
         </div>

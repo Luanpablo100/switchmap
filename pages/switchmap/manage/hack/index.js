@@ -17,7 +17,7 @@ export default function Home({hacks}) {
           </div>
 
           <div className={styles.listDiv}>
-              {hacks.map(hack => (<Link href={`/switchmap/manage/hack/${hack.id}`} key={hack.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{hack.code}</p></div></Link>))}
+              {hacks.map(hack => (<Link href={`/switchmap/manage/hack/${hack.id}`} key={hack.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{hack.codename}</p></div></Link>))}
           </div>
           
         </div>

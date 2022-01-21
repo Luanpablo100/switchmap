@@ -11,7 +11,7 @@ const prismaExecute = {
                                 Ports: true,
                             },
                             orderBy: {
-                                code: 'asc',
+                                codename: 'asc',
                             }
                         },
                     },
@@ -47,7 +47,7 @@ const prismaExecute = {
                 const allSwitchs = await prisma.switch.findMany(
                     {
                         orderBy: {
-                            code: 'asc'
+                            codename: 'asc'
                         },
                         include: {
                             Ports: true
@@ -159,7 +159,7 @@ const prismaExecute = {
                 const allDepatments = await prisma.department.findMany(
                     {
                         orderBy: {
-                            departName: 'asc'
+                            codename: 'asc'
                         },
                         include: {
                             group: true
@@ -256,10 +256,10 @@ const prismaExecute = {
         }
     },
     insert: {
-        hack: async(rackId) => {
+        hack: async(rackCodename) => {
             await prisma.hack.create({
                 data: {
-                    code: rackId
+                    codename: rackCodename
                 }
             })
                 .catch((e) => {
@@ -273,7 +273,7 @@ const prismaExecute = {
         switch: async(switchCode, rackId, swTypeId) => {
             await prisma.switch.create({
                 data: {
-                    code: switchCode,
+                    codename: switchCode,
                     rackCode: rackId,
                     typeId: swTypeId
                 }
@@ -288,7 +288,7 @@ const prismaExecute = {
         port: async (portCode, switchCode, portDesc, departmentId, patchportdesc) => {
             await prisma.port.create({
                 data: {
-                    code: portCode,
+                    codename: portCode,
                     switchCode: switchCode,
                     desc: portDesc,
                     departId: departmentId,
@@ -306,7 +306,7 @@ const prismaExecute = {
         department: async (name, groupId) => {
             await prisma.department.create({
                 data: {
-                    departName: name,
+                    codename: name,
                     groupId: groupId
                 }
             })
@@ -320,7 +320,7 @@ const prismaExecute = {
         group: async (name, color) => {
             await prisma.group.create({
                 data: {
-                    name: name,
+                    codename: name,
                     color: color,
                 }
             })
@@ -334,7 +334,7 @@ const prismaExecute = {
         switchType: async(name, color1, color2, color3, color4) => {
             await prisma.switchType.create({
                 data: {
-                    name: name,
+                    codename: name,
                     color1: color1,
                     color2: color2,
                     color3: color3,
@@ -356,7 +356,7 @@ const prismaExecute = {
                     id: portId
                 },
                 data: {
-                    code: portCode,
+                    codename: portCode,
                     desc: portDesc,
                     departId: departmentId,
                     patchportdesc: patchportdesc
@@ -375,7 +375,7 @@ const prismaExecute = {
                     id:switchid,
                 },
                 data: {
-                    code: switchcode,
+                    codename: switchcode,
                     typeId: swTypeId
                 }
             })
@@ -393,7 +393,7 @@ const prismaExecute = {
                     id: departId
                 },
                 data: {
-                    departName: departName,
+                    codename: departName,
                     groupId: groupId
                 }
             })
@@ -410,7 +410,7 @@ const prismaExecute = {
                     id: hackId
                 },
                 data: {
-                    code: hackCodename
+                    codename: hackCodename
                 }
             })
         },
@@ -420,7 +420,7 @@ const prismaExecute = {
                     id: groupId
                 },
                 data: {
-                    name: groupName,
+                    codename: groupName,
                     color: groupColor
                 }
             })
@@ -437,7 +437,7 @@ const prismaExecute = {
                     id: typeId
                 },
                 data: {
-                    name: name,
+                    codename: name,
                     color1: color1,
                     color2: color2,
                     color3: color3,

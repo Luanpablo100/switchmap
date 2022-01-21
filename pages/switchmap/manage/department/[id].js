@@ -10,7 +10,7 @@ import deleteElement from '../../../../lib/fetch/delete';
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 import InputComponent from '../../../../components/input';
-import SelectGroup from '../../../../components/selectGroup';
+import Select from '../../../../components/select';
 
 export default function Home({department, groups}) {
 
@@ -40,9 +40,8 @@ export default function Home({department, groups}) {
           <div>
             <form method='POST' onSubmit={handleUpdateDepartment}>
               <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
-              <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.departName}</InputComponent>
-              <InputComponent identify={'inputDepartColor'} labelDesc={'Cor da porta'} type={'color'}>{department.color}</InputComponent>
-              <SelectGroup labelDesc={'Grupo'} datas={groups} identify={'selectGroup'}/>
+              <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.codename}</InputComponent>
+              <Select labelDesc={'Grupo'} data={groups} identify={'selectGroup'}/>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
             </form>

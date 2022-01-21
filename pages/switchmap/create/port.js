@@ -2,11 +2,11 @@ import prismaExecute from '../../../prisma/commands'
 
 import Link from 'next/link'
 
+import Select from '../../../components/select'
+
 import Container from '../../../components/container'
 import InputComponent from '../../../components/input'
-import SwitchSelect from '../../../components/switchSelect'
 import ButtonComponent from '../../../components/button'
-import DepartmentSelect from '../../../components/departmentSelect'
 
 import { useState } from 'react'
 
@@ -67,9 +67,8 @@ export default function Home({departments, switchs}) {
                 : <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/>
               }
 
-              {/* <InputComponent labelDesc={"Número da Porta"} identify={'inputPortCode'}/> */}
-              <SwitchSelect switchs={switchs} identify='switchSelect' labelDesc={'Switch'}/>
-              <DepartmentSelect departments={departments} identify={'departmentSelect'} labelDesc="Departamento"/>
+              <Select data={switchs} identify='switchSelect' labelDesc={'Switch'}/>
+              <Select data={departments} identify={'departmentSelect'} labelDesc="Departamento"/>
               {areMany === true 
                 ? <></>
                 : <> 

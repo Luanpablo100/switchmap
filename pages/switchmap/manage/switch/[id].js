@@ -40,7 +40,7 @@ export default function Home({sw, types}) {
           <div>
             <form method='POST' onSubmit={handleUpdateSwitch}>
               <Link href={'/switchmap/manage/switch'}><a>Voltar</a></Link>
-              <InputComponent identify={'inputSwitchCode'} labelDesc={'Código do Switch'}>{sw.code}</InputComponent>
+              <InputComponent identify={'inputSwitchCode'} labelDesc={'Código do Switch'}>{sw.codename}</InputComponent>
               <SelectGroup datas={types} identify={'selectSwType'} labelDesc={'Estilo'}/>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateSwitch} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteSwitch} className='reactIconsBigger'/>

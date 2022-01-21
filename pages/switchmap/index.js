@@ -1,6 +1,5 @@
 import Container from '../../components/container'
 import SwitchElement from '../../components/switchElement'
-import DepartmentSelect from '../../components/departmentSelect'
 import Select from '../../components/select'
 import ButtonComponent from '../../components/button'
 
@@ -149,7 +148,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
 
             <div  className={styles.controls}>
               <div className={styles.controlChild}>
-                <Select identify={'inputSetHackShown'} datas={originData}/>
+                <Select identify={'inputSetHackShown'} data={originData}/>
                 <div className={styles.controlGrandSon}>
                   <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                   <BiReset onClick={resetHackShown} className='reactIcons'/>
@@ -168,7 +167,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
             {groups.map(group => (
               <div key={group.id} className={styles.subtitle}>
                 <div style={{backgroundColor: group.color}} className={styles.subtitleColor}></div>
-                <span>{group.name}</span>
+                <span>{group.codename}</span>
               </div>
             ))}
             </div>
@@ -188,14 +187,14 @@ export default function Home({originData, departments, groupsData, typesData}) {
 
             <div className={styles.controls}>
               <div className={styles.controlChild}>
-                <DepartmentSelect departments={departments} identify={'departmentSelectFilter'}/>
+                <Select data={departments} identify={'departmentSelectFilter'}/>
                 <div className={styles.controlGrandSon}>
                   <HiFilter onClick={filterPorts} className='reactIcons iconFilter'/>
                   <ImCross onClick={cancelFilter} className='reactIcons iconFilter'/>
                 </div>
               </div>
               <div className={styles.controlChild}>
-                <Select identify={'inputSetHackShown'} datas={originData}/>
+                <Select identify={'inputSetHackShown'} data={originData}/>
                 <div className={styles.controlGrandSon}>
                   <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                   <BiReset onClick={resetHackShown} className='reactIcons'/>

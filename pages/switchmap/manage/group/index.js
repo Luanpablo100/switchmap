@@ -17,7 +17,7 @@ export default function Home({groups}) {
           </div>
 
           <div className={styles.listDiv}>
-              {groups.map(group => (<Link href={`/switchmap/manage/group/${group.id}`} key={group.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{group.name}</p></div></Link>))}
+              {groups.map(group => (<Link href={`/switchmap/manage/group/${group.id}`} key={group.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{group.codename}</p></div></Link>))}
           </div>
           
         </div>

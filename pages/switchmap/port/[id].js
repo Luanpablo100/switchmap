@@ -8,7 +8,7 @@ import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 
 import prismaExecute from '../../../prisma/commands';
-import DepartmentSelect from '../../../components/departmentSelect';
+import Select from '../../../components/select';
 
 import updateElement from '../../../lib/fetch/update';
 import deleteElement from '../../../lib/fetch/delete';
@@ -50,9 +50,8 @@ async function handleDeletePort() {
           <div>
               <Link href={'/switchmap'}><a>Voltar</a></Link>
             <form method='POST' onSubmit={handleUpdatePort}>
-              <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.code}</InputComponent>
-              <InputComponent labelDesc={'Switch'} identify={'inputPortSwitchCode'}>{port.switchCode}</InputComponent>
-              <DepartmentSelect departments={departments} identify={'selectDepartment'} portDeparment={port.departId}/>
+              <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.codename}</InputComponent>
+              <Select data={departments} identify={'selectDepartment'} firstValue={port.departId}/>
               <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
               <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdatePort} className='reactIconsBigger'/></button>

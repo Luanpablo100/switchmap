@@ -37,7 +37,7 @@ export default function Home({hack}) {
           <div>
             <form method='POST' onSubmit={handleUpdateHack}>
               <Link href={'/switchmap/manage/hack'}><a>Voltar</a></Link>
-              <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.code}</InputComponent>
+              <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.codename}</InputComponent>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateHack} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
             </form>

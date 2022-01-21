@@ -41,7 +41,7 @@ export default function Home({type}) {
           <div>
             <form method='POST' onSubmit={handleUpdateType}>
               <Link href={'/switchmap/manage/type'}><a>Voltar</a></Link>
-              <InputComponent identify={'inputTypeName'} labelDesc={'Nome do departamento'}>{type.name}</InputComponent>
+              <InputComponent identify={'inputTypeName'} labelDesc={'Nome do departamento'}>{type.codename}</InputComponent>
               <InputComponent identify={'inputTypeColor1'} labelDesc={'Cor de fundo'} type={'color'}>{type.color1}</InputComponent>
               <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor da borda'} type={'color'}>{type.color2}</InputComponent>
               <InputComponent identify={'inputTypeColor3'} labelDesc={'Cor de fundo dos números'} type={'color'}>{type.color3}</InputComponent>

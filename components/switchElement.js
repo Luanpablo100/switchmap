@@ -21,7 +21,7 @@ export default function SwitchElement({sw, departments, types}) {
                 {<Ports ports={ordernedEven} orientation={"down"} key={`${sw.id}-down`} departments={departments} swStyle={swStyle}/>}
             </div>
             <div className={styles.swcode}>
-                <h1>{sw.code}</h1>
+                <h1>{sw.codename}</h1>
             </div>
         </div>
     )

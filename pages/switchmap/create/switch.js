@@ -3,12 +3,11 @@ import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
 
+import Select from '../../../components/select'
+
 import prismaExecute from '../../../prisma/commands'
 
 import createElement from '../../../lib/fetch/create'
-
-import SelectHack from '../../../components/selectHack'
-import SelectGroup from '../../../components/selectGroup'
 
 export default function Home({hacks, types}) {
 
@@ -34,8 +33,8 @@ export default function Home({hacks, types}) {
           <div>
             <form method='POST' onSubmit={handleCreateSwitch}>
               <InputComponent labelDesc={"Número do Switch"} identify={'inputSwitchCode'}></InputComponent>
-              <SelectHack datas={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
-              <SelectGroup datas={types} identify={'selectSwType'} labelDesc={'Estilo'}/>
+              <Select data={hacks} identify={'selectHackCode'} labelDesc={'Hack'}/>
+              <Select data={types} identify={'selectSwType'} labelDesc={'Estilo'}/>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>
