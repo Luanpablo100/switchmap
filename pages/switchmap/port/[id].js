@@ -51,7 +51,7 @@ async function handleDeletePort() {
               <Link href={'/switchmap'}><a>Voltar</a></Link>
             <form method='POST' onSubmit={handleUpdatePort}>
               <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.codename}</InputComponent>
-              <Select data={departments} identify={'selectDepartment'} firstValue={port.departId}/>
+              <Select data={departments} identify={'selectDepartment'} labelDesc="Departamento" firstValue={port.departId}/>
               <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
               <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdatePort} className='reactIconsBigger'/></button>
