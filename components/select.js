@@ -3,7 +3,7 @@ import styles from '../styles/select.module.css'
 export default function Select({data, identify, labelDesc, firstValue}) {
 
     let firstOpt = firstValue !== null ? data.find(value => value.id === firstValue) : null
-    console.log(firstOpt)
+    // console.log(firstOpt)
 
     return (
         <div>

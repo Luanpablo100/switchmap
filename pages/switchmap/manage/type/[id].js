@@ -47,6 +47,7 @@ export default function Home({type}) {
               <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor da borda'} type={'color'}>{type.color2}</InputComponent>
               <InputComponent identify={'inputTypeColor3'} labelDesc={'Cor de fundo dos números'} type={'color'}>{type.color3}</InputComponent>
               <InputComponent identify={'inputTypeColor4'} labelDesc={'Entorno das portas'} type={'color'}>{type.color4}</InputComponent>
+              <InputComponent identify={'inputTypeColor5'} labelDesc={'Cor do texto'} type={'color'}>{type.color5}</InputComponent>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateType} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteType} className='reactIconsBigger'/>
             </form>

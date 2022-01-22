@@ -6,11 +6,11 @@ export default function SwitchElement({sw, departments, types}) {
 
     let even
     let odd
-    {odd = sw.Ports.filter(port => port.code % 2 !== 0)}
-    {even = sw.Ports.filter(port => port.code % 2 === 0)}
+    {odd = sw.Ports.filter(port => port.codename % 2 !== 0)}
+    {even = sw.Ports.filter(port => port.codename % 2 === 0)}
 
-    const ordernedOdd = odd.sort((a,b) => a.code - b.code)
-    const ordernedEven = even.sort((a,b) => a.code - b.code)
+    const ordernedOdd = odd.sort((a,b) => a.codename - b.codename)
+    const ordernedEven = even.sort((a,b) => a.codename - b.codename)
 
     const swStyle = types.find(type =>  type.id === sw.typeId)
     

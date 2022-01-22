@@ -1,19 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# What is Switchmap?
+
+With switchmap, you can **document what is on your switch ports easily**.
+
+Here an explanation of each component that must be created:
+
+First, you have a **rack**, like a server rack, however, which is made up of switches, where each **switch** has several **ports**.
+
+There are also **groups**, which are responsible for displaying the **colors** of the ports, each group has child **departments**, which will display the color of the parent group.
+
+And finally, each switch has a **style**, which will define how it will be displayed on the home page.
+
+Here's a visual example of how it works:
+
+![Hierarch example](/public/images/mockup/example.svg?raw=true "Switchmap hierarch example")
+
+### And there, switchmap previews:
+![Homepage](/public/images/mockup/homepage.png?raw=true "Homepage")
+![Create page](/public/images/mockup/create.png?raw=true "Create page")
 
 ## Getting Started
 
-First, run the development server:
+To start your project, just follow the 6 commands below
 
-```bash
-npm run dev
-# or
-yarn dev
+``` 
+git clone https://github.com/Luanpablo100/switchmap
+cd switchmap
+npm install
+npx prisma migrate dev --name init
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Now, just access the localhost:3000 address or the remote address of your server http://hostname:3000
 
-You can start editing the page by modifying `pages/switchmap/index.js`. The page auto-updates as you edit the file.
+Remember to create
+Hack -> Group -> Department -> Style -> Switch -> Port
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/switchmap/*](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/switchmap/*`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## How to get updates?
+To update your project, just go to the swithcmap folder and run a 
+``` 
+git pull 
+``` 
+So, all updates from the main branch will be downloaded.
+It is important to note that future updates may **change the structure of the database**, so you will need to run 
+```
+npx prisma migrate
+```
+To synchronize the structure with your local database. If this change informs you that you will need to **erase all your database data**, we recommend that you **first backup your data** using SQLITE Studio. Here's a video on how to perform this backup:
