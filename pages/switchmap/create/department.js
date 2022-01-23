@@ -3,23 +3,43 @@ import Link from 'next/link'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
 
+import { useState } from 'react'
+
 import prismaExecute from '../../../prisma/commands'
 
 import createElement from '../../../lib/fetch/create'
 import Select from '../../../components/select'
 
-export default function Home({groupsData}) {
+export default function Home({groupsData, rackData}) {
 
-  async function handleCreateDepartment(event) {
+  const [isRestricted, setisRestricted] = useState(false)
 
-    event.preventDefault()
+function changeRestricted() {
+  setisRestricted(!isRestricted)
+}
 
-    const departName = document.getElementById('inputDepartName').value
-    const groupId = document.getElementById('selectGroup').value
-    const postData = {departName: departName, groupId: groupId}
+async function handleCreateDepartment(event) {
+  event.preventDefault()
 
-    createElement('department', postData)
+  const departName = document.getElementById('inputDepartName').value
+  const groupId = document.getElementById('selectGroup').value
+  let hackId
+  
+  if(isRestricted === true) {
+
+  hackId = document.getElementById('selectHack').value
+    
+  } else if(isRestricted === false) {
+
+    hackId = 1
+  
+  } else {
+    alert("Erro no envio!")
   }
+
+  const postData = {departName: departName, groupId: groupId, hackId: hackId, isRestricted: isRestricted}
+  createElement('department', postData)
+}
 
 
   return (
@@ -31,8 +51,14 @@ export default function Home({groupsData}) {
           </div>
           <div>
             <form method='POST' onSubmit={handleCreateDepartment}>
+              <label>É restrito</label>
+              <input type='checkbox' onChange={changeRestricted}></input>
               <InputComponent labelDesc={"Nome do departamento"} identify={'inputDepartName'}/>
               <Select identify={'selectGroup'} labelDesc={'Grupo'} data={groupsData}/>
+              {isRestricted === true 
+                ? <Select data={rackData} labelDesc={"Exibir apenas no rack"} identify={'selectHack'}/>
+                : ''
+              }
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>
@@ -43,7 +69,8 @@ export default function Home({groupsData}) {
 
 export async function getServerSideProps(context) {
   const groupsData = await prismaExecute.read.group.all()
+  const rackData = await prismaExecute.read.hack.all()
   return {
-    props: {groupsData},
+    props: {groupsData, rackData},
   }
 }

@@ -8,12 +8,15 @@ import Container from '../../../components/container'
 import InputComponent from '../../../components/input'
 import ButtonComponent from '../../../components/button'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import createElement from '../../../lib/fetch/create'
 
-export default function Home({departments, switchs}) {
+export default function Home({departmentData, switchsData, rackData}) {
   const [areMany, setAreMany] = useState(false)
+  const [switchs, setSwitchs] = useState(switchsData)
+  const [departments, setDepartments] = useState(departmentData)
+  const [localSelect, setLocalSelect] = useState()
   
   async function handleCreatePort(event) {
     event.preventDefault()
@@ -50,6 +53,42 @@ export default function Home({departments, switchs}) {
     setAreMany(!areMany)
   }
 
+  useEffect(() => {
+
+    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
+
+    if (isLocalHackIdNull === null) {
+
+      localStorage.setItem('switchmapHackId', 0)
+      setLocalSelect(localStorage.getItem('switchmapHackId'))
+
+    } else {
+
+      setLocalSelect(isLocalHackIdNull)
+    }
+
+    function changeDepartments() {
+      const newDepartments = departments.filter((department) => {
+        return (department.hackId === rackData[localSelect].id) || (department.isRestricted === false)
+      })
+      setDepartments(newDepartments)
+    }
+
+    function changeSwitchs() {
+      const newSwitchs = switchs.filter((sw) => {
+        return (sw.rackCode === rackData[localSelect].id)
+      })
+      setSwitchs(newSwitchs)
+    }
+
+    if(localSelect === undefined) {
+      return
+    } else {
+      changeDepartments()
+      changeSwitchs()
+    }
+
+  }, [localSelect])
 
   return (
       <Container>
@@ -85,10 +124,11 @@ export default function Home({departments, switchs}) {
 }
 
 export async function getServerSideProps(context) {
-  const switchs = await prismaExecute.read.switch.all()
-  const departData = await prismaExecute.read.department.all()
+  const switchsData = await prismaExecute.read.switch.all()
+  const departmentData = await prismaExecute.read.department.all()
+  const rackData = await prismaExecute.read.hack.all()
     return {
-      props: {departments: departData, switchs: switchs},
+      props: {departmentData, switchsData, rackData},
     }
   }
   

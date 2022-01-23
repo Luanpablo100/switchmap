@@ -120,7 +120,7 @@ const prismaExecute = {
                                 }
                             },
                             orderBy: {
-                                code: 'asc',
+                                codename: 'asc',
                             }
                         },
                     },
@@ -303,11 +303,13 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        department: async (name, groupId) => {
+        department: async (name, groupId, hackId, isRestricted) => {
             await prisma.department.create({
                 data: {
                     codename: name,
-                    groupId: groupId
+                    groupId: groupId,
+                    hackId: hackId,
+                    isRestricted: isRestricted
                 }
             })
             .catch((e) => {

@@ -41,7 +41,7 @@ export default function Home({department, groups}) {
             <form method='POST' onSubmit={handleUpdateDepartment}>
               <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
               <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.codename}</InputComponent>
-              <Select labelDesc={'Grupo'} data={groups} identify={'selectGroup'}/>
+              <Select labelDesc={'Grupo'} data={groups} identify={'selectGroup'} firstValue={department.groupId}/>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
             </form>

@@ -10,16 +10,53 @@ import { BiSave } from 'react-icons/bi'
 import prismaExecute from '../../../prisma/commands';
 import Select from '../../../components/select';
 
+import {useState, useEffect} from 'react'
+
 import updateElement from '../../../lib/fetch/update';
 import deleteElement from '../../../lib/fetch/delete';
 
-export default function Home({port, departments}) {
+export default function Home({port, departmentData, switchsData, rackData}) {
+  const [switchs, setSwitchs] = useState(switchsData)
+  const [departments, setDepartments] = useState(departmentData)
+  const [localSelect, setLocalSelect] = useState()
 
-  let portDepartment
-  if(departments !== undefined) {
-      portDepartment = departments.find(department => department.id === port.departId)
-  }
 
+  useEffect(() => {
+
+    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
+
+    if (isLocalHackIdNull === null) {
+
+      localStorage.setItem('switchmapHackId', 0)
+      setLocalSelect(localStorage.getItem('switchmapHackId'))
+
+    } else {
+
+      setLocalSelect(isLocalHackIdNull)
+    }
+
+    function changeDepartments() {
+      const newDepartments = departments.filter((department) => {
+        return (department.hackId === rackData[localSelect].id) || (department.isRestricted === false)
+      })
+      setDepartments(newDepartments)
+    }
+
+    function changeSwitchs() {
+      const newSwitchs = switchs.filter((sw) => {
+        return (sw.rackCode === rackData[localSelect].id)
+      })
+      setSwitchs(newSwitchs)
+    }
+
+    if(localSelect === undefined) {
+      return
+    } else {
+      changeDepartments()
+      changeSwitchs()
+    }
+
+  }, [localSelect])
 
   async function handleUpdatePort(event) {
 
@@ -52,6 +89,7 @@ async function handleDeletePort() {
             <form method='POST' onSubmit={handleUpdatePort}>
               <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.codename}</InputComponent>
               <Select data={departments} identify={'selectDepartment'} labelDesc="Departamento" firstValue={port.departId}/>
+              <Select data={switchs} identify={'selectSwitch'} labelDesc="Switch" firstValue={port.switchCode}/>
               <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
               <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdatePort} className='reactIconsBigger'/></button>
@@ -65,8 +103,10 @@ async function handleDeletePort() {
 
 export async function getServerSideProps(context) {
 const portData = await prismaExecute.read.port.unique(parseInt(context.params.id));
-const departData = await prismaExecute.read.department.all()
+const departmentData = await prismaExecute.read.department.all()
+const rackData = await prismaExecute.read.hack.all()
+const switchsData = await prismaExecute.read.switch.all()
   return {
-    props: {port: portData, departments: departData},
+    props: {port: portData, departmentData, switchsData, rackData},
   }
 }

@@ -52,6 +52,7 @@ model Department {
   groupId Int @default(1)
   group Group @relation(fields: [groupId], references: [id])
   hackId Int @default(1)
+  isRestricted Boolean @default(false)
   hack Hack @relation(fields: [hackId], references: [id])
 }
 

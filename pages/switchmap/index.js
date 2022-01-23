@@ -56,19 +56,16 @@ export default function Home({originData, departments, groupsData, typesData}) {
 
   const setHackShown = async() => {
     const inputSetHackShown = document.getElementById('inputSetHackShown').value
-    localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
+    const localSelectId = localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
 
-    const data = await fetch('/api/switchmap/hack')
-    const jsonData = await data.json()
-
-    setHackData(jsonData[localSelect])
+    setLocalSelect(localSelectId)
   }
 
   const resetHackShown = async() => {
     localStorage.setItem('switchmapHackId', 0)
-    const data = await fetch('/api/switchmap/hack')
-    const jsonData = await data.json()
-    setHackData(jsonData[localSelect])
+    const localSelectId = localStorage.getItem('switchmapHackId')
+
+    setLocalSelect(localSelectId)
   }
 
   // UseEffect to reload the page on changes
@@ -94,6 +91,20 @@ export default function Home({originData, departments, groupsData, typesData}) {
     }
 
     fetchData()
+
+    function changeDepartments() {
+      const newDepartments = departments.filter((department) => {
+        return (department.hackId === originData[localSelect].id) || (department.isRestricted === false)
+      })
+      setDepartmentData(newDepartments)
+    }
+
+    if(localSelect === undefined) {
+      return
+    } else {
+      changeDepartments()
+    }
+
   }, [localSelect])
 
   let isShow = false
@@ -118,6 +129,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
 
     const inputValue = event.target.value 
     const fetchData = {value: inputValue}
+
     
     const query = await createElement('search', fetchData)
     const jsonQuery = await query.json()
@@ -136,6 +148,7 @@ export default function Home({originData, departments, groupsData, typesData}) {
               <h2>Seu banco de dados está vazio!</h2>
               <h3>Primeiro, crie um hack!</h3>
               <Link href='/switchmap/create/hack'><a>Criar hack</a></Link>
+              <BiReset onClick={resetHackShown} className='reactIcons'/>
             </div>
           </Container>
         )
@@ -181,20 +194,20 @@ export default function Home({originData, departments, groupsData, typesData}) {
           </div>
             {
               hackData.Switchs.map(sw => (
-                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departmentData} types={swTypes}/>
+                <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departments} types={swTypes}/>
               ))
             }
 
             <div className={styles.controls}>
               <div className={styles.controlChild}>
-                <Select data={departments} identify={'departmentSelectFilter'}/>
+                <Select data={departmentData} identify={'departmentSelectFilter'}/>
                 <div className={styles.controlGrandSon}>
                   <HiFilter onClick={filterPorts} className='reactIcons iconFilter'/>
                   <ImCross onClick={cancelFilter} className='reactIcons iconFilter'/>
                 </div>
               </div>
               <div className={styles.controlChild}>
-                <Select identify={'inputSetHackShown'} data={originData}/>
+                <Select identify={'inputSetHackShown'} data={originData} firstValue={hackData.id}/>
                 <div className={styles.controlGrandSon}>
                   <ButtonComponent onFunction={setHackShown}>Filtrar</ButtonComponent>
                   <BiReset onClick={resetHackShown} className='reactIcons'/>
