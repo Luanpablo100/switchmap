@@ -6,7 +6,7 @@ import prismaExecute from '../../../../prisma/commands'
 
 import Link from 'next/link'
 
-export default function Home({switchs}) {
+export default function Home({switchs, rackData}) {
   return (
       <Container>
         <div className={styles.content}>
@@ -15,7 +15,21 @@ export default function Home({switchs}) {
               <h1>Gerenciar Switchs</h1>
             </div>
             <div className={styles.listDiv}>
-                {switchs.map(sw => (<Link href={`/switchmap/manage/switch/${sw.id}`} key={sw.id}><div className={styles.listElementDiv}>Switch <p className={styles.elementName}>{sw.codename}</p> <span>- Hack: </span><p className={styles.elementName}>{sw.rackCode}</p></div></Link>))}
+                {switchs.map(sw => {
+                  const switchHackCodename = rackData.find(rack => sw.rackCode === rack.id)
+                  return (
+                  <Link href={`/switchmap/manage/switch/${sw.id}`} key={sw.id}>
+                    <div className={styles.listElementDiv}>
+                      <div className={styles.listElementDivChild}>
+                        <span>Switch </span> <p className={styles.elementName}>{sw.codename}</p>
+                      </div>
+                      <div className={styles.listElementDivChild}>
+                        <span>Hack: </span> <p className={styles.elementName}>{switchHackCodename.codename}</p>
+                      </div>
+                    </div>
+                  </Link>
+                  )
+                })}
             </div>
         </div>
       </Container>
@@ -24,7 +38,8 @@ export default function Home({switchs}) {
 
 export async function getServerSideProps(context) {
     const switchsData = await prismaExecute.read.switch.all()
+    const rackData = await prismaExecute.read.hack.all()
       return {
-        props: {switchs: switchsData},
+        props: {switchs: switchsData, rackData},
     }
 }

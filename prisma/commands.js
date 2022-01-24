@@ -4,7 +4,18 @@ const prismaExecute = {
     read: {
         hack: {
             all: async () => {
-                const allRacks = await prisma.hack.findMany({
+                const allRacks = await prisma.hack.findMany()
+                .catch((e) => {
+                    throw e;
+                    })
+                .finally(async () => {
+                await prisma.$disconnect();
+                });
+    
+                return allRacks
+            },
+            allWithContent: async () => {
+                const allRacksWithContent = await prisma.hack.findMany({
                     include: {
                         Switchs: {
                             include: {
@@ -23,7 +34,7 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
     
-                return allRacks
+                return allRacksWithContent
             },
             unique: async (rackId) => {
                 const findedHack = prisma.hack.findUnique({

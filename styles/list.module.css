@@ -20,7 +20,7 @@
     margin: 10px;
     display: flex;
     justify-content:center;
-    padding: 10px 15px;
+    padding: 25px 15px;
     border: rgb(158, 158, 158) 2px solid;
     text-decoration: none;
     min-width: 150px;
@@ -28,6 +28,7 @@
     text-align: center;
     align-items: center;
     font-size: 1.1rem;
+    flex-direction: column;
 }
 
 .listElementDiv:hover {
@@ -35,10 +36,21 @@
     box-shadow: rgba(255, 255, 255, 0.39) 0px 0px 10px;
 }
 
+.listElementDivChild {
+    display: flex;
+    align-items:center;
+    padding: 5px;
+}
+
+.listElementDivChild span {
+    margin-right: 5px;
+}
+
 .elementName {
     color: chartreuse;
     font-weight: bold;
     word-break: break-all;
+    margin: 0;
 }
 
 .linkDiv {
