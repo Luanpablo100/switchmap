@@ -14,6 +14,7 @@ import { VscFilePdf } from 'react-icons/vsc'
 import styles from '../styles/hack.module.css'
 
 export default function Homepage({resetHackShown, originData, setHackShown, showSubtitles, groups, hackData, departments, departmentData, filterPorts, cancelFilter, search, handleSavePDF, swTypes}) {
+    // console.log(hackData)
 
     if (hackData === undefined) { //If database are empty
         return (

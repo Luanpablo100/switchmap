@@ -3,7 +3,7 @@ import prismaExecute from "../../../prisma/commands";
 export default async function handler(req, res) {
     if(req.method === 'GET') {
 
-        const allHacks = await prismaExecute.read.hack.all()
+        const allHacks = await prismaExecute.read.hack.allWithContent()
         return res.json(allHacks)
 
     }
