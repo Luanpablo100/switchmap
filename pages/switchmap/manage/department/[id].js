@@ -12,7 +12,11 @@ import { BiSave } from 'react-icons/bi'
 import InputComponent from '../../../../components/input';
 import Select from '../../../../components/select';
 
-export default function Home({department, groups}) {
+import { useEffect, useState } from 'react';
+
+export default function Home({department, groups, rackData}) {
+
+  const [restricted, setRestricted] = useState(department.isRestricted)
 
     async function handleUpdateDepartment(event) {
       event.preventDefault()
@@ -20,7 +24,15 @@ export default function Home({department, groups}) {
       const departId = department.id
       const departName = document.getElementById('inputDepartName').value
       const groupId =  document.getElementById('selectGroup').value
-      const updateData = {departId: departId, departName: departName, groupId: groupId}
+      let hackId
+
+      if(restricted === true) {
+        hackId = document.getElementById('selectRack').value
+      } else {
+        hackId = department.hackId
+      }
+
+      const updateData = {departId: departId, departName: departName, groupId: groupId, isRestricted: restricted, hackId: hackId}
 
       updateElement('department', updateData)
     }
@@ -33,15 +45,31 @@ export default function Home({department, groups}) {
         deleteElement('department', deleteData)
     }
 
+    function changeRestricted(event) {
+      setRestricted(!restricted)
+      event.target.checked = !restricted
+    }
+
+    useEffect(() => {
+      let inputRestricted = document.getElementById('input-restricted')
+      inputRestricted.checked = department.isRestricted
+    }, [])
+
   return (
 
       <Container>
         <div>
+          <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
           <div>
             <form method='POST' onSubmit={handleUpdateDepartment}>
-              <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
+              <label>É restrito</label>
+              <input type={'checkbox'} onChange={changeRestricted} id='input-restricted'/>
               <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.codename}</InputComponent>
               <Select labelDesc={'Grupo'} data={groups} identify={'selectGroup'} firstValue={department.groupId}/>
+              {restricted === true 
+                ? <Select data={rackData} labelDesc={"Exibir apenas no rack"} identify={'selectRack'}/>
+                : ''
+              }
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
               <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
             </form>
@@ -54,7 +82,8 @@ export default function Home({department, groups}) {
 export async function getServerSideProps(context) {
 const departmentData = await prismaExecute.read.department.unique(parseInt(context.params.id))
 const groupsData = await prismaExecute.read.group.all()
+const rackData = await prismaExecute.read.hack.all()
   return {
-    props: {department: departmentData, groups: groupsData},
+    props: {department: departmentData, groups: groupsData, rackData},
   }
 }

@@ -13,9 +13,9 @@ export default async function handler(req, res) {
 
     } else if(req.method === 'PUT') {
 
-        const {departId, departName, groupId} = req.body
+        const {departId, departName, groupId, isRestricted, hackId} = req.body
 
-        const updatedDepartment = await prismaExecute.update.department(departId, departName, parseInt(groupId))
+        const updatedDepartment = await prismaExecute.update.department(departId, departName, parseInt(groupId), isRestricted, parseInt(hackId))
 
         return res.status(200).json(updatedDepartment)
 

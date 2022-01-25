@@ -401,14 +401,16 @@ const prismaExecute = {
             await prisma.$disconnect();
             });
         },
-        department: async (departId, departName, groupId) => {
+        department: async (departId, departName, groupId, isRestricted, hackId) => {
             await prisma.department.update({
                 where: {
                     id: departId
                 },
                 data: {
                     codename: departName,
-                    groupId: groupId
+                    groupId: groupId,
+                    isRestricted: isRestricted,
+                    hackId: hackId
                 }
             })
             .catch((e) => {
@@ -482,18 +484,33 @@ const prismaExecute = {
                 });
         },
         switch: async (switchId) => {
-            await prisma.switch.delete({
+            await prisma.port.deleteMany({
                 where: {
-                    id: switchId
-                }
+                    switchCode: switchId
+                },
             })
-    
+
             .catch((e) => {
                 throw e;
+            })
+            .finally(async () => {
+            // await prisma.$disconnect();
+            
+                await prisma.switch.delete({
+                    where: {
+                        id: switchId
+                    }
                 })
+            })
+
+            .catch((e) => {
+                throw e;
+            })
             .finally(async () => {
             await prisma.$disconnect();
+
             });
+            
         },
         department: async (departId) => {
             await prisma.department.delete({

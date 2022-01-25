@@ -41,7 +41,7 @@ model Port {
 model Group {
   id Int @id @default(autoincrement())
   codename String
-  color1 String @default("#FFF")
+  color String @default("#FFF")
   departments Department[]
 }
 
