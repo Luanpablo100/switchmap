@@ -60,18 +60,21 @@ export default function Homepage({resetHackShown, originData, setHackShown, show
                 ))}
                 </div>
                 </div>
-                <div>
-                <div className={styles.searchDiv}>
-                <form onKeyUp={search} onSubmit={search}>
-                    <input className={styles.serchInput}/>
-                </form>
-                <ImSearch size={20}/>
-                </div>
-                {
-                    hackData.Switchs.map(sw => (
-                    <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departments} types={swTypes}/>
-                    ))
-                }
+                <div style={{width: '100%'}}>
+                    <div className={styles.searchDiv}>
+                    <form onKeyUp={search} onSubmit={search}>
+                        <input className={styles.serchInput}/>
+                    </form>
+                    <ImSearch size={20}/>
+                    </div>
+                    <div className={styles.divSwitchs}>
+                        {
+                            hackData.Switchs.map(sw => (
+                            <SwitchElement sw={sw} key={sw.id} hackData={hackData} departments={departments} types={swTypes}/>
+                            ))
+                        }
+                    </div>
+                
 
                 <div className={styles.controls}>
                     <div className={styles.controlChild}>

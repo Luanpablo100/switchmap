@@ -1,9 +1,10 @@
 .switch {
     min-width: 600px;
-    margin: 20px;
+    margin: 10px;
     display: flex;
     justify-content:space-between;
     padding: 8px 20px;
+    width: fit-content;
 }
 
 .swcode {

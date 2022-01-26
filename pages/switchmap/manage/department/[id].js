@@ -67,7 +67,7 @@ export default function Home({department, groups, rackData}) {
               <InputComponent identify={'inputDepartName'} labelDesc={'Nome do departamento'}>{department.codename}</InputComponent>
               <Select labelDesc={'Grupo'} data={groups} identify={'selectGroup'} firstValue={department.groupId}/>
               {restricted === true 
-                ? <Select data={rackData} labelDesc={"Exibir apenas no rack"} identify={'selectRack'}/>
+                ? <Select data={rackData} labelDesc={"Exibir apenas no rack"} identify={'selectRack'} firstValue={department.hackId}/>
                 : ''
               }
               <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
