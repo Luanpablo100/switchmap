@@ -2,7 +2,8 @@ import prismaExecute from "../../../prisma/commands";
 
 export default async function handler(req, res) {
     if(req.method === 'GET') {
-
+        const allTypes = await prismaExecute.read.switchType.all()
+        return res.json(allTypes)
     }
 
     else if (req.method === 'POST') {

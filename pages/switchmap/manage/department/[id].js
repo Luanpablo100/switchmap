@@ -14,6 +14,8 @@ import Select from '../../../../components/select';
 
 import { useEffect, useState } from 'react';
 
+import styles from '../../../../styles/form.module.css'
+
 export default function Home({department, groups, rackData}) {
 
   const [restricted, setRestricted] = useState(department.isRestricted)
@@ -53,13 +55,13 @@ export default function Home({department, groups, rackData}) {
     useEffect(() => {
       let inputRestricted = document.getElementById('input-restricted')
       inputRestricted.checked = department.isRestricted
-    }, [])
+    }, [department.isRestricted])
 
   return (
 
       <Container>
         <div>
-          <Link href={'/switchmap/manage/department'}><a>Voltar</a></Link>
+          <Link href={'/switchmap/manage/department'}><a className='returnLink'>Voltar</a></Link>
           <div>
             <form method='POST' onSubmit={handleUpdateDepartment}>
               <label>É restrito</label>
@@ -70,8 +72,10 @@ export default function Home({department, groups, rackData}) {
                 ? <Select data={rackData} labelDesc={"Exibir apenas no rack"} identify={'selectRack'} firstValue={department.hackId}/>
                 : ''
               }
-              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
-              <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
+              <div className={styles.itemControls}>
+                <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateDepartment} className='reactIconsBigger'/></button>
+                <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
+              </div>
             </form>
           </div>
         </div>

@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import prismaExecute from '../../../../prisma/commands';
 
+import styles from '../../../../styles/form.module.css'
+
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 import InputComponent from '../../../../components/input';
@@ -37,11 +39,13 @@ export default function Home({group}) {
         <div>
           <div>
             <form method='POST' onSubmit={handleUpdateGroup}>
-              <Link href={'/switchmap/manage/group'}><a>Voltar</a></Link>
+              <Link href={'/switchmap/manage/group'}><a className='returnLink'>Voltar</a></Link>
               <InputComponent identify={'inputGroupName'} labelDesc={'Nome do departamento'}>{group.codename}</InputComponent>
               <InputComponent identify={'inputGroupColor'} labelDesc={'Cor do grupo'} type={'color'}>{group.color}</InputComponent>
-              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateGroup} className='reactIconsBigger'/></button>
-              <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
+              <div className={styles.itemControls}>
+                <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateGroup} className='reactIconsBigger'/></button>
+                <CgTrash onClick={handleDeleteDepartment} className='reactIconsBigger'/>
+              </div>
             </form>
           </div>
         </div>

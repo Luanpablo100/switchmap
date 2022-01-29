@@ -12,7 +12,7 @@ export default function Home({groups}) {
         <div className={styles.content}>
 
           <div>
-            <Link href={'/switchmap/manage'}><a>Voltar</a></Link>
+            <Link href={'/switchmap/manage'}><a className='returnLink'>Voltar</a></Link>
             <h1>Gerenciar grupos</h1>
           </div>
 

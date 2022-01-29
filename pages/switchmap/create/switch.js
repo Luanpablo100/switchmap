@@ -27,7 +27,7 @@ export default function Home({hacks, types}) {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar switch</h1>
           </div>
           <div>

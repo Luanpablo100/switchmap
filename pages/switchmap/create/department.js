@@ -46,7 +46,7 @@ async function handleCreateDepartment(event) {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar departamento</h1>
           </div>
           <div>

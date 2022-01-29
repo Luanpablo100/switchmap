@@ -2,7 +2,8 @@ import prismaExecute from "../../../prisma/commands";
 
 export default async function handler(req, res) {
     if(req.method === 'GET') {
-
+        const allDepartments = await prismaExecute.read.department.all()
+        return res.json(allDepartments)
     }
 
     else if (req.method === 'POST') {

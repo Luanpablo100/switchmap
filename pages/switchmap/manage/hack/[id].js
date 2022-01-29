@@ -10,6 +10,8 @@ import InputComponent from '../../../../components/input';
 import updateElement from '../../../../lib/fetch/update';
 import deleteElement from '../../../../lib/fetch/delete';
 
+import styles from '../../../../styles/form.module.css'
+
 export default function Home({hack}) {
 
     async function handleUpdateHack(event) {
@@ -36,10 +38,12 @@ export default function Home({hack}) {
         <div>
           <div>
             <form method='POST' onSubmit={handleUpdateHack}>
-              <Link href={'/switchmap/manage/hack'}><a>Voltar</a></Link>
+              <Link href={'/switchmap/manage/hack'}><a className='returnLink'>Voltar</a></Link>
               <InputComponent identify={'inputHackCodename'} labelDesc={'Codinome do hack'}>{hack.codename}</InputComponent>
-              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateHack} className='reactIconsBigger'/></button>
-              <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
+              <div className={styles.itemControls}>
+                <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateHack} className='reactIconsBigger'/></button>
+                <CgTrash onClick={handleDeleteHack} className='reactIconsBigger'/>
+              </div>
             </form>
           </div>
         </div>

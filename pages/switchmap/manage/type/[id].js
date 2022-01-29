@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import prismaExecute from '../../../../prisma/commands';
 
+import styles from '../../../../styles/form.module.css'
+
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 import InputComponent from '../../../../components/input';
@@ -41,15 +43,17 @@ export default function Home({type}) {
         <div>
           <div>
             <form method='POST' onSubmit={handleUpdateType}>
-              <Link href={'/switchmap/manage/type'}><a>Voltar</a></Link>
+              <Link href={'/switchmap/manage/type'}><a className='returnLink'>Voltar</a></Link>
               <InputComponent identify={'inputTypeName'} labelDesc={'Nome do departamento'}>{type.codename}</InputComponent>
               <InputComponent identify={'inputTypeColor1'} labelDesc={'Cor de fundo'} type={'color'}>{type.color1}</InputComponent>
               <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor da borda'} type={'color'}>{type.color2}</InputComponent>
               <InputComponent identify={'inputTypeColor3'} labelDesc={'Cor de fundo dos números'} type={'color'}>{type.color3}</InputComponent>
               <InputComponent identify={'inputTypeColor4'} labelDesc={'Entorno das portas'} type={'color'}>{type.color4}</InputComponent>
               <InputComponent identify={'inputTypeColor5'} labelDesc={'Cor do texto'} type={'color'}>{type.color5}</InputComponent>
-              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateType} className='reactIconsBigger'/></button>
-              <CgTrash onClick={handleDeleteType} className='reactIconsBigger'/>
+              <div className={styles.itemControls}>
+                <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdateType} className='reactIconsBigger'/></button>
+                <CgTrash onClick={handleDeleteType} className='reactIconsBigger'/>
+              </div>
             </form>
           </div>
         </div>

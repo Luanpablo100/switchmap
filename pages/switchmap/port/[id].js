@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 
+import styles from '../../../styles/form.module.css'
+
 import prismaExecute from '../../../prisma/commands';
 import Select from '../../../components/select';
 
@@ -56,7 +58,7 @@ export default function Home({port, departmentData, switchsData, rackData}) {
       changeSwitchs()
     }
 
-  }, [localSelect])
+  }, [])
 
   async function handleUpdatePort(event) {
 
@@ -85,15 +87,17 @@ async function handleDeletePort() {
       <Container>
         <div>
           <div>
-              <Link href={'/switchmap'}><a>Voltar</a></Link>
+            <Link href={'/switchmap'}><a className='returnLink'>Voltar</a></Link>
             <form method='POST' onSubmit={handleUpdatePort}>
               <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.codename}</InputComponent>
               <Select data={departments} identify={'selectDepartment'} labelDesc="Departamento" firstValue={port.departId}/>
               <Select data={switchs} identify={'selectSwitch'} labelDesc="Switch" firstValue={port.switchCode}/>
               <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
               <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
-              <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdatePort} className='reactIconsBigger'/></button>
-              <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
+              <div className={styles.itemControls}>
+                <button style={{backgroundColor:'transparent', border:'none'}}><BiSave onClick={handleUpdatePort} className='reactIconsBigger'/></button>
+                <CgTrash onClick={handleDeletePort} className='reactIconsBigger'/>
+              </div>
             </form>
           </div>
         </div>

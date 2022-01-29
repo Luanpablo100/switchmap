@@ -3,7 +3,8 @@ import prismaExecute from "../../../prisma/commands";
 
 export default async function handler(req, res) {
     if(req.method === 'GET') {
-
+        const allGroups = await prismaExecute.read.group.all()
+        return res.json(allGroups)
     }
 
     else if (req.method === 'POST') {

@@ -21,13 +21,13 @@ export default function Home() {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar grupo</h1>
           </div>
           <div>
             <form method='POST' onSubmit={handleCreateGroup}>
               <InputComponent labelDesc={"Nome do grupo"} identify={'inputGroupName'}/>
-              <InputComponent labelDesc={"Cor do grupo"} identify={'inputGroupColor'} type={'color'}/>
+              <InputComponent labelDesc={"Cor do grupo"} identify={'inputGroupColor'} type={'color'}>#FFFFFF</InputComponent>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>

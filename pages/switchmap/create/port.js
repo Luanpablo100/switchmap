@@ -88,13 +88,13 @@ export default function Home({departmentData, switchsData, rackData}) {
       changeSwitchs()
     }
 
-  }, [localSelect])
+  }, [])
 
   return (
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar porta</h1>
           </div>
           <div>

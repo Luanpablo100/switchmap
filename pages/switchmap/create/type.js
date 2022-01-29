@@ -25,17 +25,17 @@ export default function Home() {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a>Voltar</a></Link>
+            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar estilo</h1>
           </div>
           <div>
             <form method='POST' onSubmit={handleCreateSwType}>
               <InputComponent labelDesc={"Nome do estilo"} identify={'inputTypeName'}/>
-              <InputComponent labelDesc={"Cor de fundo"} identify={'inputTypeColor1'} type={'color'}/>
-              <InputComponent labelDesc={"Cor da borda"} identify={'inputTypeColor2'} type={'color'}/>
-              <InputComponent labelDesc={"Cor de fundo dos números"} identify={'inputTypeColor3'} type={'color'}/>
-              <InputComponent labelDesc={"Entorno das portas"} identify={'inputTypeColor4'} type={'color'}/>
-              <InputComponent labelDesc={"Cor do texto"} identify={'inputTypeColor5'} type={'color'}/>
+              <InputComponent labelDesc={"Cor de fundo"} identify={'inputTypeColor1'} type={'color'}>#FFFFFF</InputComponent>
+              <InputComponent labelDesc={"Cor da borda"} identify={'inputTypeColor2'} type={'color'}>#FFFFFF</InputComponent>
+              <InputComponent labelDesc={"Cor de fundo dos números"} identify={'inputTypeColor3'} type={'color'}>#FFFFFF</InputComponent>
+              <InputComponent labelDesc={"Entorno das portas"} identify={'inputTypeColor4'} type={'color'}>#FFFFFF</InputComponent>
+              <InputComponent labelDesc={"Cor do texto"} identify={'inputTypeColor5'} type={'color'}>#FFFFFF</InputComponent>
               <ButtonComponent>Enviar</ButtonComponent>
             </form>
           </div>

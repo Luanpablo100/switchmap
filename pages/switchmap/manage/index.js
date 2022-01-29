@@ -11,7 +11,7 @@ export default function Home() {
       <Container>
         <div className={styles.content}>
           <div>
-            <Link href={'/switchmap'}><a>Voltar</a></Link>
+            <Link href={'/switchmap'}><a className='returnLink'>Voltar</a></Link>
             <h1>Gerenciar</h1>
           </div>
           <div className={styles.listDiv}>

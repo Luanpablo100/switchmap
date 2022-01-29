@@ -10,7 +10,7 @@ export default function Home() {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap'}><a>Voltar</a></Link>
+            <Link href={'/switchmap'}><a className='returnLink'>Voltar</a></Link>
             <h1>Criar elementos</h1>
           </div>
           <div className={styles.listDiv}>

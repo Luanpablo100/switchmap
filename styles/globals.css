@@ -55,3 +55,16 @@ h2 small {
 .iconFilter {
   margin-top: 10px;
 }
+
+@media (max-width: 600px) {
+  .returnLink {
+    font-size: 15pt;
+    border: 2px solid chartreuse;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+}
+
+.returnLink {
+  margin: 100px 0px;
+}

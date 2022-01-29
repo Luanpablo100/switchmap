@@ -15,6 +15,12 @@
     overflow-x: auto;
 }
 
+@media (max-width: 600px) {
+    .content {
+        padding-top: 10px;
+    }
+}
+
 .listElementDiv {
     background-color: rgba(36, 36, 36, 0.76);
     margin: 10px;
