@@ -1,0 +1,64 @@
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+
+.leftDiv, .rightDiv {
+    padding: 10%;
+    width: 50%;
+}
+
+.rightDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+    background-image: url("/images/bg-login.svg");
+    background-position: right;
+    background-size: cover;    
+}
+
+.leftDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:flex-start;
+}
+
+.leftDiv h1 {
+    font-size: 3.0rem;
+}
+
+.rightDiv h3 {
+    margin: 10px 0px;
+}
+
+.leftDiv img{
+    width: 200px;
+    height: 200px;
+}
+
+.rightDiv img{
+    width: 150px;
+    height: 150px;
+}
+
+.loginButton {
+    width: 170px;
+    height: 50px;
+    cursor: pointer;
+    background-color: rgb(6, 180, 0);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.6rem;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.loginButton:hover {
+    background-color: rgb(5, 124, 1);
+
+}

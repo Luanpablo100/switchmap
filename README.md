@@ -48,3 +48,8 @@ It is important to note that future updates may **change the structure of the da
 npx prisma migrate
 ```
 To synchronize the structure with your local database. If this change informs you that you will need to **erase all your database data**, we recommend that you **first backup your data** using SQLITE Studio. Here's a video on how to perform this backup:
+
+
+To add authentication with Azure AD you need to add local variables:
+NEXT_PUBLIC_AZURE_AD_CLIENT_ID='your app client id'
+NEXT_PUBLIC_AZURE_AD_TENANT_ID='your app tenant id'

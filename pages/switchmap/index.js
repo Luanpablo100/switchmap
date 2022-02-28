@@ -2,6 +2,10 @@ import prismaExecute from '../../prisma/commands'
 
 import Container from '../../components/container'
 
+import { AuthenticatedTemplate, UnauthenticatedTemplate} from '@azure/msal-react';
+
+import SignIn from '../../components/signIn';
+
 import dynamic from 'next/dynamic'
 
 const Homepage = dynamic(() => import('../../components/main'))
@@ -9,6 +13,7 @@ const Homepage = dynamic(() => import('../../components/main'))
 import { useEffect, useState } from 'react'
 
 export default function Home({originData, departments}) {
+
 
   const [allRacks, setAllRacks] = useState(originData)
   const [allDepartments, setAllDepartments] = useState(departments)
@@ -31,9 +36,11 @@ export default function Home({originData, departments}) {
 
   // UseEffect to reload the page on changes
   return (
-      <Container>
-        <Homepage allRacks={allRacks} departmentData={allDepartments}/>
-      </Container>
+    <>
+        <Container>
+          <Homepage allRacks={allRacks} departmentData={allDepartments}/>
+        </Container>
+    </>
   )
 }
 
