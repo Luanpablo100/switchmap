@@ -5,6 +5,7 @@ import containerStyles from '../styles/container.module.css'
 
 import {BsFillPlusSquareFill} from 'react-icons/bs'
 import {BsGearFill} from 'react-icons/bs'
+import { GoSignOut } from 'react-icons/go'
 
 import { AuthenticatedTemplate, UnauthenticatedTemplate, useMsal} from '@azure/msal-react';
 
@@ -12,8 +13,8 @@ import SignIn from './signIn';
 
 function SignOutButton() {
     const { instance } = useMsal();
-  
-    return <button className={containerStyles.signOutButton} onClick={() => instance.logoutRedirect()}>Sair</button>;
+    
+    return <GoSignOut onClick={() => instance.logoutRedirect()} className={containerStyles.reactIconsHeader}/>
   }
 
 export default function Container({children}) {
@@ -29,9 +30,9 @@ export default function Container({children}) {
                 <div className={containerStyles.header}>
                     <Link href="/switchmap"><a><h1>Switchmap</h1></a></Link>
                     <div className={containerStyles.headerLinks}>
-                        <SignOutButton/>
                         <Link href="/switchmap/create"><a><BsFillPlusSquareFill className={containerStyles.reactIconsHeader}/></a></Link>
                         <Link href="/switchmap/manage"><a><BsGearFill className={containerStyles.reactIconsHeader}/></a></Link>
+                        <SignOutButton/>
                     </div>
                 </div>
                 <div className={containerStyles.hack}>

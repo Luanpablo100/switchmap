@@ -39,20 +39,5 @@
     width: 30px;
     height: 30px;
     cursor: pointer;
-}
-.signOutButton {
-    width: 80px;
-    height: 30px;
-    border-radius: 5px;
-    border: none;
-    background-color: white;
-    color: #141414;
-    font-weight: bold;
-    cursor: pointer;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
-}
-
-.signOutButton:hover {
-    background-color: #141414;
-    color: white;
+    margin: 0px 8px;
 }
