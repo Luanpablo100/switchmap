@@ -36,7 +36,6 @@ export default function Home() {
                 }}
                 viewBox="0 0 4334.92 4334.92"
               >
-                <title>""</title>
                 <g id="Camada_x0020_1">
                   <g id="_2202454032320">
                     
