@@ -121,7 +121,7 @@ export default function Homepage({allRacks, departmentData}) {
 
     setIsLoaded(true)
     let localSelectId
-    if((localStorage.getItem('switchmapHackId')) === undefined) {
+    if((localStorage.getItem('switchmapHackId')) === undefined || (localStorage.getItem('switchmapHackId')) === null) {
       localStorage.setItem('switchmapHackId', 0)
       localSelectId = 0
     } else {
