@@ -3,7 +3,7 @@ import ButtonComponent from './button'
 
 import dynamic from 'next/dynamic'
 
-const exportPDF = dynamic(() => import('../lib/functions/exportPDF'))
+import exportPDF from '../lib/functions/exportPDF'
 const SwitchContainer = dynamic(() => import('./switchContainer'))
 
 import Link from 'next/link'
@@ -83,19 +83,27 @@ export default function Homepage({allRacks, departmentData}) {
   }
   
     //Set hack funtions
+
+  async function setNewDepartments(inputSetHackShown) {
+    const newDepartments = departmentData.filter((department) => {
+      return (department.hackId === allRacks[inputSetHackShown - 1].id) || (department.isRestricted === false)
+    })
+
+    return setDepartments(newDepartments)
+  }
   
   const setHackShown = () => {
     const inputSetHackShown = document.getElementById('inputSetHackShown').value
     localStorage.setItem('switchmapHackId', inputSetHackShown - 1)
+    setLocalSelect(inputSetHackShown - 1)
 
-    setRack(allRacks[inputSetHackShown - 1])
+    setNewDepartments(inputSetHackShown).then(setRack(allRacks[inputSetHackShown - 1]))
   }
 
   const resetHackShown = () => {
     localStorage.setItem('switchmapHackId', 0)
-    const localSelectId = localStorage.getItem('switchmapHackId')
-
-    setRack(allRacks[localSelectId])
+    setLocalSelect(0)
+    setNewDepartments(1).then(setRack(allRacks[0]))
   }
 
   async function getGroups() {
@@ -115,6 +123,7 @@ export default function Homepage({allRacks, departmentData}) {
       const newDepartments = departmentData.filter((department) => {
         return (department.hackId === allRacks[localSelectId].id) || (department.isRestricted === false)
       })
+      console.log(newDepartments)
 
       setDepartments(newDepartments)
     }
@@ -127,6 +136,7 @@ export default function Homepage({allRacks, departmentData}) {
     } else {
       localSelectId = localStorage.getItem('switchmapHackId')
     }
+    console.log(allRacks)
     setLocalSelect(localSelectId)
     setRack(allRacks[localSelectId])
     getGroups()

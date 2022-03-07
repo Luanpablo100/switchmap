@@ -5,6 +5,7 @@ import Link from 'next/link'
 import SvgPort from './svgPort'
 
 export default function Port({port, orientation, departments, swStyle}) {
+    // console.log(departments)
     let portDepartment
     if(departments !== undefined) {
         portDepartment = departments.find(department => department.id === port.departId)
