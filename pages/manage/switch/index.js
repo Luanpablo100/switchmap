@@ -1,8 +1,8 @@
-import Container from '../../../../components/container'
+import Container from '../../../components/container'
 
-import styles from '../../../../styles/list.module.css'
+import styles from '../../../styles/list.module.css'
 
-import prismaExecute from '../../../../prisma/commands'
+import prismaExecute from '../../../prisma/commands'
 
 import Link from 'next/link'
 
@@ -11,14 +11,14 @@ export default function Home({switchs, rackData}) {
       <Container>
         <div className={styles.content}>
             <div>
-              <Link href={'/switchmap/manage'}><a className='returnLink'>Voltar</a></Link>
+              <Link href={'/manage'}><a className='returnLink'>Voltar</a></Link>
               <h1>Gerenciar Switchs</h1>
             </div>
             <div className={styles.listDiv}>
                 {switchs.map(sw => {
                   const switchHackCodename = rackData.find(rack => sw.rackCode === rack.id)
                   return (
-                  <Link href={`/switchmap/manage/switch/${sw.id}`} key={sw.id}>
+                  <Link href={`/manage/switch/${sw.id}`} key={sw.id}>
                     <div className={styles.listElementDiv}>
                       <div className={styles.listElementDivChild}>
                         <span>Switch </span> <p className={styles.elementName}>{sw.codename}</p>

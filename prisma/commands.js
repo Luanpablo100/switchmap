@@ -281,12 +281,16 @@ const prismaExecute = {
                 });
     
         },
-        switch: async(switchCode, rackId, swTypeId) => {
+        switch: async(switchCode, rackId, swTypeId, location, reference, mac, ip) => {
             await prisma.switch.create({
                 data: {
                     codename: switchCode,
                     rackCode: rackId,
-                    typeId: swTypeId
+                    typeId: swTypeId,
+                    location: location,
+                    reference: reference,
+                    mac: mac,
+                    ip: ip
                 }
             })
                 .catch((e) => {
@@ -383,14 +387,18 @@ const prismaExecute = {
                 await prisma.$disconnect();
                 });
         },
-        switch: async (switchid, switchcode, swTypeId) => {
+        switch: async (switchid, switchcode, swTypeId, location, reference, mac, ip) => {
             await prisma.switch.update({
                 where: {
                     id:switchid,
                 },
                 data: {
                     codename: switchcode,
-                    typeId: swTypeId
+                    typeId: swTypeId,
+                    location: location,
+                    reference: reference,
+                    mac: mac,
+                    ip: ip
                 }
             })
     

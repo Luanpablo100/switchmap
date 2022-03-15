@@ -1,20 +1,20 @@
-import Container from '../../../../components/container'
+import Container from '../../../components/container'
 
 import Link from 'next/link';
 
-import prismaExecute from '../../../../prisma/commands';
+import prismaExecute from '../../../prisma/commands';
 
-import updateElement from '../../../../lib/fetch/update';
-import deleteElement from '../../../../lib/fetch/delete';
+import updateElement from '../../../lib/fetch/update';
+import deleteElement from '../../../lib/fetch/delete';
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
-import InputComponent from '../../../../components/input';
-import Select from '../../../../components/select';
+import InputComponent from '../../../components/input';
+import Select from '../../../components/select';
 
 import { useEffect, useState } from 'react';
 
-import styles from '../../../../styles/form.module.css'
+import styles from '../../../styles/form.module.css'
 
 export default function Home({department, groups, rackData}) {
 
@@ -61,7 +61,7 @@ export default function Home({department, groups, rackData}) {
 
       <Container>
         <div>
-          <Link href={'/switchmap/manage/department'}><a className='returnLink'>Voltar</a></Link>
+          <Link href={'/manage/department'}><a className='returnLink'>Voltar</a></Link>
           <div>
             <form method='POST' onSubmit={handleUpdateDepartment}>
               <label>É restrito</label>

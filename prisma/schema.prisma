@@ -25,6 +25,10 @@ model Switch {
   Ports Port[]
   typeId Int @default(1)
   type SwitchType @relation(fields: [typeId], references: [id])
+  location String @default("")
+  reference String @default("")
+  mac String @default("")
+  ip String @default("")
 }
 
 model Port {

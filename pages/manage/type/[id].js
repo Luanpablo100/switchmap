@@ -1,16 +1,16 @@
-import Container from '../../../../components/container'
+import Container from '../../../components/container'
 
 import Link from 'next/link';
 
-import prismaExecute from '../../../../prisma/commands';
+import prismaExecute from '../../../prisma/commands';
 
-import styles from '../../../../styles/form.module.css'
+import styles from '../../../styles/form.module.css'
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
-import InputComponent from '../../../../components/input';
-import updateElement from '../../../../lib/fetch/update';
-import deleteElement from '../../../../lib/fetch/delete';
+import InputComponent from '../../../components/input';
+import updateElement from '../../../lib/fetch/update';
+import deleteElement from '../../../lib/fetch/delete';
 
 export default function Home({type}) {
 
@@ -43,7 +43,7 @@ export default function Home({type}) {
         <div>
           <div>
             <form method='POST' onSubmit={handleUpdateType}>
-              <Link href={'/switchmap/manage/type'}><a className='returnLink'>Voltar</a></Link>
+              <Link href={'/manage/type'}><a className='returnLink'>Voltar</a></Link>
               <InputComponent identify={'inputTypeName'} labelDesc={'Nome do departamento'}>{type.codename}</InputComponent>
               <InputComponent identify={'inputTypeColor1'} labelDesc={'Cor de fundo'} type={'color'}>{type.color1}</InputComponent>
               <InputComponent identify={'inputTypeColor2'} labelDesc={'Cor da borda'} type={'color'}>{type.color2}</InputComponent>

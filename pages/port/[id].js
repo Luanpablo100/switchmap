@@ -1,21 +1,21 @@
-import Container from '../../../components/container'
+import Container from '../../components/container'
 
-import InputComponent from '../../../components/input';
+import InputComponent from '../../components/input';
 
 import Link from 'next/link';
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
 
-import styles from '../../../styles/form.module.css'
+import styles from '../../styles/form.module.css'
 
-import prismaExecute from '../../../prisma/commands';
-import Select from '../../../components/select';
+import prismaExecute from '../../prisma/commands';
+import Select from '../../components/select';
 
 import {useState, useEffect} from 'react'
 
-import updateElement from '../../../lib/fetch/update';
-import deleteElement from '../../../lib/fetch/delete';
+import updateElement from '../../lib/fetch/update';
+import deleteElement from '../../lib/fetch/delete';
 
 export default function Home({port, departmentData, switchsData, rackData}) {
   const [switchs, setSwitchs] = useState(switchsData)
@@ -87,11 +87,11 @@ async function handleDeletePort() {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap'}><a className='returnLink'>Voltar</a></Link>
+            <Link href={'/'}><a className='returnLink'>Voltar</a></Link>
             <form method='POST' onSubmit={handleUpdatePort}>
               <InputComponent labelDesc={'Porta'} identify={'inputPortCode'}>{port.codename}</InputComponent>
-              <Select data={departments} identify={'selectDepartment'} labelDesc="Departamento" firstValue={port.departId}/>
               <Select data={switchs} identify={'selectSwitch'} labelDesc="Switch" firstValue={port.switchCode}/>
+              <Select data={departments} identify={'selectDepartment'} labelDesc="Departamento" firstValue={port.departId}/>
               <InputComponent labelDesc={'Descrição'} identify={'inputPortDesc'}>{port.desc}</InputComponent>
               <InputComponent labelDesc={'Desc. Patch Panel'} identify={'inputPatchPortDesc'}>{port.patchportdesc}</InputComponent>
               <div className={styles.itemControls}>

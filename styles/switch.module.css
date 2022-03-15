@@ -12,10 +12,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    margin-left: 15px;
 }
 
 .swcode h1 {
     color:lime;
     text-shadow: rgb(102, 102, 102) 0px 0px 5px;
-    margin-left: 15px;
 }

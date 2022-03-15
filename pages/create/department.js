@@ -1,14 +1,14 @@
-import Container from '../../../components/container'
+import Container from '../../components/container'
 import Link from 'next/link'
-import InputComponent from '../../../components/input'
-import ButtonComponent from '../../../components/button'
+import InputComponent from '../../components/input'
+import ButtonComponent from '../../components/button'
 
 import { useState } from 'react'
 
-import prismaExecute from '../../../prisma/commands'
+import prismaExecute from '../../prisma/commands'
 
-import createElement from '../../../lib/fetch/create'
-import Select from '../../../components/select'
+import createElement from '../../lib/fetch/create'
+import Select from '../../components/select'
 
 export default function Home({groupsData, rackData}) {
 
@@ -46,7 +46,7 @@ async function handleCreateDepartment(event) {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
+            <Link href={'/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar departamento</h1>
           </div>
           <div>

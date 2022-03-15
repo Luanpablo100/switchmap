@@ -1,8 +1,8 @@
-import Container from '../../../../components/container'
+import Container from '../../../components/container'
 
-import prismaExecute from '../../../../prisma/commands'
+import prismaExecute from '../../../prisma/commands'
 
-import styles from '../../../../styles/list.module.css'
+import styles from '../../../styles/list.module.css'
 
 import Link from 'next/link'
 
@@ -12,12 +12,12 @@ export default function Home({departments}) {
         <div className={styles.content}>
 
           <div>
-            <Link href={'/switchmap/manage'}><a className='returnLink'>Voltar</a></Link>
+            <Link href={'/manage'}><a className='returnLink'>Voltar</a></Link>
             <h1>Gerenciar departamentos</h1>
           </div>
 
           <div className={styles.listDiv}>
-              {departments.map(department => (<Link href={`/switchmap/manage/department/${department.id}`} key={department.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{department.codename}</p></div></Link>))}
+              {departments.map(department => (<Link href={`/manage/department/${department.id}`} key={department.id}><div className={styles.listElementDiv}><p className={styles.elementName}>{department.codename}</p></div></Link>))}
           </div>
           
         </div>

@@ -13,8 +13,6 @@ export default function SwitchContainer({departments, rack, swTypes}) {
         return x.codename - y.codename
     })
 
-    console.log(ordernedSwitchs)
-
     return (
         <div className={styles.divSwitchs}>
             {

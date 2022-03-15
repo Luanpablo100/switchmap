@@ -1,16 +1,16 @@
-import Container from '../../../../components/container'
+import Container from '../../../components/container'
 
 import Link from 'next/link';
 
-import prismaExecute from '../../../../prisma/commands';
+import prismaExecute from '../../../prisma/commands';
 
-import styles from '../../../../styles/form.module.css'
+import styles from '../../../styles/form.module.css'
 
 import { CgTrash } from "react-icons/cg"
 import { BiSave } from 'react-icons/bi'
-import InputComponent from '../../../../components/input';
-import updateElement from '../../../../lib/fetch/update';
-import deleteElement from '../../../../lib/fetch/delete';
+import InputComponent from '../../../components/input';
+import updateElement from '../../../lib/fetch/update';
+import deleteElement from '../../../lib/fetch/delete';
 
 export default function Home({group}) {
 
@@ -39,7 +39,7 @@ export default function Home({group}) {
         <div>
           <div>
             <form method='POST' onSubmit={handleUpdateGroup}>
-              <Link href={'/switchmap/manage/group'}><a className='returnLink'>Voltar</a></Link>
+              <Link href={'/manage/group'}><a className='returnLink'>Voltar</a></Link>
               <InputComponent identify={'inputGroupName'} labelDesc={'Nome do departamento'}>{group.codename}</InputComponent>
               <InputComponent identify={'inputGroupColor'} labelDesc={'Cor do grupo'} type={'color'}>{group.color}</InputComponent>
               <div className={styles.itemControls}>

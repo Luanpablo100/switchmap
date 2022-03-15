@@ -1,16 +1,16 @@
-import prismaExecute from '../../../prisma/commands'
+import prismaExecute from '../../prisma/commands'
 
 import Link from 'next/link'
 
-import Select from '../../../components/select'
+import Select from '../../components/select'
 
-import Container from '../../../components/container'
-import InputComponent from '../../../components/input'
-import ButtonComponent from '../../../components/button'
+import Container from '../../components/container'
+import InputComponent from '../../components/input'
+import ButtonComponent from '../../components/button'
 
 import { useState, useEffect } from 'react'
 
-import createElement from '../../../lib/fetch/create'
+import createElement from '../../lib/fetch/create'
 
 export default function Home({departmentData, switchsData, rackData}) {
   const [areMany, setAreMany] = useState(false)
@@ -54,39 +54,16 @@ export default function Home({departmentData, switchsData, rackData}) {
   }
 
   useEffect(() => {
-
-    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
-
-    if (isLocalHackIdNull === null) {
-
-      localStorage.setItem('switchmapHackId', 0)
-      setLocalSelect(localStorage.getItem('switchmapHackId'))
-
-    } else {
-
-      setLocalSelect(isLocalHackIdNull)
-    }
-
-    function changeDepartments() {
-      const newDepartments = departments.filter((department) => {
-        return (department.hackId === rackData[localSelect].id) || (department.isRestricted === false)
-      })
-      setDepartments(newDepartments)
-    }
-
     function changeSwitchs() {
-      const newSwitchs = switchs.filter((sw) => {
-        return (sw.rackCode === rackData[localSelect].id)
+      const newSwitchs = switchs.map((sw) => {
+        const swRack = rackData.find(rack => rack.id === sw.rackCode);
+        return {...sw, codename: sw.codename + " - " + swRack.codename}
       })
+      console.log(newSwitchs)
       setSwitchs(newSwitchs)
     }
 
-    if(localSelect === undefined) {
-      return
-    } else {
-      changeDepartments()
       changeSwitchs()
-    }
 
   }, [])
 
@@ -94,7 +71,7 @@ export default function Home({departmentData, switchsData, rackData}) {
       <Container>
         <div>
           <div>
-            <Link href={'/switchmap/create/'}><a className='returnLink'>Voltar</a></Link>
+            <Link href={'/create/'}><a className='returnLink'>Voltar</a></Link>
             <h1>Adicionar porta</h1>
           </div>
           <div>

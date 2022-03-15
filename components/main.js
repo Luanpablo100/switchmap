@@ -123,7 +123,6 @@ export default function Homepage({allRacks, departmentData}) {
       const newDepartments = departmentData.filter((department) => {
         return (department.hackId === allRacks[localSelectId].id) || (department.isRestricted === false)
       })
-      console.log(newDepartments)
 
       setDepartments(newDepartments)
     }
@@ -136,7 +135,6 @@ export default function Homepage({allRacks, departmentData}) {
     } else {
       localSelectId = localStorage.getItem('switchmapHackId')
     }
-    console.log(allRacks)
     setLocalSelect(localSelectId)
     setRack(allRacks[localSelectId])
     getGroups()
@@ -153,7 +151,7 @@ export default function Homepage({allRacks, departmentData}) {
         <div className={styles.centerDiv}>
           <h2>Seu banco de dados está vazio!</h2>
           <h3>Primeiro, crie um hack!</h3>
-          <Link href='/switchmap/create/hack'><a>Criar hack</a></Link>
+          <Link href='/create/hack'><a>Criar hack</a></Link>
           <BiReset onClick={resetHackShown} className='reactIcons'/>
         </div>
 
@@ -161,7 +159,7 @@ export default function Homepage({allRacks, departmentData}) {
       
         <div className={styles.centerDiv}>
           <h2>Não há switchs para serem exibidos neste hack!</h2>
-          <Link href='/switchmap/create/switch'><a>Criar switch</a></Link>
+          <Link href='create/switch'><a>Criar switch</a></Link>
 
           <div  className={styles.controls}>
             <div className={styles.controlChild}>
