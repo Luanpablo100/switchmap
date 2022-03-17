@@ -41,6 +41,11 @@ export default function Container({children}) {
         </AuthenticatedTemplate>
 
         <UnauthenticatedTemplate>
+        <Head>
+                    <title>Switchmap - Sign In</title>
+                    <meta name="description" content="Documentation to your network" />
+                    <link rel="icon" href="/favicon.ico" />
+                </Head>
             <SignIn/>
         </UnauthenticatedTemplate>
         </>
