@@ -24,39 +24,30 @@ export default function Home({port, departmentData, switchsData, rackData}) {
 
 
   useEffect(() => {
+    let switchmapHackId = localStorage.getItem('switchmapHackId')
 
-    let isLocalHackIdNull = localStorage.getItem('switchmapHackId')
+    if (switchmapHackId === null || switchmapHackId === undefined) {
 
-    if (isLocalHackIdNull === null) {
+      switchmapHackId = 0
 
-      localStorage.setItem('switchmapHackId', 0)
-      setLocalSelect(localStorage.getItem('switchmapHackId'))
-
-    } else {
-
-      setLocalSelect(isLocalHackIdNull)
     }
 
     function changeDepartments() {
-      const newDepartments = departments.filter((department) => {
-        return (department.hackId === rackData[localSelect].id) || (department.isRestricted === false)
+      const newDepartments = departmentData.filter((department) => {
+        return (department.hackId === rackData[switchmapHackId].id) || (department.isRestricted === false)
       })
       setDepartments(newDepartments)
     }
 
     function changeSwitchs() {
       const newSwitchs = switchs.filter((sw) => {
-        return (sw.rackCode === rackData[localSelect].id)
+        return (sw.rackCode === rackData[switchmapHackId].id)
       })
       setSwitchs(newSwitchs)
     }
 
-    if(localSelect === undefined) {
-      return
-    } else {
       changeDepartments()
       changeSwitchs()
-    }
 
   }, [])
 

@@ -1,6 +1,6 @@
 import styles from '../styles/select.module.css'
 
-export default function Select({data, identify, labelDesc, firstValue}) {
+export default function Select({data, identify, labelDesc, firstValue, functionOnChange}) {
 
     let firstOpt
     if(firstValue !== undefined) {
@@ -11,7 +11,7 @@ export default function Select({data, identify, labelDesc, firstValue}) {
         <div>
             {labelDesc !== undefined ? <label htmlFor={identify}>{labelDesc}</label> : ''}
             <div className={styles.select}>
-                <select className={styles.selectDiv} id={identify}>
+                <select className={styles.selectDiv} id={identify} onChange={functionOnChange}>
                     {firstOpt !== undefined ? <option value={firstOpt.id}>{firstOpt.codename}</option> : null}
                     {data.map(value => {
                         if (firstOpt !== undefined && value.id === firstOpt.id) {return null}

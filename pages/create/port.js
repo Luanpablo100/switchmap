@@ -16,7 +16,6 @@ export default function Home({departmentData, switchsData, rackData}) {
   const [areMany, setAreMany] = useState(false)
   const [switchs, setSwitchs] = useState(switchsData)
   const [departments, setDepartments] = useState(departmentData)
-  const [localSelect, setLocalSelect] = useState()
   
   async function handleCreatePort(event) {
     event.preventDefault()
@@ -53,18 +52,33 @@ export default function Home({departmentData, switchsData, rackData}) {
     setAreMany(!areMany)
   }
 
+
   useEffect(() => {
-    function changeSwitchs() {
-      const newSwitchs = switchs.map((sw) => {
-        const swRack = rackData.find(rack => rack.id === sw.rackCode);
-        return {...sw, codename: sw.codename + " - " + swRack.codename}
+    let switchmapHackId = localStorage.getItem('switchmapHackId')
+
+    if (switchmapHackId === null || switchmapHackId === undefined) {
+
+      switchmapHackId = 0
+
+    }
+
+    function changeDepartments() {
+      const newDepartments = departmentData.filter((department) => {
+        return (department.hackId === rackData[switchmapHackId].id) || (department.isRestricted === false)
       })
-      console.log(newSwitchs)
+      setDepartments(newDepartments)
+    }
+
+    function changeSwitchs() {
+      const newSwitchs = switchs.filter((sw) => {
+        return (sw.rackCode === rackData[switchmapHackId].id)
+      })
       setSwitchs(newSwitchs)
     }
 
+      changeDepartments()
       changeSwitchs()
-
+  
   }, [])
 
   return (
